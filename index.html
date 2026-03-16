@@ -9,7 +9,7 @@
     <meta property="og:description" content="Janet: your AI companion, offline and yours. Privacy-first. Voice-first. Open source.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#7C3AED">
+    <meta name="theme-color" content="#7C3AED" id="meta-theme">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -33,9 +33,10 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background-color: #faf9ff;
-            color: #1e1b2e;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         @supports (font-variation-settings: normal) {
@@ -50,11 +51,50 @@
             --accent: #ede9fe;
             --gray-light: #f5f3ff;
             --gray-mid: #cbd5e1;
+            --text: #1e1b2e;
             --text-light: #4c4a6e;
+            --bg: #faf9ff;
+            --bg-card: #ffffff;
+            --border-card: #f0eaff;
             --shadow-sm: 0 10px 25px -5px rgba(124,58,237,0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
             --shadow-hover: 0 25px 30px -12px rgba(124,58,237,0.25);
             --border-radius: 28px;
             --gradient-bg: linear-gradient(145deg, #fdfaff, #f0eaff);
+            --nav-bg: rgba(255,255,255,0.75);
+            --nav-border: rgba(203,213,225,0.3);
+            --hero-border: #e4dcff;
+        }
+
+        [data-theme="dark"] {
+            --text: #e8e6f0;
+            --text-light: #b7b0d4;
+            --bg: #1e1b2e;
+            --bg-card: #2d2b4e;
+            --border-card: #3f3a60;
+            --accent: #312b5a;
+            --gray-light: #252238;
+            --gradient-bg: linear-gradient(145deg, #252238, #1e1b2e);
+            --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.3);
+            --shadow-hover: 0 25px 30px -12px rgba(124,58,237,0.35);
+            --nav-bg: rgba(30,27,46,0.9);
+            --nav-border: rgba(63,58,96,0.5);
+            --hero-border: #3f3a60;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --text: #e8e6f0;
+                --text-light: #b7b0d4;
+                --bg: #1e1b2e;
+                --bg-card: #2d2b4e;
+                --border-card: #3f3a60;
+                --accent: #312b5a;
+                --gray-light: #252238;
+                --gradient-bg: linear-gradient(145deg, #252238, #1e1b2e);
+                --nav-bg: rgba(30,27,46,0.9);
+                --nav-border: rgba(63,58,96,0.5);
+                --hero-border: #3f3a60;
+            }
         }
 
         .container {
@@ -87,10 +127,10 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            background: rgba(255,255,255,0.75);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(203,213,225,0.3);
+            border-bottom: 1px solid var(--nav-border);
             padding: 16px 0;
         }
 
@@ -99,7 +139,46 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
+            gap: 12px;
         }
+
+        .nav-utils {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+        }
+        .lang-switcher a, .lang-switcher span {
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-light);
+            background: transparent;
+        }
+        .lang-switcher a:hover { color: var(--primary); background: var(--accent); }
+        .lang-switcher [aria-current="true"] { color: var(--primary); font-weight: 600; }
+
+        .dark-mode-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gray-mid);
+            background: var(--bg-card);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .dark-mode-toggle:hover { border-color: var(--primary); color: var(--primary); }
+        .dark-mode-toggle:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
         .logo {
             font-size: 2rem;
@@ -140,7 +219,7 @@
         .hero {
             padding: 90px 0 110px;
             background: var(--gradient-bg);
-            border-bottom: 1px solid #e4dcff;
+            border-bottom: 1px solid var(--hero-border);
         }
 
         .hero-grid {
@@ -274,14 +353,14 @@
         }
 
         .trait {
-            background: white;
+            background: var(--bg-card);
             padding: 20px 16px;
             border-radius: 30px;
             flex: 1;
             min-width: 140px;
             text-align: center;
             box-shadow: var(--shadow-sm);
-            border: 1px solid #f0eaff;
+            border: 1px solid var(--border-card);
             transition: all 0.2s;
         }
 
@@ -297,8 +376,8 @@
             margin-bottom: 10px;
         }
 
-        .trait h4 { font-size: 1.3rem; margin-bottom: 6px; color: #1e1b2e; }
-        .trait p { font-size: 0.9rem; margin: 0; color: #5f5b7a; }
+        .trait h4 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
+        .trait p { font-size: 0.9rem; margin: 0; color: var(--text-light); }
 
         .about-image {
             border-radius: 60px;
@@ -321,12 +400,12 @@
         }
 
         .companion-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 40px;
             padding: 32px 24px 36px;
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid var(--border-card);
             text-align: center;
             backdrop-filter: blur(4px);
         }
@@ -350,7 +429,7 @@
             font-size: 2.8rem;
         }
 
-        .companion-card h3 { font-size: 2rem; font-weight: 600; margin-bottom: 12px; color: #1e1b2e; }
+        .companion-card h3 { font-size: 2rem; font-weight: 600; margin-bottom: 12px; color: var(--text); }
         .companion-card p { color: var(--text-light); font-size: 1rem; }
         .companion-card a { color: var(--primary); font-weight: 600; text-decoration: none; }
         .companion-card a:hover { text-decoration: underline; }
@@ -485,7 +564,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: white;
+            background: var(--bg-card);
             color: var(--primary);
             width: 52px;
             height: 52px;
@@ -494,7 +573,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: var(--shadow-sm);
-            border: 1px solid #e4dcff;
+            border: 1px solid var(--border-card);
             transition: 0.2s;
             opacity: 0.85;
             text-decoration: none;
@@ -508,12 +587,56 @@
             background: var(--primary);
             color: white;
         }
+
+        /* Q&A / FAQ */
+        .faq-list { max-width: 720px; margin: 0 auto; }
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .faq-item summary {
+            padding: 20px 24px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--primary);
+            transition: transform 0.2s;
+        }
+        .faq-item[open] summary::after { transform: rotate(180deg); }
+        .faq-item summary:hover { color: var(--primary); }
+        .faq-item summary:focus { outline: none; }
+        .faq-item summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+        .faq-item .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-light);
+            line-height: 1.65;
+        }
+        .faq-item .faq-answer p { margin-bottom: 12px; }
+        .faq-item .faq-answer p:last-child { margin-bottom: 0; }
+        .faq-item .faq-answer a { color: var(--primary); font-weight: 500; }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main">
         <div class="container nav-container">
             <span class="logo">The Great <span>Sage</span></span>
             <div class="nav-links">
@@ -521,8 +644,19 @@
                 <a href="#about">About</a>
                 <a href="#companions">Products</a>
                 <a href="#vision">Vision</a>
+                <a href="#faq">Q&amp;A</a>
                 <a href="https://glasses.greatsage.org">Glasses</a>
                 <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-utils">
+                <nav class="lang-switcher" aria-label="Language">
+                    <a href="#" data-lang="en" aria-current="true" id="lang-en">EN</a>
+                    <span aria-hidden="true">|</span>
+                    <a href="#" data-lang="ja" id="lang-ja">&#26085;</a>
+                </nav>
+                <button type="button" class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -583,7 +717,7 @@
             </div>
         </section>
 
-        <section id="companions" class="section" style="background:#ffffff;">
+        <section id="companions" class="section" style="background: var(--bg-card);">
             <div class="container">
                 <div class="section-header">
                     <h2>Janet everywhere</h2>
@@ -641,6 +775,163 @@
             </div>
         </section>
 
+        <section id="faq" class="section" style="background: var(--gray-light);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Questions &amp; Answers</h2>
+                    <p>Common questions about Janet, The Great Sage, and how to get started.</p>
+                </div>
+                <div class="faq-list" role="region" aria-label="FAQ">
+                    <details class="faq-item">
+                        <summary>Why Janet?</summary>
+                        <div class="faq-answer">
+                            <p>J.A.N.E.T. stands for Just A Neat Evolving Thinker. It describes what she is: an AI that keeps learning and adapting with you, not a fixed assistant. The name is memorable, works across languages like Japanese, and clearly sets her apart from Siri or Alexa. It's short, easy to say, and feels like a companion rather than a product.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What devices can I use Janet on?</summary>
+                        <div class="faq-answer">
+                            <p>Janet runs on your computer (janet-seed), then you connect from your phone (CallJanet for iOS), code editor (Janet Awakening in Cursor), smart home (Home Assistant), or future glasses. There are or will be native apps for iOS, watchOS, macOS, Windows, and Android. The vision includes Meta Quest. Right now you can see what's available at <a href="https://what-can-janet-do.pages.dev">what-can-janet-do.pages.dev</a>. Production-ready deployment is targeted for Q3 2026 if funding is successful.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What are the benefits of Janet?</summary>
+                        <div class="faq-answer">
+                            <p>Janet is built privacy-first. What that means is that your data stays on your devices and never goes to the cloud. You own your data. Janet works offline so you're not dependent on the internet. She follows a set of 16 rules that define her behavior. She's open source, so people can inspect and improve the code. The glasses add live captions, translation, and memory support, all running locally on your device. And there's no subscription — you pay once for the hardware and can optionally pay for support.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why did you come up with Janet?</summary>
+                        <div class="faq-answer">
+                            <p>I wanted an alternative to the big tech assistants that rely on the cloud and monetize your data. J.A.N.E.T. — Just A Neat Evolving Thinker — is open, privacy-focused, works offline, and is built with accessibility in mind. The idea is to provide an alternative to Siri, Alexa, and Google with something you can own and trust. It's about giving people real choice instead of closed ecosystems that harvest your data.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How to use Janet?</summary>
+                        <div class="faq-answer">
+                            <p>You run the core brain (janet-seed) on your computer, then connect from your phone (CallJanet), code editor (Janet Awakening), or smart home. You say &quot;Hey Janet!&quot; to start and talk naturally — she supports both voice and text. When you're finished, say &quot;Thank you, Janet!&quot; or &quot;Good night, Janet.&quot; The glasses will show live captions and translation right in your field of view, and all of that stays on your devices — nothing goes to the cloud.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Janet vs other AI?</summary>
+                        <div class="faq-answer">
+                            <p>Janet is meant to replace Siri, Alexa, and Google Assistant. She keeps your data on your devices, not in the cloud. She works offline, follows clear rules, and has no subscription. She's teachable — you can add runbooks and context. The glasses add accessibility features and are designed to be built in Europe in the future. Competitors rely on the cloud, subscriptions, and closed systems. Janet is open source, runs on your hardware, and you keep ownership of everything.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What are runbooks and how do they work?</summary>
+                        <div class="faq-answer">
+                            <p>A runbook is like a recipe or checklist for Janet. You write step-by-step instructions instead of code, and she follows them. For example, weather: check internet; if yes, look up the weather and answer in one sentence; if no, say you're offline. Or reminders: ask what and when, save it, then remind the user. Why it matters: no coding, you can change instructions later, you decide what she does in each situation, and she gets better as you add more runbooks. It's teaching her with simple steps instead of programming.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What would support for Janet mean to me?</summary>
+                        <div class="faq-answer">
+                            <p>Support could mean backing the Janet Glasses campaign on GoFundMe, adopting Janet in your daily life, or contributing to the project. The glasses aim to provide live captions, translation, and memory support — features that matter for accessibility. The campaign target is €5,000, with a deadline of May 1, 2026. Your support would help validate that people want privacy-first, future EU-made AI wearables that don't depend on subscriptions or the cloud.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why open source?</summary>
+                        <div class="faq-answer">
+                            <p>Janet is open source, so anyone can inspect, modify, and share the code. That creates trust — no hidden behavior. People can add features, fix bugs, and make sure it's safe. The whole ecosystem, including the core brain (janet-seed), is open. That reduces vendor lock-in and lets the community shape the product instead of a single company.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why no subscription?</summary>
+                        <div class="faq-answer">
+                            <p>Subscriptions tend to create lock-in and pressure companies to collect more data. Janet uses a one-time purchase model with optional support. The glasses are a single purchase with no monthly fee. That keeps costs predictable and avoids usage caps or paywalls for core features. You buy it once and you own it.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why is privacy important?</summary>
+                        <div class="faq-answer">
+                            <p>Big tech companies collect and use your data. Janet is built so your data never leaves your devices. There's no cloud storage and no telemetry. We cannot access your conversations. The glasses process your voice locally so it doesn't go anywhere else. Privacy isn't an add-on — it's built into the design from the start, because your words and habits should stay yours.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why pay for J.A.N.E.T.?</summary>
+                        <div class="faq-answer">
+                            <p>You don't have to. If you're tech-savvy, you can run Janet entirely for free — it's open source. Download janet-seed, connect your clients, and you're set. No subscription, no paywall.</p>
+                            <p>So why pay at all? Two reasons. First: crowdfunding. If you back J.A.N.E.T. Glasses or similar campaigns, you're helping build the ecosystem — hardware, accessibility, EU-made products. Second: service. If you're not into tech, you pay for convenience. J.A.N.E.T. in a box, Janet Server, pre-set glasses — plug-and-play, fully set up. We handle installation and configuration so you get Janet without fiddling with servers or terminals.</p>
+                            <p>Free if you do it yourself. Pay for support, hardware, or someone else doing the setup for you.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What are Janet Glasses?</summary>
+                        <div class="faq-answer">
+                            <p>Janet Glasses are AI smart glasses that run Janet — live captions, translation, and memory support right in your field of view. Phase 1 is Janet software on Brilliant Labs Halo hardware (JanetXHalo). The long-term goal is J.A.N.E.T. Glasses: our own hardware sourced and built in Europe, same features but Janet-native — offline, no subscription, constitutional AI. They're lightweight, all-day battery, and your voice never leaves your devices.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do Janet Glasses help with accessibility?</summary>
+                        <div class="faq-answer">
+                            <p>Janet Glasses are built for accessibility first. They show live captions so you can read what's being said — for people who are deaf or hard of hearing. They do translation in real time for non-native speakers. And they support memory assist, so you can get gentle reminders and context without sending anything to the cloud. All of that runs locally on your devices. No subscription, no data harvesting.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>I'm not a developer — can I still use Janet?</summary>
+                        <div class="faq-answer">
+                            <p>Yes. If you're not into tech, you don't have to run servers yourself. You can back the Janet Glasses campaign and eventually get plug-and-play glasses. Or you can pay for &quot;Janet in a box&quot; or Janet Server — someone sets everything up for you. If you are tech-savvy, you can run it all for free: download janet-seed, connect your phone or editor, and go. Either way, no monthly subscription for core Janet.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What are the 16 rules (axioms)?</summary>
+                        <div class="faq-answer">
+                            <p>Janet follows 16 constitutional axioms — rules that govern how she behaves. They cover things like telling the truth, respecting your privacy, not doing harmful things, and asking you before taking risky actions. One of them is Soul Check: for sensitive actions she'll ask for your confirmation instead of doing them automatically. The full list is in the project docs. The point is: her behavior is predictable and you're in control.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can Janet do anything I ask?</summary>
+                        <div class="faq-answer">
+                            <p>She can do a lot — voice, text, file search, reminders, smart home, coding help. But she won't do things that break her rules. She won't lie, steal your data, or do harmful actions without your explicit confirmation. Soul Check is there so risky or sensitive steps need your okay. You're the one in charge; she's built to support you within clear boundaries.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Where is my data stored? Who can see my conversations?</summary>
+                        <div class="faq-answer">
+                            <p>Your data stays on your devices and in your Janet cluster — the computer and devices you run Janet on. There's no cloud. The team behind Janet can't access your conversations or your voice. The glasses process audio locally. So: you own it, and nobody else can see it unless you choose to share.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How much does it cost to get started?</summary>
+                        <div class="faq-answer">
+                            <p>To get started for free: download janet-seed and connect from your phone or code editor. No subscription. If you want hardware or someone else to set it up, you pay for that — for example backing the Janet Glasses GoFundMe (campaign target €5,000, deadline May 1, 2026) or buying a pre-configured Janet Server. The glasses are one-time purchase, no monthly fee. So: free if you do it yourself; you pay for convenience or to support the ecosystem.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I contribute to Janet?</summary>
+                        <div class="faq-answer">
+                            <p>Yes. The whole ecosystem is open source (GPL/MIT). The main repo is JANET on GitHub — janet-seed, CallJanet-iOS, Janet Awakening, JanetOS, and more. You can report bugs, suggest features, submit code, or improve docs. There's no vendor lock-in; the community helps shape what Janet becomes.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why not just use ChatGPT or Siri?</summary>
+                        <div class="faq-answer">
+                            <p>ChatGPT and Siri send your data to the cloud and often require subscriptions or lock you into one company. Janet runs on your hardware, works offline, has no mandatory subscription, and you can teach her with runbooks. Your conversations stay yours. For young adults especially: you get an assistant you actually own, with no hidden data deals or monthly fees.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Who is The Great Sage?</summary>
+                        <div class="faq-answer">
+                            <p>The Great Sage is the company behind the Janet ecosystem and J.A.N.E.T. Glasses. Janet is the product. The Great Sage is the entity that brings it to market and runs efforts like the GoFundMe for the glasses.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What's next for Janet?</summary>
+                        <div class="faq-answer">
+                            <p>Short term: production-ready deployment (Q3 2026 if funding works), more apps and platforms, and the Janet Glasses Phase 1 campaign (software on Halo, then a pilot). Next: J.A.N.E.T. Glasses as our own European-sourced hardware — same privacy and no subscription, but built in the EU. The vision is a full ecosystem: OS, iOS, Android, Meta Quest, glasses, and smart home, all offline-first and under your control.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How can I back the glasses?</summary>
+                        <div class="faq-answer">
+                            <p>Back the Janet Glasses campaign on GoFundMe. The goal is €5,000 by May 1, 2026. Your support funds Halo units for development, JanetXHalo software (live captions and translation), an accessibility pilot, and a landing page for the ecosystem. It's Phase 1 validation: proving that Janet on glasses works before we build our own European hardware. Go to <a href="https://glasses.greatsage.org">glasses.greatsage.org</a> to support Janet Glasses.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" style="height: 0; overflow: visible; visibility: hidden;" aria-hidden="true"></section>
     </main>
 
@@ -666,6 +957,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#companions">Products</a></li>
                         <li><a href="#vision">Vision</a></li>
+                        <li><a href="#faq">Q&amp;A</a></li>
                         <li><a href="https://glasses.greatsage.org">Glasses</a></li>
                         <li><a href="#">Careers</a></li>
                     </ul>
@@ -702,6 +994,55 @@
                 this.style.borderBottomColor = 'var(--primary)';
             });
         });
+
+        (function() {
+            var themeKey = 'greatsage-theme';
+            var metaTheme = document.getElementById('meta-theme');
+            var toggle = document.getElementById('dark-mode-toggle');
+            var icon = toggle && toggle.querySelector('i');
+
+            function getStored() { return localStorage.getItem(themeKey); }
+            function setStored(v) { try { localStorage.setItem(themeKey, v); } catch (e) {} }
+
+            function applyTheme(theme) {
+                var isDark = theme === 'dark' || (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (theme === 'light') isDark = false;
+                if (theme === 'dark') isDark = true;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                if (metaTheme) metaTheme.setAttribute('content', isDark ? '#1e1b2e' : '#7C3AED');
+                if (icon) {
+                    icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                }
+                setStored(isDark ? 'dark' : 'light');
+            }
+
+            if (toggle) {
+                var initial = getStored();
+                if (initial) applyTheme(initial);
+                else applyTheme(null);
+                toggle.addEventListener('click', function() {
+                    var cur = document.documentElement.getAttribute('data-theme');
+                    applyTheme(cur === 'dark' ? 'light' : 'dark');
+                });
+            }
+        })();
+
+        (function() {
+            var langKey = 'greatsage-lang';
+            var en = document.getElementById('lang-en');
+            var ja = document.getElementById('lang-ja');
+            function setLang(lang) {
+                document.documentElement.setAttribute('lang', lang);
+                try { localStorage.setItem(langKey, lang); } catch (e) {}
+                if (en) en.setAttribute('aria-current', lang === 'en' ? 'true' : 'false');
+                if (ja) { ja.setAttribute('aria-current', lang === 'ja' ? 'true' : 'false'); }
+            }
+            var stored = localStorage.getItem(langKey);
+            if (stored) setLang(stored);
+            if (en) en.addEventListener('click', function(e) { e.preventDefault(); setLang('en'); });
+            if (ja) ja.addEventListener('click', function(e) { e.preventDefault(); setLang('ja'); });
+        })();
     </script>
 </body>
 </html>
