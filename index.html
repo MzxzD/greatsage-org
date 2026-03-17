@@ -500,7 +500,7 @@
 
         .support-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 40px;
             align-items: start;
             margin-top: 48px;
@@ -530,8 +530,239 @@
             font-size: 1rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .support-grid { grid-template-columns: 1fr; }
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .business-card-teaser .business-card-trigger {
+            width: 100%;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--accent);
+            border: 2px dashed var(--primary);
+            border-radius: 24px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        .business-card-teaser .business-card-trigger:hover {
+            background: var(--primary);
+            color: white;
+            border-style: solid;
+        }
+        .business-card-teaser .business-card-trigger:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        .business-card-teaser-mini {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .business-card-teaser-cta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .business-card-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .business-card-overlay[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .business-card-overlay-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+        .business-card-overlay-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            max-width: 100%;
+        }
+        .business-card-full {
+            width: 340px;
+            min-height: 220px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border-card);
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.3);
+            transition: transform 0.3s ease;
+        }
+        .business-card-overlay[aria-hidden="false"] .business-card-full {
+            transform: scale(1);
+        }
+        .business-card-full::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--primary));
+        }
+        .business-card-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: auto 1fr auto;
+            gap: 12px 16px;
+        }
+        .business-card-icon {
+            grid-row: 1 / 3;
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.35);
+        }
+        .business-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .business-card-icon-fallback {
+            font-size: 2rem;
+            color: white;
+        }
+        .business-card-text {
+            grid-column: 1;
+        }
+        .business-card-company {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            margin: 0 0 4px 0;
+        }
+        .business-card-tagline {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            line-height: 1.3;
+            margin: 0;
+        }
+        .business-card-qr {
+            grid-row: 1 / 4;
+            align-self: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg);
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .business-card-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .business-card-contact {
+            grid-column: 1 / -1;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .business-card-contact a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .business-card-contact a:hover {
+            text-decoration: underline;
+        }
+        .business-card-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .business-card-close-btn {
+            background: transparent;
+            border: 1px solid var(--border-card);
+            color: var(--text);
+        }
+        .business-card-close-btn:hover {
+            background: var(--gray-light);
+        }
+        .business-card-close-btn:focus-visible,
+        .business-card-print-btn:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .business-card-overlay,
+            .business-card-overlay .business-card-full {
+                transition-duration: 0.01ms !important;
+            }
+            .business-card-overlay[aria-hidden="false"] .business-card-full {
+                transform: scale(1);
+            }
+        }
+
+        @media print {
+            .business-card-overlay-backdrop,
+            .business-card-actions {
+                display: none !important;
+            }
+            .business-card-overlay {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                background: transparent;
+                padding: 0;
+            }
+            .business-card-overlay-content {
+                padding: 0;
+            }
+            .business-card-full {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
         }
 
         .footer {
@@ -875,9 +1106,44 @@
                         <p data-i18n="support.glassesDesc">Backing the glasses specifically? The Janet Glasses campaign funds live captions and translation on Brilliant Labs Halo — accessibility-first, offline, no subscription.</p>
                         <a href="https://glasses.greatsage.org" class="btn" data-i18n="support.glassesCta">glasses.greatsage.org →</a>
                     </div>
+                    <div class="support-side business-card-teaser">
+                        <button type="button" class="business-card-trigger" id="business-card-trigger" data-i18n="businessCard.cta" data-i18n-attr="aria-label:businessCard.ariaLabel" aria-describedby="business-card-desc">
+                            <span class="business-card-teaser-mini" data-i18n="businessCard.company">The Great Sage</span>
+                            <span class="business-card-teaser-cta" data-i18n="businessCard.cta">View & print card</span>
+                        </button>
+                        <p id="business-card-desc" class="visually-hidden" data-i18n="businessCard.ariaLabel">Business card — view and print</p>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <div id="business-card-overlay" class="business-card-overlay" role="dialog" aria-modal="true" aria-labelledby="business-card-title" aria-describedby="business-card-desc" aria-hidden="true">
+            <div class="business-card-overlay-backdrop"></div>
+            <div class="business-card-overlay-content">
+                <div class="business-card-full" id="business-card-print-area">
+                    <div class="business-card-inner">
+                        <div class="business-card-icon">
+                            <img src="https://glasses.greatsage.org/janet-icon.png" alt="Janet" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'business-card-icon-fallback\' aria-hidden=\'true\'>✦</span>';">
+                        </div>
+                        <div class="business-card-text">
+                            <h3 id="business-card-title" class="business-card-company" data-i18n="businessCard.company">The Great Sage</h3>
+                            <p class="business-card-tagline" data-i18n="businessCard.tagline">Privacy-first AI companion. Offline. No cloud. No subscription.</p>
+                        </div>
+                        <div class="business-card-qr">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://greatsage.org" alt="QR code to greatsage.org">
+                        </div>
+                        <div class="business-card-contact">
+                            <a href="mailto:ilovejanet@greatsage.org">ilovejanet@greatsage.org</a>
+                            <span>greatsage.org · glasses.greatsage.org</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="business-card-actions">
+                    <button type="button" class="btn business-card-print-btn" data-i18n="businessCard.print">Print / Save as PDF</button>
+                    <button type="button" class="btn business-card-close-btn" data-i18n="businessCard.close">Close</button>
+                </div>
+            </div>
+        </div>
 
         <section id="faq" class="section" style="background: var(--gray-light);">
             <div class="container">
@@ -1164,6 +1430,73 @@
             }
             onScroll();
             window.addEventListener('scroll', onScroll, { passive: true });
+        })();
+
+        (function() {
+            var trigger = document.getElementById('business-card-trigger');
+            var overlay = document.getElementById('business-card-overlay');
+            var backdrop = overlay && overlay.querySelector('.business-card-overlay-backdrop');
+            var closeBtn = overlay && overlay.querySelector('.business-card-close-btn');
+            var printBtn = overlay && overlay.querySelector('.business-card-print-btn');
+            var focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+            function getFocusables() {
+                return overlay ? overlay.querySelectorAll(focusableSelector) : [];
+            }
+
+            function openCard() {
+                if (!overlay) return;
+                overlay.setAttribute('aria-hidden', 'false');
+                overlay.querySelector('.business-card-close-btn').focus();
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeCard() {
+                if (!overlay) return;
+                overlay.setAttribute('aria-hidden', 'true');
+                trigger && trigger.focus();
+                document.body.style.overflow = '';
+            }
+
+            function handleKeydown(e) {
+                if (overlay.getAttribute('aria-hidden') === 'true') return;
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeCard();
+                }
+                if (e.key === 'Tab') {
+                    var focusables = getFocusables();
+                    var first = focusables[0];
+                    var last = focusables[focusables.length - 1];
+                    if (e.shiftKey) {
+                        if (document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        }
+                    } else {
+                        if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+            }
+
+            if (trigger) {
+                trigger.addEventListener('click', openCard);
+            }
+            if (backdrop) {
+                backdrop.addEventListener('click', closeCard);
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeCard);
+            }
+            if (printBtn) {
+                printBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+            document.addEventListener('keydown', handleKeydown);
         })();
     </script>
 </body>
