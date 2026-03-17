@@ -1,5 +1,4 @@
 {
-  "skipLink": "Saltar al contenido principal",
   "nav.home": "Inicio",
   "nav.about": "Acerca de",
   "nav.products": "Productos",
@@ -156,5 +155,7 @@
   "footer.gofundme": "Apoyar en GoFundMe",
   "footer.patreon": "Apoyar en Patreon",
   "footer.careers": "Empleos",
-  "footer.copyright": "© 2026 The Great Sage. IA offline primero para todos."
+  "footer.copyright": "© 2026 The Great Sage. IA offline primero para todos.",
+  "footer.cookies": "Cookies: Usamos cookies para recordar tu idioma y preferencias de tema (claro/oscuro).",
+  "cookieConsent.text": "Usamos cookies para recordar tu idioma y preferencias de tema. <a href=\"#cookies\">Cookies</a>"
 }

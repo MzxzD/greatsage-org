@@ -42,18 +42,30 @@
         [data-theme="dark"] {
             --primary: #0A84FF;
             --primary-light: #3da3ff;
-            --text: #e8e6f0;
-            --text-light: #b7b0d4;
+            --text: #f1f5f9;
+            --text-light: #cbd5e1;
             --bg: #0f1726;
             --bg-card: #1a2744;
             --border-card: #2a3a5c;
             --accent: #1e2d4a;
         }
+        [data-theme="dark"] h1 { color: #f1f5f9; }
+        [data-theme="dark"] .subhead { color: #e2e8f0; }
+        [data-theme="dark"] .prompt { color: #f1f5f9; }
+        [data-theme="dark"] .age-btn { color: #f1f5f9; border-color: var(--border-card); background: var(--bg-card); }
+        [data-theme="dark"] .age-btn:hover { color: #60a5fa; }
+        [data-theme="dark"] .tabs-label { color: #f1f5f9; }
+        [data-theme="dark"] .tab { color: #e2e8f0; }
+        [data-theme="dark"] .tab:hover { color: #60a5fa; }
+        [data-theme="dark"] .explanation-box .placeholder { color: #94a3b8; }
+        [data-theme="dark"] .explanation-box h3 { color: #60a5fa; }
+        [data-theme="dark"] .explanation-box p { color: #e2e8f0; }
+        [data-theme="dark"] .footer-legal { color: #94a3b8; }
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
                 --primary: #0A84FF;
                 --primary-light: #3da3ff;
-                --text: #e8e6f0; --text-light: #b7b0d4; --bg: #0f1726; --bg-card: #1a2744;
+                --text: #f1f5f9; --text-light: #cbd5e1; --bg: #0f1726; --bg-card: #1a2744;
                 --border-card: #2a3a5c; --accent: #1e2d4a;
             }
         }
@@ -166,29 +178,9 @@
         .explanation-box p { margin-bottom: 12px; color: var(--text); }
         .explanation-box p:last-child { margin-bottom: 0; }
         .explanation-box a { color: var(--primary); font-weight: 500; }
-        .skip-link {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 10px 20px;
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            z-index: 100;
-            transform: translateY(-120%);
-            transition: transform 0.2s;
-        }
-        .skip-link:focus {
-            transform: translateY(0);
-            outline: 3px solid var(--primary);
-            outline-offset: 2px;
-        }
     </style>
 </head>
 <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
     <header class="top-bar">
         <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
             <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="understand.backLink">Back to greatsage.org</span></a>
@@ -238,13 +230,24 @@
     </main>
 
     <footer class="understand-footer">
-        <p id="cookies" class="footer-legal">Cookies: We use cookies only to remember your language preference.</p>
+        <p id="cookies" class="footer-legal" data-i18n="footer.cookies">Cookies: We use cookies to remember your language and theme (dark/light) preferences.</p>
     </footer>
 
     <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
-        <p class="cookie-consent-text">We use cookies to remember your language preference. <a href="#cookies">Cookies</a></p>
+        <p class="cookie-consent-text" data-i18n-html="cookieConsent.text">We use cookies to remember your language and theme preferences. <a href="#cookies">Cookies</a></p>
         <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
     </aside>
+    <script>
+    (function(){
+      var el=document.getElementById('cookie-consent');
+      if(!el)return;
+      try{if(localStorage.getItem('greatsage-cookie-ack')==='1'){el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);return}}
+      catch(e){}
+      var dismiss=function(e){if(e)e.preventDefault();if(!el.parentNode)return;try{localStorage.setItem('greatsage-cookie-ack','1')}catch(x){}el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);};
+      var btn=el.querySelector('.cookie-consent-btn');
+      if(btn){btn.addEventListener('click',dismiss);btn.addEventListener('touchend',dismiss);}
+    })();
+    </script>
 
     <script defer src="i18n/i18n.js"></script>
     <script defer src="cookie-consent.js"></script>

@@ -1,5 +1,4 @@
 {
-  "skipLink": "Zum Hauptinhalt springen",
   "nav.home": "Start",
   "nav.about": "Über uns",
   "nav.products": "Produkte",
@@ -58,7 +57,7 @@
   "faq.devicesA": "Janet läuft auf deinem Computer (janet-seed), dann verbindest du dich von deinem Handy (CallJanet für iOS), Code-Editor (Janet Awakening in Cursor), Smart Home (Home Assistant) oder zukünftiger Brille. Es gibt oder wird native Apps für iOS, watchOS, macOS, Windows und Android geben. Die Vision umfasst Meta Quest. Aktuell siehst du unter <a href=\"https://what-can-janet-do.pages.dev\">what-can-janet-do.pages.dev</a>, was verfügbar ist. Produktionsreife Bereitstellung ist für Q3 2026 geplant, wenn die Finanzierung erfolgreich ist.",
   "faq.benefits": "Welche Vorteile hat Janet?",
   "faq.benefitsA": "Janet ist datenschutzorientiert aufgebaut. Das heißt: deine Daten bleiben auf deinen Geräten und gehen nie in die Cloud. Du besitzt deine Daten. Janet funktioniert offline, du bist nicht vom Internet abhängig. Sie folgt 16 Regeln, die ihr Verhalten definieren. Sie ist Open Source, sodass Menschen den Code prüfen und verbessern können. Die Brille bietet Live-Untertitel, Übersetzung und Speicherunterstützung, alles lokal auf deinem Gerät. Und es gibt kein Abo — du zahlst einmal für die Hardware und optional für Support.",
-  "faq.whyCameUp": "Warum habt ihr Janet entwickelt?",
+  "faq.whyCameUp": "Warum habe ich Janet entwickelt?",
   "faq.whyCameUpA": "Ich wollte eine Alternative zu den großen Tech-Assistenten, die auf die Cloud setzen und deine Daten monetarisieren. J.A.N.E.T. — Just A Neat Evolving Thinker — ist offen, datenschutzorientiert, funktioniert offline und ist mit Barrierefreiheit im Blick gebaut. Die Idee ist, eine Alternative zu Siri, Alexa und Google zu bieten, die du besitzen und der du vertrauen kannst. Es geht darum, Menschen echte Wahl zu geben statt geschlossene Ökosysteme, die deine Daten sammeln.",
   "faq.howToUse": "Wie nutze ich Janet?",
   "faq.howToUseA": "Du startest das Kerngehirn (janet-seed) auf deinem Computer und verbindest dich dann von deinem Handy (CallJanet), Code-Editor (Janet Awakening) oder Smart Home. Du sagst „Hey Janet!“, um zu starten, und sprichst natürlich — sie unterstützt Sprache und Text. Wenn du fertig bist, sag „Thank you, Janet!“ oder „Good night, Janet.“ Die Brille zeigt Live-Untertitel und Übersetzung direkt im Sichtfeld, und alles bleibt auf deinen Geräten — nichts geht in die Cloud.",
@@ -156,5 +155,7 @@
   "footer.gofundme": "Auf GoFundMe unterstützen",
   "footer.patreon": "Auf Patreon unterstützen",
   "footer.careers": "Karriere",
-  "footer.copyright": "© 2026 The Great Sage. Offline-first KI für alle."
+  "footer.copyright": "© 2026 The Great Sage. Offline-first KI für alle.",
+  "footer.cookies": "Cookies: Wir verwenden Cookies, um deine Sprach- und Theme-Präferenzen (Hell/Dunkel) zu speichern.",
+  "cookieConsent.text": "Wir verwenden Cookies, um deine Sprach- und Theme-Präferenzen zu speichern. <a href=\"#cookies\">Cookies</a>"
 }

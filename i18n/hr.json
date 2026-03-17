@@ -1,5 +1,4 @@
 {
-  "skipLink": "Preskoči na glavni sadržaj",
   "nav.home": "Početna",
   "nav.about": "O nama",
   "nav.products": "Proizvodi",
@@ -58,7 +57,7 @@
   "faq.devicesA": "Janet radi na tvom računalu (janet-seed), zatim se povezuješ s telefona (CallJanet za iOS), uređivača koda (Janet Awakening u Cursoru), pametnog doma (Home Assistant) ili budućih naočala. Postoje ili će postojati nativne aplikacije za iOS, watchOS, macOS, Windows i Android. Vizija uključuje Meta Quest. Trenutno možeš vidjeti što je dostupno na <a href=\"https://what-can-janet-do.pages.dev\">what-can-janet-do.pages.dev</a>. Produkcijsko spremno pokretanje planirano je za Q3 2026. ako financijski uspije.",
   "faq.benefits": "Koje su prednosti Janet?",
   "faq.benefitsA": "Janet je izgrađena s prioritetom privatnosti. To znači da tvoji podaci ostaju na tvojim uređajima i nikad ne idu u oblak. Posjeduješ svoje podatke. Janet radi offline pa nisi ovisan o internetu. Slijedi skup od 16 pravila koja definiraju njezino ponašanje. Otvorenog je koda pa ljudi mogu pregledati i poboljšati kod. Naočale dodaju titlove uživo, prijevod i podršku za pamćenje, sve radi lokalno na tvom uređaju. I nema pretplate — platiš jednom za hardver i opcionalno možeš platiti za podršku.",
-  "faq.whyCameUp": "Zašto si osmislio Janet?",
+  "faq.whyCameUp": "Zašto sam osmislio Janet?",
   "faq.whyCameUpA": "Želio sam alternativu velikim tehnološkim asistentima koji se oslanjaju na oblak i monetiziraju tvoje podatke. J.A.N.E.T. — Just A Neat Evolving Thinker — je otvorena, usmjerena na privatnost, radi offline i izgrađena s pristupačnošću na umu. Ideja je pružiti alternativu Siri, Alexa i Googleu s nečim što možeš posjedovati i kojemu možeš vjerovati. Radi se o davanju ljudima prave izbora umjesto zatvorenih ekosustava koji sakupljaju tvoje podatke.",
   "faq.howToUse": "Kako koristiti Janet?",
   "faq.howToUseA": "Pokreneš glavni mozak (janet-seed) na svom računalu, zatim se povezuješ s telefona (CallJanet), uređivača koda (Janet Awakening) ili pametnog doma. Kažeš \"Hey Janet!\" za početak i prirodno razgovaraš — podržava i glas i tekst. Kad završiš, reci \"Thank you, Janet!\" ili \"Good night, Janet.\" Naočale će prikazivati titlove i prijevod uživo u tvom vidnom polju, i sve to ostaje na tvojim uređajima — ništa ne ide u oblak.",
@@ -156,5 +155,7 @@
   "footer.gofundme": "Podrška na GoFundMeu",
   "footer.patreon": "Podrška na Patreonu",
   "footer.careers": "Karijere",
-  "footer.copyright": "© 2026 The Great Sage. AI offline prvo za sve."
+  "footer.copyright": "© 2026 The Great Sage. AI offline prvo za sve.",
+  "footer.cookies": "Kolačići: Koristimo kolačiće za pamćenje tvojih jezičnih i tema (svijetla/tamna) postavki.",
+  "cookieConsent.text": "Koristimo kolačiće za pamćenje tvojih jezičnih i tema postavki. <a href=\"#cookies\">Kolačići</a>"
 }

@@ -1,5 +1,4 @@
 {
-  "skipLink": "メインコンテンツへスキップ",
   "nav.home": "ホーム",
   "nav.about": "会社について",
   "nav.products": "製品",
@@ -156,5 +155,7 @@
   "footer.gofundme": "GoFundMeでサポート",
   "footer.patreon": "Patreonでサポート",
   "footer.careers": "採用",
-  "footer.copyright": "© 2026 The Great Sage. みんなのためのオフライン優先AI。"
+  "footer.copyright": "© 2026 The Great Sage. みんなのためのオフライン優先AI。",
+  "footer.cookies": "Cookie：言語とテーマ（ダーク/ライト）の設定を記憶するために使用しています。",
+  "cookieConsent.text": "言語とテーマの設定を記憶するためにCookieを使用しています。<a href=\"#cookies\">Cookie</a>"
 }

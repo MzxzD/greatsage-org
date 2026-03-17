@@ -82,8 +82,8 @@
             --primary: #0A84FF;
             --primary-light: #3da3ff;
             --primary-dark: #0066cc;
-            --text: #e8e6f0;
-            --text-light: #b7b0d4;
+            --text: #f1f5f9;
+            --text-light: #cbd5e1;
             --bg: #0f1726;
             --bg-card: #1a2744;
             --border-card: #2a3a5c;
@@ -102,8 +102,8 @@
                 --primary: #0A84FF;
                 --primary-light: #3da3ff;
                 --primary-dark: #0066cc;
-                --text: #e8e6f0;
-                --text-light: #b7b0d4;
+                --text: #f1f5f9;
+                --text-light: #cbd5e1;
                 --bg: #0f1726;
                 --bg-card: #1a2744;
                 --border-card: #2a3a5c;
@@ -120,26 +120,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
-        }
-
-        .skip-link {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 10px 20px;
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            z-index: 100;
-            transform: translateY(-120%);
-            transition: transform 0.2s;
-        }
-        .skip-link:focus {
-            transform: translateY(0);
-            outline: 3px solid var(--secondary);
-            outline-offset: 2px;
         }
 
         .navbar {
@@ -223,6 +203,99 @@
             border-bottom-color: var(--primary);
         }
 
+        .nav-hamburger {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gray-mid);
+            background: var(--bg-card);
+            color: var(--text);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .nav-hamburger:hover { border-color: var(--primary); color: var(--primary); }
+        .nav-hamburger:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+        .nav-hamburger i { font-size: 1.2rem; }
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+        .nav-mobile-menu[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-mobile-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50vw;
+            min-height: 100vh;
+            height: 100vh;
+            background: var(--bg-card);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            padding: 80px 24px 24px;
+            transform: translateX(100%);
+            transition: transform 0.2s;
+            z-index: 41;
+            overflow-y: auto;
+        }
+        .nav-mobile-menu[aria-hidden="false"] .nav-mobile-panel {
+            transform: translateX(0);
+        }
+        .nav-mobile-panel .nav-links {
+            flex-direction: column;
+            gap: 0;
+        }
+        .nav-mobile-panel .nav-links a {
+            display: block;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-card);
+            font-size: 1.1rem;
+        }
+        .nav-mobile-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-card);
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-mobile-close:hover { background: var(--gray-light); }
+        @media (max-width: 768px) {
+            .navbar[data-scrolled] .nav-container .nav-links { display: none; }
+            .navbar[data-scrolled] .nav-hamburger { display: flex; }
+            .navbar[data-scrolled] { padding: 8px 0; }
+            .navbar[data-scrolled] .nav-container { flex-direction: row; gap: 8px; }
+            .navbar[data-scrolled] .logo { font-size: 1.35rem; }
+            .navbar[data-scrolled] .nav-hamburger { width: 38px; height: 38px; }
+            .navbar[data-scrolled] .dark-mode-toggle { width: 38px; height: 38px; }
+            .navbar[data-scrolled] .lang-dropdown-trigger { padding: 6px 10px; font-size: 0.85rem; }
+        }
+        @media (min-width: 769px) {
+            .nav-mobile-menu { display: none !important; }
+        }
+        @media (max-width: 768px) {
+            .nav-mobile-menu { display: block; }
+        }
         @media (max-width: 640px) {
             .nav-container { flex-direction: column; gap: 12px; }
             .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
@@ -338,6 +411,39 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
         }
+        [data-theme="dark"] .hero-content h1 {
+            background: linear-gradient(145deg, #ffffff, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="dark"] .hero-content .highlight {
+            color: #60a5fa;
+        }
+        [data-theme="dark"] .hero-content p {
+            color: #e2e8f0;
+        }
+        [data-theme="dark"] .section-header h2 {
+            background: linear-gradient(135deg, #e2e8f0, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="dark"] .section-header p { color: #e2e8f0; }
+        [data-theme="dark"] .about-content p { color: #e2e8f0; }
+        [data-theme="dark"] .trait h4 { color: #f1f5f9; }
+        [data-theme="dark"] .trait p { color: #cbd5e1; }
+        [data-theme="dark"] .companion-card h3 { color: #f1f5f9; }
+        [data-theme="dark"] .companion-card p { color: #e2e8f0; }
+        [data-theme="dark"] .support-side h3 { color: #f1f5f9; }
+        [data-theme="dark"] .support-side p { color: #e2e8f0; }
+        [data-theme="dark"] .faq-item .faq-question { color: #f1f5f9; }
+        [data-theme="dark"] .faq-item .faq-answer { color: #e2e8f0; }
+        [data-theme="dark"] .business-card-teaser .business-card-trigger { color: #f1f5f9; }
+        [data-theme="dark"] .business-card-company { color: #f1f5f9; }
+        [data-theme="dark"] .business-card-tagline,
+        [data-theme="dark"] .business-card-contact { color: #e2e8f0; }
+        [data-theme="dark"] .understand-cta p { color: #e2e8f0; }
 
         .section-header p {
             color: var(--text-light);
@@ -500,38 +606,52 @@
 
         .support-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 32px;
+            align-items: stretch;
             margin-top: 48px;
         }
 
         .support-embed {
             min-height: 320px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border-card);
+            background: var(--bg-card);
         }
 
         .support-side {
             background: var(--bg-card);
             border-radius: 40px;
-            padding: 32px;
+            padding: 36px 32px;
             border: 1px solid var(--border-card);
             box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .support-side h3 {
             font-size: 1.5rem;
-            margin-bottom: 12px;
+            margin-bottom: 0;
             color: var(--text);
         }
 
         .support-side p {
             color: var(--text-light);
-            margin-bottom: 20px;
+            margin-bottom: 0;
             font-size: 1rem;
+            flex: 1;
+            line-height: 1.6;
         }
 
-        @media (max-width: 900px) {
-            .support-grid { grid-template-columns: 1fr; }
+        @media (max-width: 1100px) {
+            .support-grid { grid-template-columns: 1fr 1fr; }
+            .support-embed { grid-column: 1 / -1; }
+        }
+
+        @media (max-width: 768px) {
+            .support-grid { grid-template-columns: 1fr; gap: 24px; }
         }
 
         .visually-hidden {
@@ -744,10 +864,11 @@
         }
 
         @media print {
+            body * { visibility: hidden; }
+            body .business-card-overlay,
+            body .business-card-overlay * { visibility: visible; }
             .business-card-overlay-backdrop,
-            .business-card-actions {
-                display: none !important;
-            }
+            .business-card-actions { display: none !important; }
             .business-card-overlay {
                 position: static;
                 opacity: 1;
@@ -939,11 +1060,12 @@
     </style>
 </head>
 <body>
-    <a href="#main" class="skip-link" data-i18n="skipLink">Skip to main content</a>
-
     <nav class="navbar" role="navigation" aria-label="Main">
         <div class="container nav-container">
             <span class="logo">The Great <span>Sage</span></span>
+            <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
             <div class="nav-links">
                 <a href="#home" data-i18n="nav.home">Home</a>
                 <a href="#about" data-i18n="nav.about">About</a>
@@ -973,6 +1095,24 @@
                 <button type="button" class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
+            </div>
+        </div>
+        <div class="nav-mobile-menu" id="nav-mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu" aria-hidden="true">
+            <div class="nav-mobile-panel">
+                <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Close menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <div class="nav-links">
+                    <a href="#home" data-i18n="nav.home">Home</a>
+                    <a href="#about" data-i18n="nav.about">About</a>
+                    <a href="#companions" data-i18n="nav.products">Products</a>
+                    <a href="#vision" data-i18n="nav.vision">Vision</a>
+                    <a href="#support" data-i18n="nav.support">Support</a>
+                    <a href="#faq" data-i18n="nav.qa">Q&amp;A</a>
+                    <a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a>
+                    <a href="https://glasses.greatsage.org" data-i18n="nav.glasses">Glasses</a>
+                    <a href="#contact" data-i18n="nav.contact">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -1366,16 +1506,27 @@
             <div class="copyright" data-i18n="footer.copyright">
                 &copy; 2026 The Great Sage. Offline-first AI for everyone.
             </div>
-            <p id="cookies" class="footer-legal">Cookies: We use cookies only to remember your language preference.</p>
+            <p id="cookies" class="footer-legal" data-i18n="footer.cookies">Cookies: We use cookies to remember your language and theme (dark/light) preferences.</p>
         </div>
     </footer>
 
     <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 
     <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
-        <p class="cookie-consent-text">We use cookies to remember your language preference. <a href="#cookies">Cookies</a></p>
+        <p class="cookie-consent-text" data-i18n-html="cookieConsent.text">We use cookies to remember your language and theme preferences. <a href="#cookies">Cookies</a></p>
         <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
     </aside>
+    <script>
+    (function(){
+      var el=document.getElementById('cookie-consent');
+      if(!el)return;
+      try{if(localStorage.getItem('greatsage-cookie-ack')==='1'){el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);return}}
+      catch(e){}
+      var dismiss=function(e){if(e)e.preventDefault();if(!el.parentNode)return;try{localStorage.setItem('greatsage-cookie-ack','1')}catch(x){}el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);};
+      var btn=el.querySelector('.cookie-consent-btn');
+      if(btn){btn.addEventListener('click',dismiss);btn.addEventListener('touchend',dismiss);}
+    })();
+    </script>
 
     <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
     <script defer src="i18n/i18n.js"></script>
@@ -1430,6 +1581,39 @@
             }
             onScroll();
             window.addEventListener('scroll', onScroll, { passive: true });
+        })();
+
+        (function() {
+            var hamburger = document.getElementById('nav-hamburger');
+            var menu = document.getElementById('nav-mobile-menu');
+            var closeBtn = document.getElementById('nav-mobile-close');
+            if (!hamburger || !menu) return;
+            function openMenu() {
+                menu.setAttribute('aria-hidden', 'false');
+                hamburger.setAttribute('aria-expanded', 'true');
+                hamburger.setAttribute('aria-label', 'Close menu');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                menu.setAttribute('aria-hidden', 'true');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'Open menu');
+                document.body.style.overflow = '';
+            }
+            hamburger.addEventListener('click', function() {
+                if (menu.getAttribute('aria-hidden') === 'true') openMenu();
+                else closeMenu();
+            });
+            closeBtn && closeBtn.addEventListener('click', closeMenu);
+            menu.addEventListener('click', function(e) {
+                if (e.target === menu) closeMenu();
+            });
+            menu.querySelectorAll('.nav-links a').forEach(function(a) {
+                a.addEventListener('click', closeMenu);
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menu.getAttribute('aria-hidden') === 'false') closeMenu();
+            });
         })();
 
         (function() {

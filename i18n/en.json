@@ -1,5 +1,4 @@
 {
-  "skipLink": "Skip to main content",
   "nav.home": "Home",
   "nav.about": "About",
   "nav.products": "Products",
@@ -58,7 +57,7 @@
   "faq.devicesA": "Janet runs on your computer (janet-seed), then you connect from your phone (CallJanet for iOS), code editor (Janet Awakening in Cursor), smart home (Home Assistant), or future glasses. There are or will be native apps for iOS, watchOS, macOS, Windows, and Android. The vision includes Meta Quest. Right now you can see what's available at <a href=\"https://what-can-janet-do.pages.dev\">what-can-janet-do.pages.dev</a>. Production-ready deployment is targeted for Q3 2026 if funding is successful.",
   "faq.benefits": "What are the benefits of Janet?",
   "faq.benefitsA": "Janet is built privacy-first. What that means is that your data stays on your devices and never goes to the cloud. You own your data. Janet works offline so you're not dependent on the internet. She follows a set of 16 rules that define her behavior. She's open source, so people can inspect and improve the code. The glasses add live captions, translation, and memory support, all running locally on your device. And there's no subscription — you pay once for the hardware and can optionally pay for support.",
-  "faq.whyCameUp": "Why did you come up with Janet?",
+  "faq.whyCameUp": "Why did I come up with Janet?",
   "faq.whyCameUpA": "I wanted an alternative to the big tech assistants that rely on the cloud and monetize your data. J.A.N.E.T. — Just A Neat Evolving Thinker — is open, privacy-focused, works offline, and is built with accessibility in mind. The idea is to provide an alternative to Siri, Alexa, and Google with something you can own and trust. It's about giving people real choice instead of closed ecosystems that harvest your data.",
   "faq.howToUse": "How to use Janet?",
   "faq.howToUseA": "You run the core brain (janet-seed) on your computer, then connect from your phone (CallJanet), code editor (Janet Awakening), or smart home. You say \"Hey Janet!\" to start and talk naturally — she supports both voice and text. When you're finished, say \"Thank you, Janet!\" or \"Good night, Janet.\" The glasses will show live captions and translation right in your field of view, and all of that stays on your devices — nothing goes to the cloud.",
@@ -156,5 +155,7 @@
   "footer.gofundme": "Support on GoFundMe",
   "footer.patreon": "Support on Patreon",
   "footer.careers": "Careers",
-  "footer.copyright": "© 2026 The Great Sage. Offline-first AI for everyone."
+  "footer.copyright": "© 2026 The Great Sage. Offline-first AI for everyone.",
+  "footer.cookies": "Cookies: We use cookies to remember your language and theme (dark/light) preferences.",
+  "cookieConsent.text": "We use cookies to remember your language and theme preferences. <a href=\"#cookies\">Cookies</a>"
 }

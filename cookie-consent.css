@@ -25,7 +25,9 @@
 }
 
 .cookie-consent.hidden {
-  display: none;
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .cookie-consent-text {
@@ -52,6 +54,9 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s;
+  -webkit-appearance: button;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .cookie-consent-btn:hover {
