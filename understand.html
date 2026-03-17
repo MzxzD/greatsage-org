@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I still don't understand · The Great Sage</title>
-    <meta name="description" content="We explain Janet in a way that fits you. Pick your age and how you like to learn — simple or technical.">
+    <title data-i18n="understand.pageTitle">I still don't understand · The Great Sage</title>
+    <meta name="description" content="We explain Janet in a way that fits you. Pick your age and how you like to learn — simple or technical." data-i18n-attr="content:understand.metaDesc">
     <link rel="canonical" href="https://greatsage.org/understand.html">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="i18n/lang-dropdown.css">
+    <link rel="stylesheet" href="cookie-consent.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -97,6 +99,15 @@
             background: var(--primary);
             color: white;
         }
+        .understand-footer {
+            text-align: center;
+            padding: 24px 24px 32px;
+            border-top: 1px solid var(--border-card);
+        }
+        .footer-legal {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
         .tabs-label { font-weight: 600; color: var(--text); margin-bottom: 14px; }
         .tabs {
             display: flex;
@@ -145,94 +156,77 @@
 </head>
 <body>
     <header class="top-bar">
-        <div class="container">
-            <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to greatsage.org</a>
+        <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="understand.backLink">Back to greatsage.org</span></a>
+            <div class="lang-dropdown" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-label="Language">
+                <button type="button" class="lang-dropdown-trigger" aria-label="Select language">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <span class="lang-dropdown-label">English</span>
+                    <i class="fas fa-chevron-down lang-dropdown-chevron" aria-hidden="true"></i>
+                </button>
+                <ul class="lang-dropdown-menu" role="listbox">
+                    <li><button type="button" role="option" data-lang="en" aria-selected="true">English</button></li>
+                    <li><button type="button" role="option" data-lang="de" aria-selected="false">Deutsch</button></li>
+                    <li><button type="button" role="option" data-lang="es" aria-selected="false">Español</button></li>
+                    <li><button type="button" role="option" data-lang="hr" aria-selected="false">Hrvatski</button></li>
+                    <li><button type="button" role="option" data-lang="ja" aria-selected="false">日本語</button></li>
+                </ul>
+            </div>
             <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
         </div>
     </header>
     <main>
         <div class="container">
-            <h1>I still don't understand</h1>
-            <p class="subhead">We'll explain Janet in a way that fits you. Choose your age and how you like to learn.</p>
+            <h1 data-i18n="understand.title">I still don't understand</h1>
+            <p class="subhead" data-i18n="understand.subhead">We'll explain Janet in a way that fits you. Choose your age and how you like to learn.</p>
 
-            <p class="prompt" id="age-prompt">Please select your age group so we can explain it better to you:</p>
+            <p class="prompt" id="age-prompt" data-i18n="understand.agePrompt">Please select your age group so we can explain it better to you:</p>
             <div class="age-group" role="group" aria-labelledby="age-prompt">
-                <button type="button" class="age-btn" data-age="child">Child</button>
-                <button type="button" class="age-btn" data-age="teen">Teen</button>
-                <button type="button" class="age-btn" data-age="young-adult">Young Adult</button>
-                <button type="button" class="age-btn" data-age="adult">Adult</button>
-                <button type="button" class="age-btn" data-age="senior">Senior</button>
+                <button type="button" class="age-btn" data-age="child" data-i18n="understand.ageChild">Child</button>
+                <button type="button" class="age-btn" data-age="teen" data-i18n="understand.ageTeen">Teen</button>
+                <button type="button" class="age-btn" data-age="young-adult" data-i18n="understand.ageYoungAdult">Young Adult</button>
+                <button type="button" class="age-btn" data-age="adult" data-i18n="understand.ageAdult">Adult</button>
+                <button type="button" class="age-btn" data-age="senior" data-i18n="understand.ageSenior">Senior</button>
             </div>
 
-            <p class="tabs-label">How would you like it explained?</p>
+            <p class="tabs-label" data-i18n="understand.tabsLabel">How would you like it explained?</p>
             <div class="tabs" role="tablist">
-                <button type="button" class="tab" role="tab" id="tab-geek" aria-selected="false" aria-controls="panel-geek" data-tab="geek">I am a Tech Geek</button>
-                <button type="button" class="tab selected" role="tab" id="tab-noidea" aria-selected="true" aria-controls="panel-noidea" data-tab="noidea">I have no IDEA ABOUT TECHNOLOGY</button>
+                <button type="button" class="tab" role="tab" id="tab-geek" aria-selected="false" aria-controls="panel-geek" data-tab="geek" data-i18n="understand.tabGeek">I am a Tech Geek</button>
+                <button type="button" class="tab selected" role="tab" id="tab-noidea" aria-selected="true" aria-controls="panel-noidea" data-tab="noidea" data-i18n="understand.tabNoidea">I have no IDEA ABOUT TECHNOLOGY</button>
             </div>
 
             <div class="explanation-box" id="explanation-box">
-                <p class="placeholder" id="explanation-placeholder">Select your age and how you'd like the explanation above, then we'll show you a version that fits you.</p>
+                <p class="placeholder" id="explanation-placeholder" data-i18n="understand.placeholder">Select your age and how you'd like the explanation above, then we'll show you a version that fits you.</p>
                 <div id="explanation-content"></div>
             </div>
         </div>
     </main>
 
+    <footer class="understand-footer">
+        <p id="cookies" class="footer-legal">Cookies: We use cookies only to remember your language preference.</p>
+    </footer>
+
+    <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
+        <p class="cookie-consent-text">We use cookies to remember your language preference. <a href="#cookies">Cookies</a></p>
+        <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
+    </aside>
+
+    <script defer src="i18n/i18n.js"></script>
+    <script defer src="cookie-consent.js"></script>
     <script>
         (function() {
             var age = null;
             var tab = 'noidea';
-            var contents = {
-                child: {
-                    geek: {
-                        title: 'Janet for kids (technical)',
-                        body: '<p>Janet is an AI that runs on your family\'s own computer or phone instead of in the cloud. She listens when you say "Hey Janet!" and answers using rules (axioms) so she stays safe and predictable. No app store skills, no exposed servers — just your device. Parents can teach her with runbooks (step-by-step instructions) so she does exactly what you allow.</p>'
-                    },
-                    noidea: {
-                        title: 'Janet for kids (simple)',
-                        body: '<p>Janet is like a friendly robot that lives on your tablet or your family\'s computer. When you say "Hey Janet!" she talks back — and everything stays at your house. Nothing goes to the internet. Your parents can teach her what she\'s allowed to do. She follows 16 rules so she\'s safe and nice.</p>'
-                    }
-                },
-                teen: {
-                    geek: {
-                        title: 'Janet for teens (technical)',
-                        body: '<p>Janet is a constitutional AI companion: 16 axioms, local inference (Neural Engine on device or janet-seed on your machine), and cluster-only state. No plugin marketplace, no gateway — so no OpenClaw-style attack surface. You get voice/text, runbooks, and optional clients (CallJanet, Awakening, glasses) without cloud or subscription.</p>'
-                    },
-                    noidea: {
-                        title: 'Janet for teens (simple)',
-                        body: '<p>Janet is an AI you actually own. She runs on your phone or computer, not in some company\'s cloud. Say "Hey Janet!" to talk; she follows clear rules and doesn\'t send your stuff anywhere. No monthly fee, no sketchy apps — just you and your device. You can even teach her new habits with simple instructions.</p>'
-                    }
-                },
-                'young-adult': {
-                    geek: {
-                        title: 'Janet for young adults (technical)',
-                        body: '<p>Janet is an offline-first, constitutional AI stack: janet-seed as the brain, WebSocket clients (CallJanet, Janet Awakening, JanetOS), 16 axioms, runbook-driven behavior. No cloud dependency, no untrusted plugin ecosystem, no exposed gateway — your data stays in your cluster. LLM can be local (Ollama, Neural Engine) or your chosen provider; orchestration is on your hardware.</p>'
-                    },
-                    noidea: {
-                        title: 'Janet for young adults (simple)',
-                        body: '<p>Janet is your AI companion that runs on your devices — phone, laptop, even glasses. She works offline, doesn\'t sell your data, and has no subscription. You say "Hey Janet!" to start; she helps with reminders, answers, and more, all while following 16 rules so she\'s predictable and safe. You own it; no big tech in the middle.</p>'
-                    }
-                },
-                adult: {
-                    geek: {
-                        title: 'Janet for adults (technical)',
-                        body: '<p>Janet is a privacy-first AI runtime: constitutional (16 axioms), cluster-scoped state, local or self-hosted LLM, runbooks for behavior. Clients include CallJanet (iOS/watchOS), Janet Awakening (Cursor), JanetOS, and J.A.N.E.T. Glasses. No plugin marketplace, no cloud gateway — reduces supply-chain and exposure risk compared to agent platforms that rely on third-party skills and exposed services.</p>'
-                    },
-                    noidea: {
-                        title: 'Janet for adults (simple)',
-                        body: '<p>Janet is an AI assistant that stays on your devices. No cloud, no subscription, no data harvesting. You can use her on your phone, computer, or (coming) glasses. She follows 16 clear rules and you can teach her with simple step-by-step instructions. Your conversations and data never leave your control — built for people who want an alternative to Siri, Alexa, or Google.</p>'
-                    }
-                },
-                senior: {
-                    geek: {
-                        title: 'Janet for seniors (technical)',
-                        body: '<p>Janet is a constitutional, offline-first AI companion with cluster-only state and runbook-driven behavior. No plugin ecosystem or exposed gateway — so no dependency on third-party skills or open ports. Clients (CallJanet, Awakening, glasses) connect to janet-seed; inference can be fully local (Ollama, Neural Engine). Suited for users who want control and auditability without cloud or subscription.</p>'
-                    },
-                    noidea: {
-                        title: 'Janet for seniors (simple)',
-                        body: '<p>Janet is a friendly AI that lives on your phone or computer. You say "Hey Janet!" to talk to her. She doesn\'t use the internet to work (after setup), so your words stay private. There\'s no monthly fee and no confusing apps from the store — just one companion that follows clear rules. Great for reminders, questions, and help without giving your data to big companies.</p>'
-                    }
-                }
-            };
+            var keyMap = { child: 'child', teen: 'teen', 'young-adult': 'youngAdult', adult: 'adult', senior: 'senior' };
+
+            function getContent(ageKey, tabKey) {
+                var t = window.greatsageT;
+                var section = keyMap[ageKey];
+                if (!section || !t) return null;
+                var title = t('understand.' + section + '.' + tabKey + '.title');
+                var body = t('understand.' + section + '.' + tabKey + '.body');
+                return (title && body) ? { title: title, body: body } : null;
+            }
 
             function render() {
                 var placeholder = document.getElementById('explanation-placeholder');
@@ -244,7 +238,7 @@
                     contentEl.classList.remove('visible');
                     return;
                 }
-                var c = contents[age] && contents[age][tab];
+                var c = getContent(age, tab);
                 if (!c) return;
                 placeholder.style.display = 'none';
                 contentEl.innerHTML = '<div class="content visible"><h3>' + c.title + '</h3>' + c.body + '</div>';
@@ -269,6 +263,9 @@
                     render();
                 });
             });
+
+            document.addEventListener('greatsage-i18n-ready', function() { if (age && tab) render(); });
+            document.addEventListener('greatsage-lang-changed', function() { if (age && tab) render(); });
 
             document.getElementById('dark-toggle').addEventListener('click', function() {
                 var root = document.documentElement;

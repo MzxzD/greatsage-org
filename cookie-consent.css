@@ -1,0 +1,59 @@
+/**
+ * Great Sage — Subtle cookie notice (corner, non-blocking)
+ * We only use cookies/local storage for language preference.
+ */
+.cookie-consent {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  z-index: 9999;
+  max-width: 280px;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  opacity: 0.95;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.cookie-consent:hover {
+  opacity: 1;
+}
+
+.cookie-consent.hidden {
+  display: none;
+}
+
+.cookie-consent-text {
+  margin-bottom: 8px;
+}
+
+.cookie-consent-text a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.cookie-consent-text a:hover {
+  text-decoration: underline;
+}
+
+.cookie-consent-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cookie-consent-btn:hover {
+  background: var(--primary-light, #9b5cff);
+}
