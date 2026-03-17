@@ -13,6 +13,14 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.05ms !important;
+            }
+        }
         body {
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
@@ -32,17 +40,21 @@
             --border-radius: 28px;
         }
         [data-theme="dark"] {
+            --primary: #0A84FF;
+            --primary-light: #3da3ff;
             --text: #e8e6f0;
             --text-light: #b7b0d4;
-            --bg: #1e1b2e;
-            --bg-card: #2d2b4e;
-            --border-card: #3f3a60;
-            --accent: #312b5a;
+            --bg: #0f1726;
+            --bg-card: #1a2744;
+            --border-card: #2a3a5c;
+            --accent: #1e2d4a;
         }
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --text: #e8e6f0; --text-light: #b7b0d4; --bg: #1e1b2e; --bg-card: #2d2b4e;
-                --border-card: #3f3a60; --accent: #312b5a;
+                --primary: #0A84FF;
+                --primary-light: #3da3ff;
+                --text: #e8e6f0; --text-light: #b7b0d4; --bg: #0f1726; --bg-card: #1a2744;
+                --border-card: #2a3a5c; --accent: #1e2d4a;
             }
         }
         .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
@@ -148,13 +160,35 @@
         }
         .explanation-box .content { display: none; }
         .explanation-box .content.visible { display: block; }
+        .explanation-box .tabpanel-content[hidden] { display: none !important; }
+        .explanation-box .tabpanel-content:not([hidden]) { display: block; }
         .explanation-box h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--primary); }
         .explanation-box p { margin-bottom: 12px; color: var(--text); }
         .explanation-box p:last-child { margin-bottom: 0; }
         .explanation-box a { color: var(--primary); font-weight: 500; }
+        .skip-link {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            z-index: 100;
+            transform: translateY(-120%);
+            transition: transform 0.2s;
+        }
+        .skip-link:focus {
+            transform: translateY(0);
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <header class="top-bar">
         <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
             <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="understand.backLink">Back to greatsage.org</span></a>
@@ -175,7 +209,7 @@
             <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
         </div>
     </header>
-    <main>
+    <main id="main">
         <div class="container">
             <h1 data-i18n="understand.title">I still don't understand</h1>
             <p class="subhead" data-i18n="understand.subhead">We'll explain Janet in a way that fits you. Choose your age and how you like to learn.</p>
@@ -197,7 +231,8 @@
 
             <div class="explanation-box" id="explanation-box">
                 <p class="placeholder" id="explanation-placeholder" data-i18n="understand.placeholder">Select your age and how you'd like the explanation above, then we'll show you a version that fits you.</p>
-                <div id="explanation-content"></div>
+                <div role="tabpanel" id="panel-geek" aria-labelledby="tab-geek" class="tabpanel-content" hidden></div>
+                <div role="tabpanel" id="panel-noidea" aria-labelledby="tab-noidea" class="tabpanel-content" hidden></div>
             </div>
         </div>
     </main>
@@ -230,19 +265,25 @@
 
             function render() {
                 var placeholder = document.getElementById('explanation-placeholder');
-                var contentEl = document.getElementById('explanation-content');
+                var panelGeek = document.getElementById('panel-geek');
+                var panelNoidea = document.getElementById('panel-noidea');
                 if (!age || !tab) {
-                    placeholder.classList.add('visible');
                     placeholder.style.display = 'block';
-                    contentEl.innerHTML = '';
-                    contentEl.classList.remove('visible');
+                    if (panelGeek) { panelGeek.hidden = true; panelGeek.innerHTML = ''; }
+                    if (panelNoidea) { panelNoidea.hidden = true; panelNoidea.innerHTML = ''; }
                     return;
                 }
                 var c = getContent(age, tab);
                 if (!c) return;
                 placeholder.style.display = 'none';
-                contentEl.innerHTML = '<div class="content visible"><h3>' + c.title + '</h3>' + c.body + '</div>';
-                contentEl.classList.add('visible');
+                var html = '<div class="content visible"><h3>' + c.title + '</h3>' + c.body + '</div>';
+                if (tab === 'geek') {
+                    if (panelGeek) { panelGeek.innerHTML = html; panelGeek.hidden = false; }
+                    if (panelNoidea) { panelNoidea.hidden = true; panelNoidea.innerHTML = ''; }
+                } else {
+                    if (panelNoidea) { panelNoidea.innerHTML = html; panelNoidea.hidden = false; }
+                    if (panelGeek) { panelGeek.hidden = true; panelGeek.innerHTML = ''; }
+                }
             }
 
             document.querySelectorAll('.age-btn').forEach(function(btn) {

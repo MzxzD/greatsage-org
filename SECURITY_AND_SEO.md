@@ -14,6 +14,15 @@
 - **sitemap.xml:** Single entry for the homepage. Submit in [Google Search Console](https://search.google.com/search-console) (add property greatsage.org) for faster discovery.
 - **Structured data:** JSON-LD for `Organization` and `WebSite` so Google can show rich results if applicable.
 
+## Accessibility
+
+- **Skip link:** "Skip to main content" for keyboard users (index.html, understand.html).
+- **Reduced motion:** `prefers-reduced-motion` respected — animations and transitions minimized.
+- **Focus styles:** Visible `:focus-visible` outlines on buttons, links, and interactive elements.
+- **ARIA:** Semantic HTML, `aria-label` on nav/buttons, `aria-hidden` on decorative icons, tab panels with correct `aria-controls`/`role="tabpanel"`.
+- **Dark mode:** Blue palette (Janet-aligned) with system preference support; manual toggle available.
+- **Gradient text:** Fallback `color` for hero and section headings when gradient is unsupported.
+
 ## Optional next steps
 
 - **Google Search Console:** Add `https://greatsage.org` as a property and submit the sitemap.

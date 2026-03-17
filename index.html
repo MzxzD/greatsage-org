@@ -79,34 +79,40 @@
         }
 
         [data-theme="dark"] {
+            --primary: #0A84FF;
+            --primary-light: #3da3ff;
+            --primary-dark: #0066cc;
             --text: #e8e6f0;
             --text-light: #b7b0d4;
-            --bg: #1e1b2e;
-            --bg-card: #2d2b4e;
-            --border-card: #3f3a60;
-            --accent: #312b5a;
-            --gray-light: #252238;
-            --gradient-bg: linear-gradient(145deg, #252238, #1e1b2e);
+            --bg: #0f1726;
+            --bg-card: #1a2744;
+            --border-card: #2a3a5c;
+            --accent: #1e2d4a;
+            --gray-light: #152033;
+            --gradient-bg: linear-gradient(145deg, #152033, #0f1726);
             --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.3);
-            --shadow-hover: 0 25px 30px -12px rgba(124,58,237,0.35);
-            --nav-bg: rgba(30,27,46,0.9);
-            --nav-border: rgba(63,58,96,0.5);
-            --hero-border: #3f3a60;
+            --shadow-hover: 0 25px 30px -12px rgba(10,132,255,0.35);
+            --nav-bg: rgba(15,23,38,0.9);
+            --nav-border: rgba(42,58,92,0.5);
+            --hero-border: #2a3a5c;
         }
 
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
+                --primary: #0A84FF;
+                --primary-light: #3da3ff;
+                --primary-dark: #0066cc;
                 --text: #e8e6f0;
                 --text-light: #b7b0d4;
-                --bg: #1e1b2e;
-                --bg-card: #2d2b4e;
-                --border-card: #3f3a60;
-                --accent: #312b5a;
-                --gray-light: #252238;
-                --gradient-bg: linear-gradient(145deg, #252238, #1e1b2e);
-                --nav-bg: rgba(30,27,46,0.9);
-                --nav-border: rgba(63,58,96,0.5);
-                --hero-border: #3f3a60;
+                --bg: #0f1726;
+                --bg-card: #1a2744;
+                --border-card: #2a3a5c;
+                --accent: #1e2d4a;
+                --gray-light: #152033;
+                --gradient-bg: linear-gradient(145deg, #152033, #0f1726);
+                --nav-bg: rgba(15,23,38,0.9);
+                --nav-border: rgba(42,58,92,0.5);
+                --hero-border: #2a3a5c;
             }
         }
 
@@ -145,6 +151,15 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--nav-border);
             padding: 16px 0;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .navbar[data-scrolled] {
+            --nav-bg: rgba(255,255,255,0.6);
+            border-bottom-color: rgba(203,213,225,0.2);
+        }
+        [data-theme="dark"] .navbar[data-scrolled] {
+            --nav-bg: rgba(15,23,38,0.75);
+            border-bottom-color: rgba(42,58,92,0.3);
         }
 
         .nav-container {
@@ -231,10 +246,11 @@
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.03em;
+            color: var(--text);
             background: linear-gradient(145deg, #1e1b2e, #7C3AED);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
 
@@ -315,10 +331,11 @@
             font-size: 2.8rem;
             font-weight: 700;
             letter-spacing: -0.02em;
+            color: var(--text);
             background: linear-gradient(135deg, #1e1b2e, #5b21b6);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
         }
 
@@ -438,6 +455,10 @@
             color: white;
             box-shadow: 0 30px 40px -20px #312b5a;
         }
+        [data-theme="dark"] .vision-wrapper {
+            background: linear-gradient(135deg, #152033 0%, #1e2d4a 100%);
+            box-shadow: 0 30px 40px -20px #1e2d4a;
+        }
 
         .vision-grid {
             display: grid;
@@ -467,6 +488,7 @@
         .vision-stats { display: flex; gap: 30px; justify-content: flex-end; }
         .stat-item { text-align: center; }
         .stat-number { font-size: 3.2rem; font-weight: 800; color: #c7b0ff; }
+        [data-theme="dark"] .stat-number { color: #7eb8ff; }
         .stat-label { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.7; }
 
         @media (max-width: 800px) {
@@ -519,6 +541,15 @@
             border-radius: 60px 60px 0 0;
             margin-top: 40px;
         }
+        [data-theme="dark"] .footer {
+            background: #0f1726;
+            color: #94a3b8;
+        }
+        [data-theme="dark"] .footer h4 { color: #e2e8f0; }
+        [data-theme="dark"] .footer-links a { color: #94a3b8; }
+        [data-theme="dark"] .footer-links a:hover { color: white; }
+        [data-theme="dark"] .social-icons a { background: #1e293b; }
+        [data-theme="dark"] .copyright { border-top-color: #1e293b; }
 
         .footer-grid {
             display: grid;
@@ -743,22 +774,22 @@
                         <p data-i18n="about.p2">Janet is constitutional AI: 16 axioms, teachable runbooks, and cluster-only communication. She grows with you, works offline, and never sends your data to the cloud.</p>
                         <div class="sage-traits">
                             <div class="trait">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-lock" aria-hidden="true"></i>
                                 <h4 data-i18n="trait.private">Private</h4>
                                 <p data-i18n="trait.privateDesc">your data stays yours</p>
                             </div>
                             <div class="trait">
-                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-wifi" aria-hidden="true"></i>
                                 <h4 data-i18n="trait.offline">Offline-first</h4>
                                 <p data-i18n="trait.offlineDesc">runs without the cloud</p>
                             </div>
                             <div class="trait">
-                                <i class="fas fa-balance-scale"></i>
+                                <i class="fas fa-balance-scale" aria-hidden="true"></i>
                                 <h4 data-i18n="trait.constitutional">Constitutional</h4>
                                 <p data-i18n="trait.constitutionalDesc">16 axioms, predictable</p>
                             </div>
                             <div class="trait">
-                                <i class="fas fa-code-branch"></i>
+                                <i class="fas fa-code-branch" aria-hidden="true"></i>
                                 <h4 data-i18n="trait.open">Open</h4>
                                 <p data-i18n="trait.openDesc">GPL/MIT, you own it</p>
                             </div>
@@ -779,22 +810,22 @@
                 </div>
                 <div class="companions-grid">
                     <div class="companion-card">
-                        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="card-icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.calljanet">CallJanet</h3>
                         <p data-i18n="companions.calljanetDesc">iPhone &amp; Apple Watch. &quot;Hey Janet!&quot; on the go. Offline, Siri Intents, ready for the App Store.</p>
                     </div>
                     <div class="companion-card">
-                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                        <div class="card-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.awakening">Janet Awakening</h3>
                         <p data-i18n="companions.awakeningDesc">Janet in Cursor IDE. Code with your companion, 100% offline via Continue.dev and janet-seed.</p>
                     </div>
                     <div class="companion-card">
-                        <div class="card-icon"><i class="fas fa-desktop"></i></div>
+                        <div class="card-icon"><i class="fas fa-desktop" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.janetos">JanetOS</h3>
                         <p data-i18n="companions.janetosDesc">Full OS for your device. Janet as the interface — Asahi Linux, Apple Silicon, and beyond.</p>
                     </div>
                     <div class="companion-card">
-                        <div class="card-icon"><i class="fas fa-glasses"></i></div>
+                        <div class="card-icon"><i class="fas fa-glasses" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.glasses">Janet Glasses</h3>
                         <p data-i18n-html="companions.glassesDesc">Live captions and translation. Accessibility-first, offline. <a href="https://glasses.greatsage.org">glasses.greatsage.org</a></p>
                     </div>
@@ -1073,7 +1104,7 @@
         </div>
     </footer>
 
-    <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 
     <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
         <p class="cookie-consent-text">We use cookies to remember your language preference. <a href="#cookies">Cookies</a></p>
@@ -1105,7 +1136,7 @@
                 if (theme === 'light') isDark = false;
                 if (theme === 'dark') isDark = true;
                 document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-                if (metaTheme) metaTheme.setAttribute('content', isDark ? '#1e1b2e' : '#7C3AED');
+                if (metaTheme) metaTheme.setAttribute('content', isDark ? '#0f1726' : '#7C3AED');
                 if (icon) {
                     icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
                     toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
@@ -1124,6 +1155,16 @@
             }
         })();
 
+        (function() {
+            var nav = document.querySelector('.navbar');
+            if (!nav) return;
+            function onScroll() {
+                if (window.scrollY > 50) nav.setAttribute('data-scrolled', '');
+                else nav.removeAttribute('data-scrolled');
+            }
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+        })();
     </script>
 </body>
 </html>
