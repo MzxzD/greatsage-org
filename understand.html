@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I still don't understand · The Great Sage</title>
+    <meta name="description" content="We explain Janet in a way that fits you. Pick your age and how you like to learn — simple or technical.">
+    <link rel="canonical" href="https://greatsage.org/understand.html">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        :root {
+            --primary: #7C3AED;
+            --primary-light: #9b5cff;
+            --text: #1e1b2e;
+            --text-light: #4c4a6e;
+            --bg: #faf9ff;
+            --bg-card: #ffffff;
+            --border-card: #f0eaff;
+            --accent: #ede9fe;
+            --shadow-sm: 0 10px 25px -5px rgba(124,58,237,0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
+            --border-radius: 28px;
+        }
+        [data-theme="dark"] {
+            --text: #e8e6f0;
+            --text-light: #b7b0d4;
+            --bg: #1e1b2e;
+            --bg-card: #2d2b4e;
+            --border-card: #3f3a60;
+            --accent: #312b5a;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --text: #e8e6f0; --text-light: #b7b0d4; --bg: #1e1b2e; --bg-card: #2d2b4e;
+                --border-card: #3f3a60; --accent: #312b5a;
+            }
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .top-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-card);
+            padding: 16px 0;
+        }
+        .top-bar .container { display: flex; align-items: center; justify-content: space-between; }
+        .back-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .dark-toggle {
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 1px solid var(--border-card); background: var(--bg-card);
+            color: var(--text); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .dark-toggle:hover { border-color: var(--primary); color: var(--primary); }
+        main { padding: 48px 0 80px; }
+        h1 { font-size: 2.2rem; margin-bottom: 12px; color: var(--text); }
+        .subhead { color: var(--text-light); font-size: 1.1rem; margin-bottom: 32px; }
+        .prompt { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 20px; }
+        .age-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .age-btn {
+            padding: 14px 24px;
+            border-radius: 50px;
+            border: 2px solid var(--border-card);
+            background: var(--bg-card);
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .age-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--accent);
+        }
+        .age-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        .tabs-label { font-weight: 600; color: var(--text); margin-bottom: 14px; }
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid var(--border-card);
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+        .tab {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .tab:hover { color: var(--primary); background: var(--accent); }
+        .tab.selected { background: var(--primary); color: white; }
+        .tab:first-child { border-radius: 50px 0 0 50px; }
+        .tab:last-child { border-radius: 0 50px 50px 0; }
+        .explanation-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 28px 32px;
+            box-shadow: var(--shadow-sm);
+            min-height: 120px;
+        }
+        .explanation-box .placeholder {
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .explanation-box .content { display: none; }
+        .explanation-box .content.visible { display: block; }
+        .explanation-box h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--primary); }
+        .explanation-box p { margin-bottom: 12px; color: var(--text); }
+        .explanation-box p:last-child { margin-bottom: 0; }
+        .explanation-box a { color: var(--primary); font-weight: 500; }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="container">
+            <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to greatsage.org</a>
+            <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>I still don't understand</h1>
+            <p class="subhead">We'll explain Janet in a way that fits you. Choose your age and how you like to learn.</p>
+
+            <p class="prompt" id="age-prompt">Please select your age group so we can explain it better to you:</p>
+            <div class="age-group" role="group" aria-labelledby="age-prompt">
+                <button type="button" class="age-btn" data-age="child">Child</button>
+                <button type="button" class="age-btn" data-age="teen">Teen</button>
+                <button type="button" class="age-btn" data-age="young-adult">Young Adult</button>
+                <button type="button" class="age-btn" data-age="adult">Adult</button>
+                <button type="button" class="age-btn" data-age="senior">Senior</button>
+            </div>
+
+            <p class="tabs-label">How would you like it explained?</p>
+            <div class="tabs" role="tablist">
+                <button type="button" class="tab" role="tab" id="tab-geek" aria-selected="false" aria-controls="panel-geek" data-tab="geek">I am a Tech Geek</button>
+                <button type="button" class="tab selected" role="tab" id="tab-noidea" aria-selected="true" aria-controls="panel-noidea" data-tab="noidea">I have no IDEA ABOUT TECHNOLOGY</button>
+            </div>
+
+            <div class="explanation-box" id="explanation-box">
+                <p class="placeholder" id="explanation-placeholder">Select your age and how you'd like the explanation above, then we'll show you a version that fits you.</p>
+                <div id="explanation-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            var age = null;
+            var tab = 'noidea';
+            var contents = {
+                child: {
+                    geek: {
+                        title: 'Janet for kids (technical)',
+                        body: '<p>Janet is an AI that runs on your family\'s own computer or phone instead of in the cloud. She listens when you say "Hey Janet!" and answers using rules (axioms) so she stays safe and predictable. No app store skills, no exposed servers — just your device. Parents can teach her with runbooks (step-by-step instructions) so she does exactly what you allow.</p>'
+                    },
+                    noidea: {
+                        title: 'Janet for kids (simple)',
+                        body: '<p>Janet is like a friendly robot that lives on your tablet or your family\'s computer. When you say "Hey Janet!" she talks back — and everything stays at your house. Nothing goes to the internet. Your parents can teach her what she\'s allowed to do. She follows 16 rules so she\'s safe and nice.</p>'
+                    }
+                },
+                teen: {
+                    geek: {
+                        title: 'Janet for teens (technical)',
+                        body: '<p>Janet is a constitutional AI companion: 16 axioms, local inference (Neural Engine on device or janet-seed on your machine), and cluster-only state. No plugin marketplace, no gateway — so no OpenClaw-style attack surface. You get voice/text, runbooks, and optional clients (CallJanet, Awakening, glasses) without cloud or subscription.</p>'
+                    },
+                    noidea: {
+                        title: 'Janet for teens (simple)',
+                        body: '<p>Janet is an AI you actually own. She runs on your phone or computer, not in some company\'s cloud. Say "Hey Janet!" to talk; she follows clear rules and doesn\'t send your stuff anywhere. No monthly fee, no sketchy apps — just you and your device. You can even teach her new habits with simple instructions.</p>'
+                    }
+                },
+                'young-adult': {
+                    geek: {
+                        title: 'Janet for young adults (technical)',
+                        body: '<p>Janet is an offline-first, constitutional AI stack: janet-seed as the brain, WebSocket clients (CallJanet, Janet Awakening, JanetOS), 16 axioms, runbook-driven behavior. No cloud dependency, no untrusted plugin ecosystem, no exposed gateway — your data stays in your cluster. LLM can be local (Ollama, Neural Engine) or your chosen provider; orchestration is on your hardware.</p>'
+                    },
+                    noidea: {
+                        title: 'Janet for young adults (simple)',
+                        body: '<p>Janet is your AI companion that runs on your devices — phone, laptop, even glasses. She works offline, doesn\'t sell your data, and has no subscription. You say "Hey Janet!" to start; she helps with reminders, answers, and more, all while following 16 rules so she\'s predictable and safe. You own it; no big tech in the middle.</p>'
+                    }
+                },
+                adult: {
+                    geek: {
+                        title: 'Janet for adults (technical)',
+                        body: '<p>Janet is a privacy-first AI runtime: constitutional (16 axioms), cluster-scoped state, local or self-hosted LLM, runbooks for behavior. Clients include CallJanet (iOS/watchOS), Janet Awakening (Cursor), JanetOS, and J.A.N.E.T. Glasses. No plugin marketplace, no cloud gateway — reduces supply-chain and exposure risk compared to agent platforms that rely on third-party skills and exposed services.</p>'
+                    },
+                    noidea: {
+                        title: 'Janet for adults (simple)',
+                        body: '<p>Janet is an AI assistant that stays on your devices. No cloud, no subscription, no data harvesting. You can use her on your phone, computer, or (coming) glasses. She follows 16 clear rules and you can teach her with simple step-by-step instructions. Your conversations and data never leave your control — built for people who want an alternative to Siri, Alexa, or Google.</p>'
+                    }
+                },
+                senior: {
+                    geek: {
+                        title: 'Janet for seniors (technical)',
+                        body: '<p>Janet is a constitutional, offline-first AI companion with cluster-only state and runbook-driven behavior. No plugin ecosystem or exposed gateway — so no dependency on third-party skills or open ports. Clients (CallJanet, Awakening, glasses) connect to janet-seed; inference can be fully local (Ollama, Neural Engine). Suited for users who want control and auditability without cloud or subscription.</p>'
+                    },
+                    noidea: {
+                        title: 'Janet for seniors (simple)',
+                        body: '<p>Janet is a friendly AI that lives on your phone or computer. You say "Hey Janet!" to talk to her. She doesn\'t use the internet to work (after setup), so your words stay private. There\'s no monthly fee and no confusing apps from the store — just one companion that follows clear rules. Great for reminders, questions, and help without giving your data to big companies.</p>'
+                    }
+                }
+            };
+
+            function render() {
+                var placeholder = document.getElementById('explanation-placeholder');
+                var contentEl = document.getElementById('explanation-content');
+                if (!age || !tab) {
+                    placeholder.classList.add('visible');
+                    placeholder.style.display = 'block';
+                    contentEl.innerHTML = '';
+                    contentEl.classList.remove('visible');
+                    return;
+                }
+                var c = contents[age] && contents[age][tab];
+                if (!c) return;
+                placeholder.style.display = 'none';
+                contentEl.innerHTML = '<div class="content visible"><h3>' + c.title + '</h3>' + c.body + '</div>';
+                contentEl.classList.add('visible');
+            }
+
+            document.querySelectorAll('.age-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.age-btn').forEach(function(b) { b.classList.remove('selected'); });
+                    this.classList.add('selected');
+                    age = this.getAttribute('data-age');
+                    render();
+                });
+            });
+
+            document.querySelectorAll('.tab').forEach(function(t) {
+                t.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('selected'); b.setAttribute('aria-selected', 'false'); });
+                    this.classList.add('selected');
+                    this.setAttribute('aria-selected', 'true');
+                    tab = this.getAttribute('data-tab');
+                    render();
+                });
+            });
+
+            document.getElementById('dark-toggle').addEventListener('click', function() {
+                var root = document.documentElement;
+                var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                this.querySelector('i').className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                this.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            });
+
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !document.documentElement.getAttribute('data-theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                var icon = document.querySelector('#dark-toggle i');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        })();
+    </script>
+</body>
+</html>
