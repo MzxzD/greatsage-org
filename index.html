@@ -490,6 +490,42 @@
             .about-image { order: -1; }
         }
 
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 48px;
+        }
+
+        .support-embed {
+            min-height: 320px;
+        }
+
+        .support-side {
+            background: var(--bg-card);
+            border-radius: 40px;
+            padding: 32px;
+            border: 1px solid var(--border-card);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .support-side h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .support-side p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .support-grid { grid-template-columns: 1fr; }
+        }
+
         .footer {
             background: #1e1b2e;
             color: #b7b0d4;
@@ -658,6 +694,7 @@
                 <a href="#about">About</a>
                 <a href="#companions">Products</a>
                 <a href="#vision">Vision</a>
+                <a href="#support">Support</a>
                 <a href="#faq">Q&amp;A</a>
                 <a href="understand.html">I still don&apos;t understand</a>
                 <a href="https://glasses.greatsage.org">Glasses</a>
@@ -785,6 +822,25 @@
                             <div class="stat-number">16</div>
                             <div class="stat-label">axioms</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="support" class="section" style="background: var(--bg-card);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Support J.A.N.E.T.</h2>
+                    <p>Help make Janet a reality — the ecosystem, the glasses, and the vision.</p>
+                </div>
+                <div class="support-grid">
+                    <div class="support-embed">
+                        <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-me-make-janet-a-reality/widget/large?sharesheet=undefined&attribution_id=sl:af6c823e-6037-48ae-be8c-5dfdd94d3a58"></div>
+                    </div>
+                    <div class="support-side">
+                        <h3>Janet Glasses</h3>
+                        <p>Backing the glasses specifically? The Janet Glasses campaign funds live captions and translation on Brilliant Labs Halo — accessibility-first, offline, no subscription.</p>
+                        <a href="https://glasses.greatsage.org" class="btn">glasses.greatsage.org →</a>
                     </div>
                 </div>
             </div>
@@ -974,7 +1030,7 @@
                         <a href="https://github.com/MzxzD" aria-label="GitHub"> <i class="fab fa-github"></i> </a>
                     </div>
                     <div class="donate-links">
-                        <a href="https://www.gofundme.com/u/mzxzd">Support on GoFundMe</a>
+                        <a href="https://www.gofundme.com/f/help-me-make-janet-a-reality">Support on GoFundMe</a>
                         <a href="https://www.patreon.com/c/OhayoJanet">Support on Patreon</a>
                     </div>
                 </div>
@@ -984,6 +1040,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#companions">Products</a></li>
                         <li><a href="#vision">Vision</a></li>
+                        <li><a href="#support">Support</a></li>
                         <li><a href="#faq">Q&amp;A</a></li>
                         <li><a href="understand.html">I still don&apos;t understand</a></li>
                         <li><a href="https://glasses.greatsage.org">Glasses</a></li>
@@ -1015,6 +1072,7 @@
 
     <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
 
+    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
     <script>
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {
