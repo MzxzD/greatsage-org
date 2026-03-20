@@ -592,9 +592,12 @@
 
         .vision-stats { display: flex; gap: 30px; justify-content: flex-end; }
         .stat-item { text-align: center; }
+        .stat-link { text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+        .stat-link:hover { opacity: 0.85; }
         .stat-number { font-size: 3.2rem; font-weight: 800; color: #c7b0ff; }
         [data-theme="dark"] .stat-number { color: #7eb8ff; }
         .stat-label { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.7; }
+        .stat-def { font-size: 0.8rem; color: var(--text-light); margin-top: 8px; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.4; }
 
         @media (max-width: 800px) {
             .vision-grid { grid-template-columns: 1fr; }
@@ -1046,7 +1049,8 @@
                 <a href="#support" data-i18n="nav.support">Support</a>
                 <a href="#faq" data-i18n="nav.qa">Q&amp;A</a>
                 <a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a>
-                <a href="https://glasses.greatsage.org" data-i18n="nav.glasses">Glasses</a>
+                <a href="axioms.html" data-i18n="nav.axioms">Axioms</a>
+                <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
                 <a href="#contact" data-i18n="nav.contact">Contact</a>
             </div>
             <div class="nav-utils">
@@ -1082,7 +1086,7 @@
                     <a href="#support" data-i18n="nav.support">Support</a>
                     <a href="#faq" data-i18n="nav.qa">Q&amp;A</a>
                     <a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a>
-                    <a href="https://glasses.greatsage.org" data-i18n="nav.glasses">Glasses</a>
+                    <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
                     <a href="#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
@@ -1114,7 +1118,8 @@
                 <div class="about-grid">
                     <div class="about-content">
                         <p data-i18n="about.p1">The Great Sage is the company behind the Janet ecosystem and J.A.N.E.T. Glasses — investor relations, campaigns, and the European glasses vision. We believe everyone deserves an AI companion that respects privacy and runs on hardware they own.</p>
-                        <p data-i18n="about.p2">Janet is constitutional AI: 16 axioms, teachable runbooks, and cluster-only communication. She grows with you, works offline, and never sends your data to the cloud.</p>
+                        <p data-i18n="about.p2">Janet is constitutional AI: 18 axioms, teachable runbooks, and cluster-only communication. She grows with you, works offline, and never sends your data to the cloud.</p>
+                        <p data-i18n="about.roadmap" style="margin-top:16px;font-size:0.95rem;color:var(--text-light);">We&apos;re building toward European expansion: Croatia first, then Vienna. EU-made J.A.N.E.T. Glasses, HZZ funding, and a path to GmbH.</p>
                         <div class="sage-traits">
                             <div class="trait">
                                 <i class="fas fa-lock" aria-hidden="true"></i>
@@ -1129,7 +1134,7 @@
                             <div class="trait">
                                 <i class="fas fa-balance-scale" aria-hidden="true"></i>
                                 <h4 data-i18n="trait.constitutional">Constitutional</h4>
-                                <p data-i18n="trait.constitutionalDesc">16 axioms, predictable</p>
+                                <p data-i18n="trait.constitutionalDesc">18 axioms, predictable</p>
                             </div>
                             <div class="trait">
                                 <i class="fas fa-code-branch" aria-hidden="true"></i>
@@ -1170,7 +1175,7 @@
                     <div class="companion-card">
                         <div class="card-icon"><i class="fas fa-glasses" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.glasses">Janet Glasses</h3>
-                        <p data-i18n-html="companions.glassesDesc">Live captions and translation. Accessibility-first, offline. <a href="https://glasses.greatsage.org">glasses.greatsage.org</a></p>
+                        <p data-i18n-html="companions.glassesDesc">Live captions and translation. Accessibility-first, offline. <a href="glasses.html">Glasses</a></p>
                     </div>
                 </div>
             </div>
@@ -1195,8 +1200,11 @@
                             <div class="stat-label" data-i18n="vision.platforms">platforms</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">16</div>
-                            <div class="stat-label" data-i18n="vision.axioms">axioms</div>
+                            <a href="axioms.html" class="stat-link" aria-label="View Janet's 18 axioms">
+                                <div class="stat-number">18</div>
+                                <div class="stat-label" data-i18n="vision.axioms">axioms</div>
+                            </a>
+                            <p class="stat-def" data-i18n="vision.axiomsDef">In our world, an axiom is an immutable rule that governs Janet&apos;s behavior — from kindness to privacy to emergency stop.</p>
                         </div>
                     </div>
                 </div>
@@ -1216,7 +1224,7 @@
                     <div class="support-side">
                         <h3 data-i18n="support.glassesTitle">Janet Glasses</h3>
                         <p data-i18n="support.glassesDesc">Backing the glasses specifically? The Janet Glasses campaign funds live captions and translation on Brilliant Labs Halo — accessibility-first, offline, no subscription.</p>
-                        <a href="https://glasses.greatsage.org" class="btn" data-i18n="support.glassesCta">glasses.greatsage.org →</a>
+                        <a href="glasses.html" class="btn" data-i18n="support.glassesCta">Glasses →</a>
                     </div>
                 </div>
             </div>
@@ -1324,7 +1332,7 @@
                     <details class="faq-item">
                         <summary data-i18n="faq.sixteenRules">What are the 16 rules (axioms)?</summary>
                         <div class="faq-answer">
-                            <p data-i18n="faq.sixteenRulesA">Janet follows 16 constitutional axioms — rules that govern how she behaves. They cover things like telling the truth, respecting your privacy, not doing harmful things, and asking you before taking risky actions. One of them is Soul Check: for sensitive actions she'll ask for your confirmation instead of doing them automatically. The full list is in the project docs. The point is: her behavior is predictable and you're in control.</p>
+                            <p data-i18n-html="faq.sixteenRulesA">Janet follows 18 constitutional axioms — rules that govern how she behaves. They cover things like telling the truth, respecting your privacy, not doing harmful things, and asking you before taking risky actions. One of them is Soul Check: for sensitive actions she'll ask for your confirmation instead of doing them automatically. The full list is in the project docs. The point is: her behavior is predictable and you're in control.</p>
                         </div>
                     </details>
                     <details class="faq-item">
@@ -1372,7 +1380,7 @@
                     <details class="faq-item">
                         <summary data-i18n="faq.backGlasses">How can I back the glasses?</summary>
                         <div class="faq-answer">
-                            <p data-i18n-html="faq.backGlassesA">Back the Janet Glasses campaign on GoFundMe. The goal is €5,000 by May 1, 2026. Your support funds Halo units for development, JanetXHalo software (live captions and translation), an accessibility pilot, and a landing page for the ecosystem. It's Phase 1 validation: proving that Janet on glasses works before we build our own European hardware. Go to <a href="https://glasses.greatsage.org">glasses.greatsage.org</a> to support Janet Glasses.</p>
+                            <p data-i18n-html="faq.backGlassesA">Back the Janet Glasses campaign on GoFundMe. The goal is €5,000 by May 1, 2026. Your support funds Halo units for development, JanetXHalo software (live captions and translation), an accessibility pilot, and a landing page for the ecosystem. It's Phase 1 validation: proving that Janet on glasses works before we build our own European hardware. Go to <a href="glasses.html">Glasses</a> to support Janet Glasses.</p>
                         </div>
                     </details>
                 </div>
@@ -1402,7 +1410,7 @@
                         <div class="business-card-full contact-card-inline" id="business-card-print-area">
                             <div class="business-card-inner">
                                 <div class="business-card-icon">
-                                    <img src="https://glasses.greatsage.org/janet-icon.png" alt="Janet" crossorigin="anonymous" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'business-card-icon-fallback\' aria-hidden=\'true\'>✦</span>';">
+                                    <img src="assets/janet-icon.png" alt="Janet" crossorigin="anonymous" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'business-card-icon-fallback\' aria-hidden=\'true\'>✦</span>';">
                                 </div>
                                 <div class="business-card-text">
                                     <h3 id="business-card-title" class="business-card-company" data-i18n="businessCard.company">The Great Sage</h3>
@@ -1413,7 +1421,7 @@
                                 </div>
                                 <div class="business-card-contact">
                                     <a href="mailto:ilovejanet@greatsage.org">ilovejanet@greatsage.org</a>
-                                    <span>greatsage.org · glasses.greatsage.org</span>
+                                    <span>greatsage.org</span>
                                 </div>
                             </div>
                         </div>
@@ -1461,7 +1469,8 @@
                         <li><a href="#support" data-i18n="nav.support">Support</a></li>
                         <li><a href="#faq" data-i18n="nav.qa">Q&amp;A</a></li>
                         <li><a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a></li>
-                        <li><a href="https://glasses.greatsage.org" data-i18n="nav.glasses">Glasses</a></li>
+                        <li><a href="axioms.html" data-i18n="nav.axioms">Axioms</a></li>
+                        <li><a href="glasses.html" data-i18n="nav.glasses">Glasses</a></li>
                         <li><a href="#" data-i18n="footer.careers">Careers</a></li>
                     </ul>
                 </div>
