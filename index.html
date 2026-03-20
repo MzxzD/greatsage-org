@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="i18n/lang-dropdown.css">
     <link rel="stylesheet" href="cookie-consent.css">
+    <link rel="stylesheet" href="css/janet-chat.css">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://greatsage.org/#organization","name":"The Great Sage","url":"https://greatsage.org","logo":"https://greatsage.org/assets/hero-mascot.png","description":"The Great Sage builds Janet — privacy-first, voice-first AI. Offline-first. Constitutional AI. Open source.","sameAs":["https://github.com/MzxzD","https://www.instagram.com/ohayo.janet/","https://www.linkedin.com/in/mateodoslic/"]},{"@type":"WebSite","@id":"https://greatsage.org/#website","name":"The Great Sage","url":"https://greatsage.org","publisher":{"@id":"https://greatsage.org/#organization"}}]}
     </script>
@@ -1500,6 +1501,21 @@
 
     <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 
+    <button type="button" id="janet-fab" class="janet-fab" aria-label="Ask Janet" aria-expanded="false" aria-haspopup="dialog">
+        <i class="fas fa-comments" aria-hidden="true"></i>
+    </button>
+    <aside id="janet-panel" class="janet-panel" role="dialog" aria-labelledby="janet-panel-title" aria-hidden="true">
+        <div class="janet-panel-header">
+            <span id="janet-panel-title" class="janet-panel-title" data-i18n="janet.title">Ask Janet</span>
+            <button type="button" class="janet-panel-close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+        <div id="janet-messages" class="janet-messages"></div>
+        <div id="janet-input-area" class="janet-input-area">
+            <textarea id="janet-input" class="janet-input" rows="1" placeholder="" data-i18n-placeholder="janet.placeholder" maxlength="500"></textarea>
+            <button type="button" id="janet-send" class="janet-send" data-i18n="janet.send">Send</button>
+        </div>
+    </aside>
+
     <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
         <p class="cookie-consent-text" data-i18n-html="cookieConsent.text">We use cookies to remember your language and theme preferences. <a href="#cookies">Cookies</a></p>
         <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
@@ -1520,6 +1536,7 @@
     <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
     <script defer src="i18n/i18n.js"></script>
     <script defer src="cookie-consent.js"></script>
+    <script defer src="js/janet-web-llm.js"></script>
     <script>
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {

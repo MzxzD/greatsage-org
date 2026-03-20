@@ -176,5 +176,13 @@
   "axioms.metaDesc": "Los axiomas constitucionales de Janet — explicados para todos. Fuente: janet-seed en GitHub.",
   "axioms.sourceLink": "Ver fuente en GitHub",
   "axioms.loading": "Cargando axiomas...",
-  "cookieConsent.text": "Usamos cookies para recordar tu idioma y preferencias de tema. <a href=\"#cookies\">Cookies</a>"
+  "cookieConsent.text": "Usamos cookies para recordar tu idioma y preferencias de tema. <a href=\"#cookies\">Cookies</a>",
+  "janet.title": "Preguntar a Janet",
+  "janet.placeholder": "Pregunta sobre nuestra misión…",
+  "janet.send": "Enviar",
+  "janet.welcome": "¡Hola! Soy Janet. Pregúntame sobre The Great Sage — nuestra misión, IA con privacidad o J.A.N.E.T. Glasses. Todo funciona aquí en tu navegador.",
+  "janet.loading": "Descargando modelo… ~200MB, una vez. Funciona 100% en tu navegador.",
+  "janet.fallbackBody": "The Great Sage crea Janet — IA centrada en privacidad y voz, en tus dispositivos. Sin nube. Sin suscripción. IA constitucional, código abierto. J.A.N.E.T. Glasses. Tus datos son tuyos.",
+  "janet.fallbackHint": "Prueba Chrome, Edge o Safari para la experiencia completa de IA en el navegador.",
+  "janet.error": "Algo salió mal. Inténtalo de nuevo."
 }

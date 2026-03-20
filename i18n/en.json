@@ -176,5 +176,13 @@
   "axioms.pageTitle": "Janet's 18 Axioms · The Great Sage",
   "axioms.metaDesc": "Janet's constitutional axioms — explained for everyone. Source: janet-seed on GitHub.",
   "axioms.sourceLink": "View source on GitHub",
-  "axioms.loading": "Loading axioms..."
+  "axioms.loading": "Loading axioms...",
+  "janet.title": "Ask Janet",
+  "janet.placeholder": "Ask about our mission…",
+  "janet.send": "Send",
+  "janet.welcome": "Hi! I'm Janet. Ask me about The Great Sage — our mission, privacy-first AI, or J.A.N.E.T. Glasses. Everything runs right here in your browser.",
+  "janet.loading": "Downloading model… ~200MB, one-time. Runs 100% in your browser.",
+  "janet.fallbackBody": "The Great Sage builds Janet — privacy-first, voice-first AI on your devices. No cloud. No subscription. Constitutional AI, open source. J.A.N.E.T. Glasses. Your data stays yours.",
+  "janet.fallbackHint": "Try Chrome, Edge, or Safari for the full in-browser AI experience.",
+  "janet.error": "Something went wrong. Try again."
 }

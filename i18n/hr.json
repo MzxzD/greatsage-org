@@ -176,5 +176,13 @@
   "axioms.metaDesc": "Janetini konstitucionalni aksiomi — objašnjeno za sve. Izvor: janet-seed na GitHubu.",
   "axioms.sourceLink": "Pogledaj izvor na GitHubu",
   "axioms.loading": "Učitavanje aksioma...",
-  "cookieConsent.text": "Koristimo kolačiće za pamćenje tvojih jezičnih i tema postavki. <a href=\"#cookies\">Kolačići</a>"
+  "cookieConsent.text": "Koristimo kolačiće za pamćenje tvojih jezičnih i tema postavki. <a href=\"#cookies\">Kolačići</a>",
+  "janet.title": "Pitaj Janet",
+  "janet.placeholder": "Pitaj o našoj misiji…",
+  "janet.send": "Pošalji",
+  "janet.welcome": "Bok! Ja sam Janet. Pitaj me o The Great Sage — našoj misiji, AI s prioritetom privatnosti ili J.A.N.E.T. Glasses. Sve radi ovdje u tvom pregledniku.",
+  "janet.loading": "Preuzimanje modela… ~200MB, jednom. Radi 100% u tvom pregledniku.",
+  "janet.fallbackBody": "The Great Sage gradi Janet — AI s prioritetom privatnosti i glasa na tvojim uređajima. Bez oblaka. Bez pretplate. Konstitucionalna AI, open source. J.A.N.E.T. Glasses. Tvoji podaci ostaju tvoji.",
+  "janet.fallbackHint": "Probaj Chrome, Edge ili Safari za puno AI iskustvo u pregledniku.",
+  "janet.error": "Nešto nije u redu. Pokušaj ponovno."
 }

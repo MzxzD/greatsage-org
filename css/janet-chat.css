@@ -1,0 +1,248 @@
+/* Janet Web LLM — Chat panel styling. Matches greatsage purple/lavender theme. */
+
+.janet-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1.25rem;
+}
+
+.janet-fab:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.janet-fab:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.janet-fab[aria-expanded="true"] {
+  background: var(--primary-dark);
+}
+
+.janet-panel {
+  position: fixed;
+  bottom: 88px;
+  right: 24px;
+  width: min(400px, calc(100vw - 48px));
+  max-height: min(500px, calc(100vh - 140px));
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.janet-panel[aria-hidden="false"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.janet-panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--accent);
+}
+
+.janet-panel-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.janet-panel-close {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 8px;
+}
+
+.janet-panel-close:hover {
+  color: var(--text);
+  background: var(--gray-light);
+}
+
+.janet-panel-close:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.janet-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 120px;
+}
+
+.janet-msg {
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 90%;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.janet-msg-user {
+  align-self: flex-end;
+  background: var(--primary);
+  color: white;
+}
+
+.janet-msg-assistant {
+  align-self: flex-start;
+  background: var(--gray-light);
+  color: var(--text);
+  border: 1px solid var(--border-card);
+}
+
+.janet-msg-loading {
+  align-self: flex-start;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.janet-msg-error {
+  align-self: flex-start;
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--text);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.janet-input-area {
+  padding: 16px;
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.janet-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+  resize: none;
+  min-height: 40px;
+  max-height: 100px;
+}
+
+.janet-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+}
+
+.janet-input::placeholder {
+  color: var(--text-light);
+}
+
+.janet-send {
+  padding: 10px 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.janet-send:hover:not(:disabled) {
+  background: var(--primary-light);
+}
+
+.janet-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.janet-send:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.janet-fallback {
+  padding: 16px;
+  background: var(--gray-light);
+  border-radius: 16px;
+  margin: 16px;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.janet-fallback p {
+  margin-bottom: 8px;
+}
+
+.janet-fallback p:last-child {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.janet-progress {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.janet-progress-bar {
+  height: 6px;
+  background: var(--gray-light);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.janet-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .janet-fab,
+  .janet-panel,
+  .janet-progress-fill {
+    transition: none;
+  }
+}

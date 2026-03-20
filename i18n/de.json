@@ -176,5 +176,13 @@
   "axioms.metaDesc": "Janets konstitutionelle Axiome — für alle erklärt. Quelle: janet-seed auf GitHub.",
   "axioms.sourceLink": "Quelle auf GitHub anzeigen",
   "axioms.loading": "Axiome werden geladen...",
-  "cookieConsent.text": "Wir verwenden Cookies, um deine Sprach- und Theme-Präferenzen zu speichern. <a href=\"#cookies\">Cookies</a>"
+  "cookieConsent.text": "Wir verwenden Cookies, um deine Sprach- und Theme-Präferenzen zu speichern. <a href=\"#cookies\">Cookies</a>",
+  "janet.title": "Janet fragen",
+  "janet.placeholder": "Frag nach unserer Mission…",
+  "janet.send": "Senden",
+  "janet.welcome": "Hi! Ich bin Janet. Frag mich nach The Great Sage — unserer Mission, KI mit Privatsphäre oder J.A.N.E.T. Glasses. Alles läuft hier in deinem Browser.",
+  "janet.loading": "Modell wird geladen… ~200MB, einmalig. Läuft zu 100% in deinem Browser.",
+  "janet.fallbackBody": "The Great Sage entwickelt Janet — KI mit Privatsphäre und Sprache, auf deinen Geräten. Keine Cloud. Kein Abo. Konstitutionelle KI, Open Source. J.A.N.E.T. Glasses. Deine Daten bleiben deine.",
+  "janet.fallbackHint": "Probiere Chrome, Edge oder Safari für das volle KI-Erlebnis im Browser.",
+  "janet.error": "Etwas ist schiefgelaufen. Versuche es erneut."
 }

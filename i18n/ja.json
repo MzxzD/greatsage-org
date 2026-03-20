@@ -176,5 +176,13 @@
   "axioms.metaDesc": "Janetの憲法公理 — 誰にでも分かるように説明。出典：GitHubのjanet-seed。",
   "axioms.sourceLink": "GitHubでソースを表示",
   "axioms.loading": "公理を読み込み中...",
-  "cookieConsent.text": "言語とテーマの設定を記憶するためにCookieを使用しています。<a href=\"#cookies\">Cookie</a>"
+  "cookieConsent.text": "言語とテーマの設定を記憶するためにCookieを使用しています。<a href=\"#cookies\">Cookie</a>",
+  "janet.title": "Janetに聞く",
+  "janet.placeholder": "私たちのミッションについて聞いて…",
+  "janet.send": "送信",
+  "janet.welcome": "こんにちは！Janetです。The Great Sageについて聞いてください — 私たちのミッション、プライバシー重視のAI、J.A.N.E.T. Glasses。すべてあなたのブラウザで動いています。",
+  "janet.loading": "モデルをダウンロード中… 約200MB、1回だけ。100%ブラウザ内で動作。",
+  "janet.fallbackBody": "The Great SageはJanetを構築しています — プライバシー重視、音声重視のAIがあなたのデバイスで。クラウドなし。サブスクなし。憲法AI、オープンソース。J.A.N.E.T. Glasses。あなたのデータはあなたのもの。",
+  "janet.fallbackHint": "Chrome、Edge、Safariでブラウザ内AI体験をお試しください。",
+  "janet.error": "問題が発生しました。もう一度お試しください。"
 }
