@@ -186,7 +186,7 @@
             </div>
 
             <p class="source-link">
-                <a href="https://github.com/MzxzD/Janet-seed/blob/main/constitution/AXIOMS.md" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+                <a href="https://github.com/MzxzD/Janet-seed/blob/main/constitution/AXIOMS.md" target="_blank" rel="noopener noreferrer" data-i18n="axioms.sourceLink">View source on GitHub</a>
             </p>
         </div>
     </main>
@@ -227,7 +227,7 @@
             }
 
             function getAxiomForAudience(axiom, audienceKey) {
-                if (audienceKey === 'full' || !translationsData || !translationsData[audienceKey]) {
+                if (!translationsData || !translationsData[audienceKey]) {
                     return { title: axiom.title, quote: axiom.quote, description: axiom.description };
                 }
                 var t = translationsData[audienceKey][String(axiom.id)];
