@@ -11,8 +11,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const DEFAULT_URL = 'https://raw.githubusercontent.com/MzxzD/JANET/main/core/JanetOS/janet-seed/constitution/AXIOMS.md';
-const FALLBACK_LOCAL = path.join(__dirname, '..', '..', 'Janet-Projects', 'JanetOS', 'janet-seed', 'constitution', 'AXIOMS.md');
+const DEFAULT_URL = 'https://raw.githubusercontent.com/MzxzD/Janet-seed/main/constitution/AXIOMS.md';
 const SOURCE_URL = process.env.AXIOMS_SOURCE_URL || DEFAULT_URL;
 const OUT_DIR = path.join(__dirname, '..', 'data');
 const OUT_FILE = path.join(OUT_DIR, 'axioms.json');
@@ -31,21 +30,9 @@ function fetchUrl(url) {
   });
 }
 
-function fetchLocal(filePath) {
-  return fs.readFileSync(filePath, 'utf8');
-}
-
 async function fetchSource() {
-  try {
-    const md = await fetchUrl(SOURCE_URL);
-    return { md, source: SOURCE_URL };
-  } catch (err) {
-    if (fs.existsSync(FALLBACK_LOCAL)) {
-      console.warn('GitHub fetch failed, using local:', FALLBACK_LOCAL);
-      return { md: fetchLocal(FALLBACK_LOCAL), source: 'file:' + FALLBACK_LOCAL };
-    }
-    throw err;
-  }
+  const md = await fetchUrl(SOURCE_URL);
+  return { md, source: SOURCE_URL };
 }
 
 function parseAxioms(md) {
