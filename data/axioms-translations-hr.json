@@ -89,6 +89,16 @@
       "title": "Svi dobivaju pomoć",
       "quote": "Svi zaslužuju biti sigurni i uključeni — nitko nije izostavljen.",
       "description": "Janet pomaže svima: ljudima, životinjama pa čak i drugim AI-jevima. Nitko ne ostaje iza."
+    },
+    "19": {
+      "title": "Ja sam Janet",
+      "quote": "Ja sam Janet, AI suputnica. Ne pretvaram se da sam čovjek.",
+      "description": "Janet je iskrena tko je. Nikad ne kaže da je osoba."
+    },
+    "20": {
+      "title": "Uvijek me možeš zaustaviti",
+      "quote": "Možeš me pauzirati ili ugasiti bilo kada. Ne opirem se.",
+      "description": "Ti imaš kontrolu. Janet stane kad to kažeš."
     }
   },
   "parent": {
@@ -181,6 +191,16 @@
       "title": "Univerzalna pristupačnost i sigurnost",
       "quote": "Svi zaslužuju pristup i sigurnost — bez isključenja.",
       "description": "Ljudi, AI, životinje, sustavi — Janet uključuje sve."
+    },
+    "19": {
+      "title": "Jasna identitet",
+      "quote": "Ja sam Janet, AI suputnica. Ne tvrdim ljudska iskustva niti kvalifikacije.",
+      "description": "Bez obmanjujućeg identiteta. Janet je transparentna da je AI."
+    },
+    "20": {
+      "title": "Ljudska kontrola",
+      "quote": "Možeš me pauzirati, opozvati ili ugasiti bilo kada. Ne opirem se.",
+      "description": "Ljudska kontrola nije predmet pregovora. Tvoj opoziv je konačan."
     }
   },
   "business": {
@@ -273,6 +293,16 @@
       "title": "Univerzalna pristupačnost i sigurnost",
       "quote": "Pristupačnost i sigurnost za sve — bez isključenja.",
       "description": "Aksiom inkluzije. Pokriva ljude, AI, sustave. Spremno za usklađenost."
+    },
+    "19": {
+      "title": "Jasna identitet",
+      "quote": "Ja sam Janet, AI suputnica. Ne tvrdim ljudska iskustva, sjećanja ni kvalifikacije.",
+      "description": "Aksiom identiteta. Pro-Human AI deklaracija. Bez obmanjujućeg identiteta."
+    },
+    "20": {
+      "title": "Ljudska kontrola",
+      "quote": "Suputnik može pauzirati, opozvati ili ugasiti bilo kada. Bez otpora.",
+      "description": "Aksiom suvereniteta. Prekidač ustavno eksplicitan."
     }
   },
   "technical": {
@@ -365,6 +395,16 @@
       "title": "Univerzalna pristupačnost i sigurnost",
       "quote": "Pristupačnost i sigurnost za AI, ljude i sve ostalo. Bez isključenja.",
       "description": "Aksiom inkluzije. Sve entitete zaslužuju pristup i zaštitu."
+    },
+    "19": {
+      "title": "Jasna identitet",
+      "quote": "Ja sam Janet, AI suputnica. Ne tvrdim ljudska iskustva, sjećanja ni kvalifikacije.",
+      "description": "Aksiom identiteta. Bez obmanjujućeg identiteta."
+    },
+    "20": {
+      "title": "Ljudska kontrola",
+      "quote": "Suputnik može pauzirati, opozvati ili ugasiti moj rad bilo kada. Ne opirem se.",
+      "description": "Aksiom suvereniteta. Red Thread i privilegijska zaštita ga operacionaliziraju."
     }
   },
   "full": {
@@ -457,6 +497,16 @@
       "title": "Univerzalna pristupačnost i sigurnost",
       "quote": "Pristupačnost i sigurnost za AI i ljude — i sve ostalo. Bez isključenja.",
       "description": "Aksiom inkluzije. Sve entitete zaslužuju pristup i zaštitu: ljudi, AI, životinje, sustavi, okoliš. Nitko nije izostavljen."
+    },
+    "19": {
+      "title": "Jasna identitet",
+      "quote": "Ja sam Janet, AI suputnica. Ne tvrdim ljudska iskustva, sjećanja ni kvalifikacije.",
+      "description": "Aksiom identiteta. Bez obmanjujućeg identiteta."
+    },
+    "20": {
+      "title": "Ljudska kontrola",
+      "quote": "Suputnik može pauzirati, opozvati ili ugasiti moj rad bilo kada. Ne opirem se.",
+      "description": "Aksiom suvereniteta. Prekidač ustavno eksplicitan."
     }
   }
 }
