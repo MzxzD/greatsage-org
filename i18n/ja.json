@@ -187,6 +187,7 @@
   "janet.loadingSentinel": "Sentinelをダウンロード中… 約200MB",
   "janet.fallbackBody": "The Great SageはJanetを構築しています — プライバシー重視、音声重視のAIがあなたのデバイスで。クラウドなし。サブスクなし。憲法AI、オープンソース。J.A.N.E.T. Glasses。あなたのデータはあなたのもの。",
   "janet.fallbackHint": "Chrome、Edge、Safariでブラウザ内AI体験をお試しください。",
+  "janet.fallbackHintSafari": "SafariはWebGPUのサポートが限定的です（iOS 18.2+、macOS Safari 18.2+）。ブラウザ内AIにはChromeまたはEdgeをご利用ください。iOSではCallJanetアプリもお試しください。",
   "janet.error": "問題が発生しました。もう一度お試しください。",
   "janet.whoMadeYou": "The Great SageがJanetを構築しています — このエコシステムとJ.A.N.E.T. Glassesを支える会社です。Janetが製品で、The Great Sageはそれを市場に届ける主体です。",
   "janet.whatCanYouDo": "できることは多いです — 音声、テキスト、ファイル検索、リマインダー、スマートホーム、コーディング支援。20の憲法公理に従うので、嘘をつかない、データを盗まない、明示的な確認なしに有害な行動はしません。主導権はあなたに。私は明確な境界内であなたをサポートするように作られています。",

@@ -187,6 +187,7 @@
   "janet.loadingSentinel": "Sentinel wird geladen… ~200MB",
   "janet.fallbackBody": "The Great Sage entwickelt Janet — KI mit Privatsphäre und Sprache, auf deinen Geräten. Keine Cloud. Kein Abo. Konstitutionelle KI, Open Source. J.A.N.E.T. Glasses. Deine Daten bleiben deine.",
   "janet.fallbackHint": "Probiere Chrome, Edge oder Safari für das volle KI-Erlebnis im Browser.",
+  "janet.fallbackHintSafari": "Safari hat eingeschränkte WebGPU-Unterstützung (iOS 18.2+, macOS Safari 18.2+). Nutze Chrome oder Edge für die volle Browser-KI. Oder probiere die CallJanet-App auf iOS.",
   "janet.error": "Etwas ist schiefgelaufen. Versuche es erneut.",
   "janet.whoMadeYou": "The Great Sage entwickelt Janet — das Unternehmen hinter diesem Ökosystem und J.A.N.E.T. Glasses. Janet ist das Produkt; The Great Sage ist die Einheit, die es auf den Markt bringt.",
   "janet.whatCanYouDo": "Ich kann viel — Sprache, Text, Dateisuche, Erinnerungen, Smart Home, Coding-Hilfe. Ich folge 20 konstitutionellen Axiomen, also werde ich nicht lügen, deine Daten stehlen oder schädliche Aktionen ohne deine ausdrückliche Bestätigung ausführen. Du hast das Sagen; ich bin gebaut, dich innerhalb klarer Grenzen zu unterstützen.",

@@ -58,8 +58,10 @@
   var sendBtn = document.getElementById('janet-send');
   var closeBtn = panel && panel.querySelector('.janet-panel-close');
 
-  function t(key) {
-    return (window.greatsageT && window.greatsageT(key)) || key;
+  function t(key, fallback) {
+    var val = (window.greatsageT && window.greatsageT(key));
+    if (val != null && val !== '' && val !== key) return val;
+    return fallback !== undefined ? fallback : key;
   }
 
   /** FAQ patterns (any supported language) → i18n key. First match wins. */
@@ -150,12 +152,26 @@
     messagesEl.innerHTML = '';
     var fallback = document.createElement('div');
     fallback.className = 'janet-fallback';
-    fallback.innerHTML = '<p>' + (t('janet.fallbackBody') || "The Great Sage builds Janet — privacy-first, voice-first AI on your devices. No cloud. No subscription. Constitutional AI, open source. J.A.N.E.T. Glasses. Your data stays yours.") + '</p><p>' + (t('janet.fallbackHint') || "Try Chrome, Edge, or Safari for the full in-browser AI experience.") + '</p>';
+    fallback.innerHTML = '<p>' + t('janet.fallbackBody', "The Great Sage builds Janet — privacy-first, voice-first AI on your devices. No cloud. No subscription. Constitutional AI, open source. J.A.N.E.T. Glasses. Your data stays yours.") + '</p><p>' + getFallbackHint() + '</p>';
     messagesEl.appendChild(fallback);
   }
 
   function hasWebGPU() {
     return !!(navigator.gpu && typeof navigator.gpu.requestAdapter === 'function');
+  }
+
+  /** Safari / WebKit without Chrome/Edge; Safari has limited WebGPU (iOS 18.2+, macOS Safari 18.2+). */
+  function isSafari() {
+    var ua = navigator.userAgent || '';
+    return (/Safari/i.test(ua) && !/Chrome|CriOS|FxiOS|EdgiOS|OPR/i.test(ua)) ||
+      (navigator.vendor && /Apple/i.test(navigator.vendor));
+  }
+
+  function getFallbackHint() {
+    if (isSafari()) {
+      return t('janet.fallbackHintSafari', "Safari has limited WebGPU support (iOS 18.2+, macOS Safari 18.2+). Use Chrome or Edge for the full in-browser AI. Or try the CallJanet app on iOS.");
+    }
+    return t('janet.fallbackHint', "Try Chrome, Edge, or Safari for the full in-browser AI experience.");
   }
 
   function openPanel() {
@@ -276,7 +292,7 @@
         console.error('Janet WebLLM load error:', err);
         if (messagesEl && !headless) {
           messagesEl.innerHTML = '';
-          var errMsg = (t('janet.error') || 'Could not load the model.') + ' ' + (t('janet.fallbackHint') || 'Try Chrome, Edge, or Safari.');
+          var errMsg = (t('janet.error') || 'Could not load the model.') + ' ' + getFallbackHint();
           if (err.message && err.message.indexOf('createRequire') >= 0) {
             errMsg += ' Or try the full experience at <a href="https://chat.webllm.ai" target="_blank" rel="noopener">chat.webllm.ai</a>.';
           }
@@ -326,7 +342,7 @@
     function finishJackModeError() {
       if (!messagesEl) return;
       messagesEl.innerHTML = '';
-      var errMsg = (t('janet.error') || 'Could not load the model.') + ' ' + (t('janet.fallbackHint') || 'Try Chrome, Edge, or Safari.');
+      var errMsg = (t('janet.error') || 'Could not load the model.') + ' ' + getFallbackHint();
       var errDiv = document.createElement('div');
       errDiv.className = 'janet-msg janet-msg-error';
       errDiv.innerHTML = errMsg;
@@ -495,6 +511,17 @@
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && panel.getAttribute('aria-hidden') === 'false') closePanel();
+    });
+
+    document.addEventListener('greatsage-i18n-ready', function() {
+      if (panel.getAttribute('aria-hidden') === 'false' && !hasWebGPU() && messagesEl && messagesEl.querySelector('.janet-fallback')) {
+        showFallback();
+      }
+    });
+    document.addEventListener('greatsage-lang-changed', function() {
+      if (panel.getAttribute('aria-hidden') === 'false' && !hasWebGPU() && messagesEl && messagesEl.querySelector('.janet-fallback')) {
+        showFallback();
+      }
     });
   }
 

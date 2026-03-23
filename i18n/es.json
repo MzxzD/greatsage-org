@@ -187,6 +187,7 @@
   "janet.loadingSentinel": "Descargando Sentinel… ~200MB",
   "janet.fallbackBody": "The Great Sage crea Janet — IA centrada en privacidad y voz, en tus dispositivos. Sin nube. Sin suscripción. IA constitucional, código abierto. J.A.N.E.T. Glasses. Tus datos son tuyos.",
   "janet.fallbackHint": "Prueba Chrome, Edge o Safari para la experiencia completa de IA en el navegador.",
+  "janet.fallbackHintSafari": "Safari tiene soporte WebGPU limitado (iOS 18.2+, macOS Safari 18.2+). Usa Chrome o Edge para la IA completa en el navegador. O prueba la app CallJanet en iOS.",
   "janet.error": "Algo salió mal. Inténtalo de nuevo.",
   "janet.whoMadeYou": "The Great Sage crea Janet — la empresa detrás de este ecosistema y J.A.N.E.T. Glasses. Janet es el producto; The Great Sage es la entidad que lo lleva al mercado.",
   "janet.whatCanYouDo": "Puedo hacer mucho — voz, texto, búsqueda de archivos, recordatorios, hogar inteligente, ayuda con código. Sigo 20 axiomas constitucionales, así que no mentiré, robaré tus datos ni haré acciones dañinas sin tu confirmación explícita. Tú estás a cargo; estoy construida para apoyarte dentro de límites claros.",

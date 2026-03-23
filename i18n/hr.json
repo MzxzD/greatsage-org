@@ -187,6 +187,7 @@
   "janet.loadingSentinel": "Preuzimanje Sentinel… ~200MB",
   "janet.fallbackBody": "The Great Sage gradi Janet — AI s prioritetom privatnosti i glasa na tvojim uređajima. Bez oblaka. Bez pretplate. Konstitucionalna AI, open source. J.A.N.E.T. Glasses. Tvoji podaci ostaju tvoji.",
   "janet.fallbackHint": "Probaj Chrome, Edge ili Safari za puno AI iskustvo u pregledniku.",
+  "janet.fallbackHintSafari": "Safari ima ograničenu WebGPU podršku (iOS 18.2+, macOS Safari 18.2+). Koristi Chrome ili Edge za puno AI iskustvo u pregledniku. Ili probaj CallJanet aplikaciju na iOS-u.",
   "janet.error": "Nešto nije u redu. Pokušaj ponovno.",
   "janet.whoMadeYou": "The Great Sage gradi Janet — tvrtka iza ovog ekosustava i J.A.N.E.T. Glasses. Janet je proizvod; The Great Sage je entitet koji ga donosi na tržište.",
   "janet.whatCanYouDo": "Mogu puno — glas, tekst, pretraga datoteka, podsjetnici, pametni dom, pomoć pri programiranju. Slijedim 20 konstitucionalnih aksioma, pa neću lagati, krasti tvoje podatke ili činiti štetne radnje bez tvoje izričite potvrde. Ti si zadužen; ja sam izgrađena da te podržavam unutar jasnih granica.",
