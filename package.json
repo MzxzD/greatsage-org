@@ -1,0 +1,20 @@
+{
+  "name": "greatsage-web",
+  "version": "1.0.0",
+  "description": "The Great Sage — greatsage.org",
+  "private": true,
+  "scripts": {
+    "pit-of-fire": "node scripts/pit-of-fire.mjs",
+    "pit-of-fire-jack": "node scripts/pit-of-fire.mjs --jack",
+    "pit-of-fire-sp": "node scripts/pit-of-fire.mjs --sp-validate --sophia --log-conversations",
+    "pit-of-fire-jack-browser": "node scripts/pit-of-fire.mjs --headed --jack",
+    "pit-of-fire-smoke": "node scripts/pit-of-fire.mjs --max=10 --headed --sophia --log-conversations",
+    "pit-of-fire-normal": "node scripts/pit-of-fire.mjs --max=28 --headed --normal --log-conversations",
+    "serve": "npx serve -l 8765",
+    "lumina-a11y": "node scripts/lumina-a11y-test.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "playwright": "^1.40.0"
+  }
+}

@@ -118,4 +118,30 @@
 
 ---
 
+## Debug notes (2026-03-20)
+
+**Issue:** `ReferenceError: createRequire is not defined` when loading `@mlc-ai/web-llm` via CDN (esm.sh, esm.run).
+
+**Cause:** WebLLM's bundled code uses Node's `createRequire`, which is not available in the browser. CDN ESM delivery does not polyfill this.
+
+**Attempted fixes:**
+- Switched from `esm.sh` to `esm.run` (as in official JSFiddle) — same error
+- Skypack, JSPM — build failed / 404
+
+**Current fallback:** When WebLLM fails (including `createRequire`), show error message + link to [chat.webllm.ai](https://chat.webllm.ai) for full experience.
+
+**Recommended next steps (documented for now, not for git):**
+
+| Option | Approach | Notes |
+|--------|----------|-------|
+| **A (recommended)** | Add minimal Vite build for Janet chat script; bundle WebLLM for browser | Proper fix; requires build step in greatsage-web |
+| **B** | Try jsdelivr ESM: `https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.82/+esm` | Quick test; may or may not resolve createRequire |
+| **C** | Keep current fallback + chat.webllm.ai link | No change; acceptable interim state |
+
+**Other options:** Iframe to chat.webllm.ai with custom system prompt (if supported).
+
+**Axiom testing:** See [SINGULARITY_AXIOM_TEST_ASK_JANET.md](SINGULARITY_AXIOM_TEST_ASK_JANET.md) — Singularity protocol for testing axioms to their limits. Includes Sophia (psychologist) persona for scenario verification.
+
+---
+
 *Power of <3. All personas. One decision. Human verifies.*

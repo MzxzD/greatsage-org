@@ -180,6 +180,8 @@
   "janet.title": "Pitaj Janet",
   "janet.placeholder": "Pitaj o našoj misiji…",
   "janet.send": "Pošalji",
+  "janet.jackCta": "Ako želiš; možemo koristiti tvoj web-preglednik i tvoj uređaj da pokažemo moć JANET-a",
+  "janet.welcomeJack": "Bok! Kako mogu pomoći?",
   "janet.welcome": "Bok! Ja sam Janet. Pitaj me o The Great Sage — našoj misiji, AI s prioritetom privatnosti ili J.A.N.E.T. Glasses. Sve radi ovdje u tvom pregledniku.",
   "janet.loading": "Preuzimanje Janet… ~600MB",
   "janet.loadingSentinel": "Preuzimanje Sentinel… ~200MB",

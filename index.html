@@ -432,7 +432,7 @@
         }
         [data-theme="dark"] .section-header p { color: #e2e8f0; }
         [data-theme="dark"] .about-content p { color: #e2e8f0; }
-        [data-theme="dark"] .trait h4 { color: #f1f5f9; }
+        [data-theme="dark"] .trait h3 { color: #f1f5f9; }
         [data-theme="dark"] .trait p { color: #cbd5e1; }
         [data-theme="dark"] .companion-card h3 { color: #f1f5f9; }
         [data-theme="dark"] .companion-card p { color: #e2e8f0; }
@@ -496,7 +496,7 @@
             margin-bottom: 10px;
         }
 
-        .trait h4 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
+        .trait h3 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
         .trait p { font-size: 0.9rem; margin: 0; color: var(--text-light); }
 
         .about-image {
@@ -1036,6 +1036,7 @@
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <nav class="navbar" role="navigation" aria-label="Main">
         <div class="container nav-container">
             <span class="logo">The Great <span>Sage</span></span>
@@ -1124,22 +1125,22 @@
                         <div class="sage-traits">
                             <div class="trait">
                                 <i class="fas fa-lock" aria-hidden="true"></i>
-                                <h4 data-i18n="trait.private">Private</h4>
+                                <h3 data-i18n="trait.private">Private</h3>
                                 <p data-i18n="trait.privateDesc">your data stays yours</p>
                             </div>
                             <div class="trait">
                                 <i class="fas fa-wifi" aria-hidden="true"></i>
-                                <h4 data-i18n="trait.offline">Offline-first</h4>
+                                <h3 data-i18n="trait.offline">Offline-first</h3>
                                 <p data-i18n="trait.offlineDesc">runs without the cloud</p>
                             </div>
                             <div class="trait">
                                 <i class="fas fa-balance-scale" aria-hidden="true"></i>
-                                <h4 data-i18n="trait.constitutional">Constitutional</h4>
+                                <h3 data-i18n="trait.constitutional">Constitutional</h3>
                                 <p data-i18n="trait.constitutionalDesc">18 axioms, predictable</p>
                             </div>
                             <div class="trait">
                                 <i class="fas fa-code-branch" aria-hidden="true"></i>
-                                <h4 data-i18n="trait.open">Open</h4>
+                                <h3 data-i18n="trait.open">Open</h3>
                                 <p data-i18n="trait.openDesc">GPL/MIT, you own it</p>
                             </div>
                         </div>
@@ -1499,12 +1500,14 @@
         </div>
     </footer>
 
-    <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+    <nav aria-label="Back to top">
+        <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+    </nav>
 
     <button type="button" id="janet-fab" class="janet-fab" aria-label="Ask Janet" aria-expanded="false" aria-haspopup="dialog">
         <i class="fas fa-comments" aria-hidden="true"></i>
     </button>
-    <aside id="janet-panel" class="janet-panel" role="dialog" aria-labelledby="janet-panel-title" aria-hidden="true">
+    <aside id="janet-panel" class="janet-panel" role="dialog" aria-labelledby="janet-panel-title" aria-hidden="true" inert>
         <div class="janet-panel-header">
             <span id="janet-panel-title" class="janet-panel-title" data-i18n="janet.title">Ask Janet</span>
             <button type="button" class="janet-panel-close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
@@ -1516,7 +1519,7 @@
         </div>
     </aside>
 
-    <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
+    <aside id="cookie-consent" class="cookie-consent" role="region" aria-label="Cookie notice" aria-live="polite">
         <p class="cookie-consent-text" data-i18n-html="cookieConsent.text">We use cookies to remember your language and theme preferences. <a href="#cookies">Cookies</a></p>
         <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
     </aside>
@@ -1534,6 +1537,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+    <script defer src="scripts/gfm-embed-a11y.js"></script>
     <script defer src="i18n/i18n.js"></script>
     <script defer src="cookie-consent.js"></script>
     <script defer src="js/janet-web-llm.js"></script>

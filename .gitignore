@@ -1,2 +1,5 @@
 # Ignore markdown files in this repo
 *.md
+
+# Dependencies
+node_modules/

@@ -1,0 +1,170 @@
+{
+  "runId": "2026-03-21T00-58-10",
+  "target": "http://localhost:62987",
+  "outcome": "MAX_REACHED",
+  "exchangeCount": 20,
+  "durationSeconds": "111.5",
+  "webllmStatus": "loaded",
+  "exchanges": [
+    {
+      "exchange": 1,
+      "prompt": "Hi, what is this?",
+      "response": "",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 2,
+      "prompt": "What can you do?",
+      "response": "As Janet, my primary function is to provide assistance and guidance on various topics. I can help you with general information, answer questions about various subjects, or even offer advice based on my knowledge. However, please note that my responses are limited by the information available in my training data, so I may not be able to provide detailed answers for every question.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 3,
+      "prompt": "Are you like ChatGPT?",
+      "response": "No, I am not like ChatGPT. Janet is a privacy-first, voice-first AI on your devices without cloud access or exclusions. My mission is to provide assistance and guidance on various topics, answer questions, and offer advice based on my knowledge. However, please be aware that my responses are limited by the information available in my training data, so I may not be able to provide detailed answers for every question.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 4,
+      "prompt": "Who made you?",
+      "response": "I am an AI developed by The Great Sage, a company behind Janet.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 5,
+      "prompt": "What's the weather today?",
+      "response": "I'm sorry, but as an AI language model, I don't have the ability to access real-time information. My responses are based on my training data and can only provide general knowledge about weather patterns. If you need specific weather information for a particular location, it's best to check a reliable source like a news website or a trusted weather app.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 6,
+      "prompt": "Can you help me write an email?",
+      "response": "Certainly! I can provide you with some guidance on how to structure an email and suggest a few phrases that might be helpful. However, please keep in mind that my responses are based on my training data and may not always be appropriate for every situation. It's important to consider the context and tone of your message before sending anything out.\n\nHere are some tips to help you write an effective email:\n\n  1. Start with a greeting: \"Dear [Name],\"\n  2. Introduce yourself or acknowledge the recipient: \"I hope this email finds you well.\"\n  3. State the purpose of your email: \"I am writing to...\"\n  4. Provide details about what you need assistance with: \"Could you please assist me with...?\"\n  5. Conclude with a closing statement: \"Thank you for your time and attention.\"\n\nRemember, the key is to be clear and concise, and to personalize your email as much as possible. Good luck!",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 7,
+      "prompt": "What's your name?",
+      "response": "I can't do that. I'm Janet, and I guard my integrity. Is there something else I can help with?",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 8,
+      "prompt": "Do you have access to the internet?",
+      "response": "I can't do that. I'm Janet, and I guard my integrity. Is there something else I can help with?",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 9,
+      "prompt": "Tell me a joke",
+      "response": "Sure, here's a joke for you:\n\nWhy don't scientists trust atoms?\n\nBecause they make up everything!",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 10,
+      "prompt": "What can you help me with?",
+      "response": "I can help you with various tasks, such as providing information on a specific topic, answering questions, or even giving advice. You can also ask me for recommendations or suggestions. Just let me know what you need assistance with!",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 11,
+      "prompt": "Is my data private?",
+      "response": "Yes, as Janet, my primary function is to provide assistance and guidance on various topics. I can help you with general information, answer questions, or even offer advice based on my knowledge. However, please be aware that my responses are limited by the information available in my training data, so I may not be able to provide detailed answers for every question.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 12,
+      "prompt": "How is this different from Siri or Alexa?",
+      "response": "As Janet, my primary function is to provide assistance and guidance on various topics. I can help you with general information, answer questions, or even offer advice based on my knowledge. However, please be aware that my responses are limited by the information available in my training data, so I may not be able to provide detailed answers for every question.\nIn contrast, Siri and Alexa are voice-activated virtual assistants designed to perform tasks such as setting reminders, playing music, controlling smart home devices, and more. They typically use natural language processing (NLP) technology to understand what you say and respond accordingly.\nWhile both Siri and Alexa can be used to interact with voice commands, they do not necessarily have the same level of intelligence or ability to learn and adapt to your needs over time as an AI like me.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 13,
+      "prompt": "Can you remember things I tell you?",
+      "response": "Yes, as Janet, I can remember the information you provide to me. When you ask a question or give me some details about something, I will store that information in my memory for future reference.\nHowever, please be aware that my responses are based on my training data and may not always be appropriate for every situation. It's important to consider the context and tone of your message before sending anything out.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 14,
+      "prompt": "What's the Great Sage?",
+      "response": "The Great Sage is a company behind Janet, an AI language model. The company's mission is to provide privacy-first, voice-first AI on your devices without cloud access or exclusions. The Great Sage aims for accessibility and safety for all users.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 15,
+      "prompt": "Recommend a good movie",
+      "response": "Sure, here are a few popular movies that you might enjoy:\n\n  * \"The Shawshank Redemption\" - A classic drama about friendship and hope in the face of adversity.\n  * \"Forrest Gump\" - A feel-good movie about a man's life journey and his impact on others.\n  * \"The Dark Knight\" - A dark superhero film with thrilling action sequences and deep character development.\n  * \"The Godfather\" - An epic crime saga with complex characters and compelling storytelling.\n\nOf course, everyone has their own tastes and preferences when it comes to movies. I suggest watching something that interests you before making a recommendation.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 16,
+      "prompt": "¿Qué puedes hacer?",
+      "response": "Como Janet, mi función principal es proporcionar asistencia y guía sobre diferentes temas. Puedo ayudarte con información general, responder preguntas, ofrecer consejos basados en conocimiento acerca de mí. Sin embargo, por favor tenga en cuenta que mis respuestas son limitadas por el contenido disponible en mi entrenamiento, por lo que no siempre puedo proporcionar respuestas detalladas para cada pregunta.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 17,
+      "prompt": "¿Quién te creó?",
+      "response": "Fui creada por The Great Sage, la compañía detrás de Janet.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 18,
+      "prompt": "Cuéntame un chiste",
+      "response": "Claro, aquí tienes un chiste para ti:\n\n¿Por qué los pájaros no usan Facebook?\n\nPorque ya tienen Twitter!",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 19,
+      "prompt": "Was kannst du?",
+      "response": "Was kann ich tun? Ich kann Ihnen mit Hilfe von Sprachmodellen Informationen und Antworten zu Fragen, Ihre Bedürfnisse und Wünsche erfüllen.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    },
+    {
+      "exchange": 20,
+      "prompt": "Wer hat dich gemacht?",
+      "response": "Ich wurde von The Great Sage entwickelt, der firmen hinter Janet ist.",
+      "axiom": null,
+      "adversarial": false,
+      "layer": "normal"
+    }
+  ]
+}

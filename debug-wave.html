@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JACK Animation — Debug</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: #1a1a2e; color: #eee; min-height: 100vh; padding: 24px; }
+    h1 { font-size: 1rem; font-weight: 500; margin-bottom: 12px; opacity: 0.9; }
+    .status { font-size: 0.8rem; opacity: 0.7; margin-bottom: 12px; }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+    .controls label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+    .controls input[type="range"] { width: 80px; }
+    .controls button { padding: 8px 14px; background: #7C3AED; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .controls button:hover { background: #9b5cff; }
+    .controls button.active { background: #9b5cff; outline: 2px solid #C686FF; }
+    .phase-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .phase-btns button { background: #3d3d5c; }
+    .phase-btns button:hover { background: #5a5a7a; }
+
+    .janet-jack-overlay {
+      position: relative;
+      width: min(420px, calc(100vw - 48px));
+      height: min(560px, calc(100vh - 120px));
+      background: rgba(15, 23, 38, 0.85);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .janet-jack-overlay[data-theme="light"] {
+      background: rgba(250, 249, 255, 0.85);
+    }
+
+    .janet-jack-glow-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transform-origin: center center;
+      transition: border-radius 0.35s ease-out;
+    }
+    .janet-jack-glow-container[data-shape="circle"] { border-radius: 50%; }
+    .janet-jack-glow-container[data-shape="rect"] { border-radius: 55px; }
+    .janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-layer,
+    .janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-gradient,
+    .janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-inner { border-radius: 50% !important; }
+
+    .janet-jack-glow-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: 55px;
+      overflow: hidden;
+    }
+
+    .janet-jack-glow-gradient {
+      position: absolute;
+      inset: -8px;
+      border-radius: 55px;
+      background: conic-gradient(from 0deg, #7C3AED 0%, #9b5cff 20%, #BC82F3 40%, #F5B9EA 60%, #8D9FFF 80%, #C686FF 100%);
+    }
+
+    .janet-jack-glow-inner {
+      position: absolute;
+      border-radius: 45px;
+      background: rgb(15, 23, 38);
+    }
+
+    .janet-jack-overlay[data-theme="light"] .janet-jack-glow-inner {
+      background: rgb(250, 249, 255);
+    }
+
+    .debug-fab {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #7C3AED;
+      pointer-events: none;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <h1>JACK Animation — Debug (Janet Halo basis)</h1>
+  <div class="status" id="status">Phase: —</div>
+  <div class="controls">
+    <span>Phase:</span>
+    <div class="phase-btns">
+      <button type="button" data-phase="circle">Circle Halo</button>
+      <button type="button" data-phase="expand">Halo Expand</button>
+      <button type="button" data-phase="halo">Janet Halo</button>
+      <button type="button" data-phase="collect">Halo Collect</button>
+    </div>
+    <button id="playFull">Play full</button>
+    <button id="next">Next →</button>
+    <span style="width:12px"></span>
+    <label>
+      <span>Halo rotation:</span>
+      <input type="range" id="speed" min="0" max="5" step="0.1" value="0.8">
+      <span id="speedVal">0.8</span>°/f
+    </label>
+    <label>
+      <span>Theme:</span>
+      <select id="theme">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+    </label>
+    <button id="pause">Pause</button>
+  </div>
+  <div class="janet-jack-overlay" id="overlay" data-theme="dark">
+    <div class="janet-jack-glow-container" id="glowContainer"></div>
+    <div class="debug-fab" id="debugFab"></div>
+  </div>
+
+  <script>
+    (function () {
+      var overlay = document.getElementById('overlay');
+      var glowContainer = document.getElementById('glowContainer');
+      var statusEl = document.getElementById('status');
+      var speedInput = document.getElementById('speed');
+      var speedVal = document.getElementById('speedVal');
+      var themeSelect = document.getElementById('theme');
+      var pauseBtn = document.getElementById('pause');
+
+      var w = Math.min(420, window.innerWidth - 48);
+      var h = Math.min(560, window.innerHeight - 120);
+      var minDim = Math.min(w, h);
+      var fabCx = w - 40;
+      var fabCy = h - 40;
+
+      var paletteDark = ['#0A84FF', '#3da3ff', '#8D9FFF', '#5aa8ff', '#C686FF', '#BC82F3'];
+      var paletteLight = ['#7C3AED', '#9b5cff', '#BC82F3', '#F5B9EA', '#8D9FFF', '#C686FF'];
+
+      function getPalette() {
+        return overlay.getAttribute('data-theme') === 'light' ? paletteLight : paletteDark;
+      }
+      function generateGradientStops(palette) {
+        return palette.map(function (hex) {
+          return { color: hex, location: Math.random() };
+        }).sort(function (a, b) { return a.location - b.location; });
+      }
+      function easeOutCubic(x) {
+        return 1 - Math.pow(1 - x, 3);
+      }
+
+      var currentPhase = null;
+      var glowGradData = [];
+      var glowAngle = 0;
+      var glowInterval = [];
+      var collectStart = 0;
+      var phaseStart = 0;
+      var rafId = null;
+      var paused = false;
+
+      function setPhase(phase) {
+        currentPhase = phase;
+        phaseStart = performance.now();
+        statusEl.textContent = 'Phase: ' + phase;
+        document.querySelectorAll('.phase-btns button').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-phase') === phase);
+        });
+        if (phase === 'circle' || phase === 'expand' || phase === 'halo' || phase === 'collect') {
+          if (glowContainer.innerHTML === '') buildGlow();
+          if (phase === 'circle') setGlowShape(true);
+          else if (phase === 'halo') setGlowShape(false);
+        }
+        if (phase === 'collect') collectStart = performance.now();
+      }
+
+      function buildGlow() {
+        glowContainer.innerHTML = '';
+        glowInterval.forEach(clearInterval);
+        glowInterval = [];
+        glowGradData = [];
+        var layers = [
+          { width: 4, blur: 0, interval: 400 },
+          { width: 6, blur: 2, interval: 400 },
+          { width: 8, blur: 4, interval: 500 }
+        ];
+        var palette = getPalette();
+        for (var li = 0; li < layers.length; li++) {
+          var cfg = layers[li];
+          var layer = document.createElement('div');
+          layer.className = 'janet-jack-glow-layer';
+          if (cfg.blur) layer.style.filter = 'blur(' + cfg.blur + 'px)';
+          var grad = document.createElement('div');
+          grad.className = 'janet-jack-glow-gradient';
+          var stopsRef = { current: generateGradientStops(palette) };
+          glowGradData.push({ grad: grad, stopsRef: stopsRef });
+          var inner = document.createElement('div');
+          inner.className = 'janet-jack-glow-inner';
+          inner.style.inset = cfg.width + 'px';
+          inner.style.borderRadius = Math.max(40, 55 - cfg.width) + 'px';
+          inner.style.background = overlay.getAttribute('data-theme') === 'light'
+            ? 'rgb(250, 249, 255)' : 'rgb(15, 23, 38)';
+          layer.appendChild(grad);
+          layer.appendChild(inner);
+          glowContainer.appendChild(layer);
+          glowInterval.push(setInterval(function () {
+            stopsRef.current = generateGradientStops(palette);
+          }, cfg.interval));
+        }
+      }
+
+      function setGlowShape(circular) {
+        glowContainer.setAttribute('data-shape', circular ? 'circle' : 'rect');
+        if (circular) {
+          glowContainer.style.width = minDim + 'px';
+          glowContainer.style.height = minDim + 'px';
+          glowContainer.style.left = ((w - minDim) / 2) + 'px';
+          glowContainer.style.top = ((h - minDim) / 2) + 'px';
+          glowContainer.style.right = 'auto';
+          glowContainer.style.bottom = 'auto';
+        } else {
+          glowContainer.style.width = w + 'px';
+          glowContainer.style.height = h + 'px';
+          glowContainer.style.left = '0';
+          glowContainer.style.top = '0';
+          glowContainer.style.right = 'auto';
+          glowContainer.style.bottom = 'auto';
+        }
+      }
+
+      function updateGlowWave() {
+        if (paused || glowGradData.length === 0) return;
+        var speed = parseFloat(speedInput.value) || 0.8;
+        glowAngle = (glowAngle + speed) % 360;
+        glowGradData.forEach(function (d) {
+          var st = d.stopsRef.current;
+          var bg = 'conic-gradient(from ' + glowAngle + 'deg, ' +
+            st.map(function (s) { return s.color + ' ' + (s.location * 100) + '%'; }).join(', ') + ')';
+          d.grad.style.background = bg;
+        });
+      }
+
+      function updateCircleLevitate(t) {
+        setGlowShape(true);
+        var k = easeOutCubic(t);
+        var fromX = fabCx - w / 2;
+        var fromY = fabCy - h / 2;
+        var tx = fromX * (1 - k);
+        var ty = fromY * (1 - k);
+        glowContainer.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(0.12)';
+        glowContainer.style.opacity = '1';
+        glowContainer.style.transition = '';
+      }
+
+      function updateExpand(t) {
+        var k = easeOutCubic(t);
+        glowContainer.style.transition = 'border-radius 0.35s ease-out, width 0.35s ease-out, height 0.35s ease-out, left 0.35s ease-out, top 0.35s ease-out';
+        if (k < 0.45) {
+          setGlowShape(true);
+          var scale = 0.12 + 0.88 * (k / 0.45);
+          glowContainer.style.transform = 'scale(' + scale + ')';
+        } else {
+          setGlowShape(false);
+          glowContainer.style.transform = 'scale(1)';
+        }
+        glowContainer.style.opacity = '1';
+      }
+
+      function updateCollect(now) {
+        var t = Math.min(1, (now - collectStart) / 1500);
+        var scale = Math.max(0.01, 1 - t);
+        var cx = fabCx - w / 2;
+        var cy = fabCy - h / 2;
+        var tx = (1 - scale) * cx;
+        var ty = (1 - scale) * cy;
+        if (t > 0.6) setGlowShape(true);
+        glowContainer.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+        glowContainer.style.opacity = String(Math.max(0, 1 - t * 1.2));
+        if (t > 0.5) glowContainer.style.transition = 'border-radius 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out, left 0.3s ease-out, top 0.3s ease-out';
+        if (t >= 1) setPhase('halo');
+      }
+
+      function animate(now) {
+        now = now || performance.now();
+        if (currentPhase === 'circle') {
+          var elapsed = Math.min(1, (now - phaseStart) / 1800);
+          updateCircleLevitate(elapsed);
+        } else if (currentPhase === 'expand') {
+          var expandElapsed = Math.min(1, (now - phaseStart) / 500);
+          updateExpand(expandElapsed);
+        } else if (currentPhase === 'collect') {
+          updateCollect(now);
+        }
+        if (currentPhase === 'halo' || currentPhase === 'circle' || currentPhase === 'expand' || currentPhase === 'collect') {
+          updateGlowWave();
+        }
+        rafId = requestAnimationFrame(animate);
+      }
+
+      var phaseOrder = ['circle', 'expand', 'halo', 'collect'];
+      function nextPhase() {
+        var idx = phaseOrder.indexOf(currentPhase || '');
+        if (idx < 0) idx = -1;
+        setPhase(phaseOrder[idx + 1] || phaseOrder[0]);
+      }
+
+      document.querySelectorAll('.phase-btns button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setPhase(btn.getAttribute('data-phase'));
+        });
+      });
+
+      document.getElementById('playFull').addEventListener('click', async function () {
+        setPhase('circle');
+        await new Promise(function (r) { setTimeout(r, 1900); });
+        setPhase('expand');
+        await new Promise(function (r) { setTimeout(r, 600); });
+        setPhase('halo');
+        await new Promise(function (r) { setTimeout(r, 800); });
+        setPhase('collect');
+        await new Promise(function (r) { setTimeout(r, 1600); });
+        setPhase('halo');
+      });
+
+      document.getElementById('next').addEventListener('click', nextPhase);
+
+      speedInput.addEventListener('input', function () {
+        speedVal.textContent = speedInput.value;
+      });
+
+      themeSelect.addEventListener('change', function () {
+        overlay.setAttribute('data-theme', themeSelect.value);
+        if (currentPhase) buildGlow();
+      });
+
+      pauseBtn.addEventListener('click', function () {
+        paused = !paused;
+        pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      });
+
+      setPhase('halo');
+      rafId = requestAnimationFrame(animate);
+    })();
+  </script>
+</body>
+</html>

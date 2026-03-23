@@ -140,6 +140,11 @@
   border: 1px solid rgba(220, 38, 38, 0.3);
 }
 
+.janet-msg-error a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .janet-input-area {
   padding: 16px;
   border-top: 1px solid var(--border-card);
@@ -239,10 +244,196 @@
   transition: width 0.2s ease;
 }
 
+/* JACK CTA — triggers JACK Mode animation */
+.janet-jack-cta {
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--accent);
+  border: 2px solid var(--primary);
+  border-radius: var(--border-radius);
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.janet-jack-cta:hover {
+  background: var(--gray-light);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-sm);
+}
+
+.janet-jack-cta:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* JACK Stage — overlay for Circle Halo, Halo Expand, Janet Halo, Halo Collect */
+.janet-jack-overlay {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: min(420px, calc(100vw - 48px));
+  height: min(560px, calc(100vh - 120px));
+  z-index: 110;
+  background: rgba(250, 249, 255, 0.85);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  box-shadow: var(--shadow-hover);
+}
+
+html[data-theme="dark"] .janet-jack-overlay {
+  background: rgba(15, 23, 38, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .janet-jack-overlay {
+    background: rgba(15, 23, 38, 0.85);
+  }
+}
+
+/* Progress overlay — inside Janet Halo */
+.janet-jack-progress-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.janet-jack-progress-overlay .janet-progress-overlay {
+  max-width: 280px;
+  width: 100%;
+  padding: 20px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+}
+
+.janet-jack-progress-overlay .janet-progress-bar {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.janet-jack-progress-overlay .janet-progress-fill {
+  background: var(--primary-light, #9b5cff);
+}
+
+html[data-theme="dark"] .janet-jack-progress-overlay .janet-progress-overlay,
+html:not([data-theme="light"]) .janet-jack-progress-overlay .janet-progress-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .janet-jack-progress-overlay .janet-progress-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Janet Halo — soft ring at boundary only (5–10px) */
+.janet-jack-glow-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: center center;
+  transition: border-radius 0.35s ease-out;
+}
+
+.janet-jack-glow-container[data-shape="circle"] {
+  border-radius: 50%;
+}
+
+.janet-jack-glow-container[data-shape="rect"] {
+  border-radius: 55px;
+}
+
+.janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-layer,
+.janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-gradient,
+.janet-jack-glow-container[data-shape="circle"] .janet-jack-glow-inner {
+  border-radius: 50% !important;
+}
+
+.janet-jack-glow-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 55px;
+  overflow: hidden;
+}
+
+.janet-jack-glow-gradient {
+  position: absolute;
+  inset: -8px; /* slight overflow for edge coverage */
+  border-radius: 55px;
+  background: conic-gradient(from 0deg, #7C3AED 0%, #9b5cff 20%, #BC82F3 40%, #F5B9EA 60%, #8D9FFF 80%, #C686FF 100%);
+}
+
+.janet-jack-glow-inner {
+  position: absolute;
+  border-radius: 45px;
+  background: rgb(250, 249, 255);
+}
+
+html[data-theme="dark"] .janet-jack-glow-inner {
+  background: rgb(15, 23, 38);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .janet-jack-glow-inner {
+    background: rgb(15, 23, 38);
+  }
+}
+
+/* Reduced Spinner — accessibility fallback */
+.janet-jack-overlay-reduced .janet-jack-reduced-content {
+  text-align: center;
+}
+
+.janet-jack-overlay-reduced .janet-jack-reduced-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--gray-mid);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: janet-jack-spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+.janet-jack-overlay-reduced .janet-jack-reduced-text {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.janet-jack-overlay-fadeout {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes janet-jack-spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .janet-fab,
   .janet-panel,
-  .janet-progress-fill {
+  .janet-progress-fill,
+  .janet-jack-cta,
+  .janet-jack-overlay-fadeout {
     transition: none;
+  }
+
+  .janet-jack-overlay-reduced .janet-jack-reduced-spinner {
+    animation: none;
+    border-top-color: var(--primary);
   }
 }

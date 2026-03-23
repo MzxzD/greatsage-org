@@ -180,6 +180,8 @@
   "janet.title": "Preguntar a Janet",
   "janet.placeholder": "Pregunta sobre nuestra misión…",
   "janet.send": "Enviar",
+  "janet.jackCta": "Si lo deseas; podemos usar tu navegador web y tu dispositivo para demostrar el poder de JANET",
+  "janet.welcomeJack": "¡Hola! ¿Cómo puedo ayudarte?",
   "janet.welcome": "¡Hola! Soy Janet. Pregúntame sobre The Great Sage — nuestra misión, IA con privacidad o J.A.N.E.T. Glasses. Todo funciona aquí en tu navegador.",
   "janet.loading": "Descargando Janet… ~600MB",
   "janet.loadingSentinel": "Descargando Sentinel… ~200MB",

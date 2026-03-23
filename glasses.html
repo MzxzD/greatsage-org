@@ -266,9 +266,9 @@
             border-color: var(--primary-light);
         }
         .trait i { font-size: 2.4rem; color: var(--primary); margin-bottom: 10px; }
-        .trait h4 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
+        .trait h3 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
         .trait p { font-size: 0.9rem; margin: 0; color: var(--text-light); }
-        [data-theme="dark"] .trait h4 { color: #f1f5f9; }
+        [data-theme="dark"] .trait h3 { color: #f1f5f9; }
         [data-theme="dark"] .trait p { color: #cbd5e1; }
         .vision-wrapper {
             background: linear-gradient(135deg, #201c3a 0%, #312b5a 100%);
@@ -405,6 +405,7 @@
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <nav class="navbar" role="navigation" aria-label="Main">
         <div class="container nav-container">
             <span class="logo"><a href="index.html">The Great <span>Sage</span></a></span>
@@ -459,27 +460,27 @@
                 <div class="sage-traits">
                     <div class="trait">
                         <i class="fas fa-lock"></i>
-                        <h4>Privacy-first</h4>
+                        <h3>Privacy-first</h3>
                         <p>No cloud. Your voice stays on your devices.</p>
                     </div>
                     <div class="trait">
                         <i class="fas fa-universal-access"></i>
-                        <h4>Accessibility</h4>
+                        <h3>Accessibility</h3>
                         <p>Live captions, translation, memory assist—offline.</p>
                     </div>
                     <div class="trait">
                         <i class="fas fa-tag"></i>
-                        <h4>No subscription</h4>
+                        <h3>No subscription</h3>
                         <p>One purchase. No monthly fees.</p>
                     </div>
                     <div class="trait">
                         <i class="fas fa-code-branch"></i>
-                        <h4>Janet ecosystem</h4>
+                        <h3>Janet ecosystem</h3>
                         <p>Open-source, constitutional AI, cluster-only.</p>
                     </div>
                     <div class="trait">
                         <i class="fas fa-glasses"></i>
-                        <h4>Phase 1 validation</h4>
+                        <h3>Phase 1 validation</h3>
                         <p>Software on Brilliant Labs Halo → pilot → EU hardware.</p>
                     </div>
                 </div>
@@ -556,7 +557,7 @@
         </div>
     </footer>
 
-    <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
+    <aside id="cookie-consent" class="cookie-consent" role="region" aria-label="Cookie notice" aria-live="polite">
         <p class="cookie-consent-text">We use cookies to remember your theme preference. <a href="#cookies">Cookies</a></p>
         <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
     </aside>
@@ -572,9 +573,12 @@
     })();
     </script>
 
-    <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+    <nav aria-label="Back to top">
+        <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+    </nav>
 
     <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+    <script defer src="scripts/gfm-embed-a11y.js"></script>
     <script defer src="cookie-consent.js"></script>
     <script>
         (function() {

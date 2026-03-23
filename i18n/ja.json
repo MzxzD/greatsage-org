@@ -180,6 +180,8 @@
   "janet.title": "Janetに聞く",
   "janet.placeholder": "私たちのミッションについて聞いて…",
   "janet.send": "送信",
+  "janet.jackCta": "ご希望であれば；あなたのウェブブラウザとデバイスを使って、JANETの力をお見せできます",
+  "janet.welcomeJack": "こんにちは！何かお手伝いしましょうか？",
   "janet.welcome": "こんにちは！Janetです。The Great Sageについて聞いてください — 私たちのミッション、プライバシー重視のAI、J.A.N.E.T. Glasses。すべてあなたのブラウザで動いています。",
   "janet.loading": "Janetをダウンロード中… 約600MB",
   "janet.loadingSentinel": "Sentinelをダウンロード中… 約200MB",

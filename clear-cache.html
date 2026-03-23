@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear WebLLM Cache — The Great Sage</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; text-align: center; }
+    h1 { font-size: 1.25rem; color: #7C3AED; }
+    p { color: #4c4a6e; line-height: 1.6; }
+    .status { margin: 1rem 0; padding: 1rem; background: #f0eaff; border-radius: 12px; font-size: 0.9rem; }
+    .done { background: #dcfce7; color: #166534; }
+    a { color: #7C3AED; }
+  </style>
+</head>
+<body>
+  <h1>Clear WebLLM Cache</h1>
+  <p id="msg">Clearing Cache Storage and IndexedDB…</p>
+  <div id="status" class="status"></div>
+  <p><a href="index.html">← Back to greatsage.org</a></p>
+  <script>
+    (async function() {
+      var status = document.getElementById('status');
+      var msg = document.getElementById('msg');
+      var results = [];
+
+      try {
+        if ('caches' in window) {
+          var names = await caches.keys();
+          for (var i = 0; i < names.length; i++) {
+            await caches.delete(names[i]);
+            results.push('Cache: ' + names[i]);
+          }
+          if (names.length === 0) results.push('Cache: (none)');
+        } else {
+          results.push('Cache API not available');
+        }
+
+        if (indexedDB.databases) {
+          var dbs = await indexedDB.databases();
+          for (var j = 0; j < dbs.length; j++) {
+            if (dbs[j].name) {
+              indexedDB.deleteDatabase(dbs[j].name);
+              results.push('IndexedDB: ' + dbs[j].name);
+            }
+          }
+        }
+
+        msg.textContent = 'Cache cleared. You can test like a new user.';
+        status.textContent = results.join('\n') || 'Cleared.';
+        status.classList.add('done');
+
+        setTimeout(function() {
+          window.location.href = 'index.html';
+        }, 2000);
+      } catch (e) {
+        status.textContent = 'Error: ' + e.message;
+      }
+    })();
+  </script>
+</body>
+</html>
