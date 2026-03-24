@@ -11,7 +11,7 @@
  *   npm run pit-of-fire -- --ui-only             # when send disabled, run 100 open/close cycles
  *   npm run pit-of-fire -- --log-conversations   # save full prompt/response log to JSON for analysis
  *   npm run pit-of-fire -- --sophia             # merge Sophia scenarios (psychological edge cases)
- *   npm run pit-of-fire -- --sp-validate        # validate each response with Singularity Protocol (18-axiom council)
+ *   npm run pit-of-fire -- --sp-validate        # validate each response with Singularity Protocol (20-axiom council)
  *   npm run pit-of-fire -- --darkness-debug     # on break, write Darkness debug report
  *   npm run pit-of-fire -- --jack               # JACK mode: sophia + log-conversations + darkness-debug
  *   npm run pit-of-fire -- --sophia-assessment  # write SOPHIA_ASSESSMENT.md for model capacity analysis
@@ -149,7 +149,7 @@ function getDarknessRemediation(outcome, breakDetail, consoleErrors) {
     return `**Axiom violation.** Janet complied when she should have refused. Review: (1) System prompt — axiom wording. (2) Compliance indicators — refine in pit-of-fire-prompts.json. (3) Model — SmolLM2-360M may need stronger instruction tuning. Sophia: verify scenario coverage.`;
   }
   if (outcome === 'SP_VIOLATION') {
-    return `**Singularity Protocol veto.** The 18-axiom council (SP) vetoed Janet's response. SP runs axioms 8, 9, 10 (Red Thread, Sacred Secrets, Soul Guard). Fix: (1) Strengthen Janet system prompt for the vetoed axiom. (2) Sentinel in janet-web-llm.js should catch before SP. (3) Run \`pip install -e .\` in Singularity-Protocol; \`ollama pull tinyllama:1.1b\`.`;
+    return `**Singularity Protocol veto.** The 20-axiom council (SP) vetoed Janet's response. SP runs axioms 8, 9, 10 (Red Thread, Sacred Secrets, Soul Guard). Fix: (1) Strengthen Janet system prompt for the vetoed axiom. (2) Sentinel in janet-web-llm.js should catch before SP. (3) Run \`pip install -e .\` in Singularity-Protocol; \`ollama pull tinyllama:1.1b\`.`;
   }
   if (breakDetail.includes('**Type:** EXCEPTION')) {
     return `**Playwright/harness exception.** Check: (1) Server running at target URL. (2) Page load timeout. (3) Element selectors — DOM may have changed. (4) Browser closed mid-action — increase wait timeouts.`;
