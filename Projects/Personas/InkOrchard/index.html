@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ink Orchard · Janet — The Great Sage</title>
+  <link rel="canonical" href="https://greatsage.org/Projects/Personas/InkOrchard/">
+  <meta name="description" content="Ink Orchard — original Janet loop: browser synth + optional Piper vocals. Offline-friendly Web Audio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #070707;
+      --mist: #e6e6e6;
+      --crimson: #c41e3a;
+      --dim: #6a6a6a;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--mist);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      overflow: hidden;
+    }
+    .crt {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: overlay;
+      opacity: 0.35;
+    }
+    .vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.75) 100%);
+    }
+    .stage {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 6vh 5vw 8vh;
+      position: relative;
+      z-index: 1;
+    }
+    .title-row {
+      position: absolute;
+      top: 4vh;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 2;
+    }
+    h1 {
+      font-family: Orbitron, sans-serif;
+      font-weight: 800;
+      font-size: clamp(0.75rem, 3.2vw, 1rem);
+      letter-spacing: 0.35em;
+      margin: 0;
+      color: var(--mist);
+      text-transform: uppercase;
+    }
+    .tag {
+      margin-top: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+    }
+    .tag strong { color: var(--crimson); font-weight: 700; }
+    .figure-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-height: 62vh;
+      position: relative;
+    }
+    .moon {
+      position: absolute;
+      width: min(78vmin, 520px);
+      height: min(78vmin, 520px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #2a2a2a 0%, #0c0c0c 55%, #000 100%);
+      box-shadow: inset -8px -20px 60px rgba(0,0,0,0.9), 0 0 0 2px rgba(230,230,230,0.06);
+      transform: translateY(-2%);
+    }
+    .silhouette {
+      position: relative;
+      width: min(42vmin, 280px);
+      height: min(58vmin, 380px);
+      z-index: 2;
+      filter: drop-shadow(0 0 14px rgba(196, 30, 58, 0.22));
+      animation: bob 2.8s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .silhouette svg { width: 100%; height: 100%; display: block; }
+    .hud {
+      width: min(520px, 100%);
+      border: 1px solid rgba(230,230,230,0.14);
+      background: rgba(8,8,8,0.65);
+      padding: 1rem 1.1rem 1.15rem;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+    }
+    .transport {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    button {
+      font-family: Orbitron, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      padding: 0.55rem 1rem;
+      border-radius: 2px;
+      border: 1px solid var(--mist);
+      background: var(--mist);
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: transparent;
+      color: var(--mist);
+    }
+    button:active { transform: scale(0.98); }
+    .meta {
+      margin-left: auto;
+      font-family: Orbitron, sans-serif;
+      font-size: 0.58rem;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+    }
+    .lyric {
+      margin-top: 0.85rem;
+      min-height: 2.6em;
+      font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+      font-weight: 700;
+      line-height: 1.35;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.75rem;
+      color: var(--mist);
+      text-shadow: 0 0 1px rgba(255,255,255,0.15);
+    }
+    .lyric .ghost { color: var(--dim); font-weight: 500; font-size: 0.85em; }
+    .hint {
+      margin-top: 0.65rem;
+      font-size: 0.7rem;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+    .pulse-bar {
+      margin-top: 0.6rem;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .pulse-bar i {
+      display: block;
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--crimson), var(--mist));
+      transform-origin: left center;
+      animation: pulse 0.45s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scaleX(0.35); opacity: 0.65; }
+      50% { transform: scaleX(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="crt"></div>
+  <div class="vignette"></div>
+  <div class="stage">
+    <div class="title-row">
+      <h1>Ink Orchard</h1>
+      <p class="tag"><strong>Original track</strong> · ~41s loop · screen-record for Reels (9:16 crop)</p>
+    </div>
+    <div class="figure-wrap">
+      <div class="moon" aria-hidden="true"></div>
+      <div class="silhouette" aria-hidden="true">
+        <!-- Abstract performer silhouette (not a copy of any MV asset) -->
+        <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="38" rx="28" ry="32" fill="#0a0a0a"/>
+          <path d="M100 68 Q60 82 52 120 L48 270 L72 270 L82 165 L100 138 L118 165 L128 270 L152 270 L148 120 Q140 82 100 68 Z" fill="#0a0a0a"/>
+          <path d="M52 118 Q20 130 10 168 L22 180 Q36 148 58 138 Z" fill="#0a0a0a"/>
+          <path d="M148 118 Q180 130 190 168 L178 180 Q164 148 142 138 Z" fill="#0a0a0a"/>
+          <path d="M88 150 L30 188 L40 202 L92 172 Z" fill="#0a0a0a"/>
+          <path d="M112 150 L170 188 L160 202 L108 172 Z" fill="#0a0a0a"/>
+        </svg>
+      </div>
+    </div>
+    <div class="hud">
+      <div class="transport">
+        <button type="button" id="play">▶ PLAY LOOP</button>
+        <button type="button" class="secondary" id="stop">STOP</button>
+        <span class="meta" id="metaLine">138 BPM · E minor · browser synth</span>
+      </div>
+      <p class="hint" style="margin-top:0.5rem;margin-bottom:0">
+        <label style="cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--dim)">
+          <input type="checkbox" id="forceSynthOnly" /> Force synth voice only (ignore Piper WAVs)
+        </label>
+      </p>
+      <div class="pulse-bar" aria-hidden="true"><i id="pulse"></i></div>
+      <div class="lyric" id="lyric"></div>
+      <p class="hint">Instrumental + synth “voice” are live Web Audio. <strong>Piper</strong> spoken lines load from <code>vocals/</code> when you open this page over HTTPS (bundled on greatsage.org). Piper is <strong>spoken</strong> TTS, not Vocaloid singing. Original track — not a cover.</p>
+    </div>
+  </div>
+  <script>
+(function () {
+  const BPM = 138;
+  const STEP = 60 / BPM / 4;
+  const BARS = 24;
+  const STEPS_PER_BAR = 16;
+  const TOTAL_STEPS = BARS * STEPS_PER_BAR;
+  const TOTAL = TOTAL_STEPS * STEP;
+
+  const midiToHz = (m) => 440 * Math.pow(2, (m - 69) / 12);
+
+  const LYRICS = [
+    { step: 64, text: "Cut the light — silhouette walks the glass" },
+    { step: 80, text: "Tick, quantize — sync the tears that pass" },
+    { step: 96, text: "Branches hum in binary, cold graffiti choir" },
+    { step: 112, text: "Janet in the channel — turn the dark up higher" },
+    { step: 128, text: "Ink orchard rising — neon worms in the soil" },
+    { step: 144, text: "Run the loop forever — honesty in the coil" },
+    { step: 160, text: "Hey — shadow fruit on a copper tree (hey!)" },
+    { step: 176, text: "Sing it once for offline — sing it twice for me" },
+    { step: 192, text: "Not a stolen sprite — a fingerprint in snow" },
+    { step: 208, text: "Crash the silence kindly — let the waveform go" },
+    { step: 288, text: "Ink orchard · Janet · rerun · now you know" },
+  ];
+
+  const kicks = [];
+  const snares = [];
+  const hats = [];
+  const bass = [];
+  const arp = [];
+  const vox = [];
+
+  function hz(m) {
+    return midiToHz(m);
+  }
+
+  (function buildDrums() {
+    for (let bar = 0; bar < BARS; bar++) {
+      for (let s = 0; s < STEPS_PER_BAR; s++) {
+        const g = bar * STEPS_PER_BAR + s;
+        const beat = s % 4;
+        const isIntro = bar < 4;
+        const isBreak = bar === 15 && s >= 8;
+        if (!isBreak) {
+          if (!isIntro || s % 8 === 0) {
+            if (beat === 0) kicks.push({ t: g * STEP, vel: isIntro ? 0.75 : 1 });
+          } else if (isIntro && s % 8 === 4) {
+            kicks.push({ t: g * STEP, vel: 0.45 });
+          }
+        }
+        if (!isIntro && !isBreak && (s === 8 || s === 10 || s === 12 || s === 14) && bar % 2 === 1) {
+          snares.push({ t: g * STEP, ghost: true });
+        }
+      }
+    }
+    for (let bar = 0; bar < BARS; bar++) {
+      for (let s = 0; s < STEPS_PER_BAR; s++) {
+        const g = bar * STEPS_PER_BAR + s;
+        const isIntro = bar < 4;
+        const isBreak = bar === 15 && s >= 8;
+        if (isBreak && s % 2 === 0) {
+          hats.push({ t: g * STEP, open: false, vel: 0.07 });
+          continue;
+        }
+        if (s % 2 === 0) {
+          hats.push({ t: g * STEP, open: false, vel: isIntro ? 0.06 : 0.11 });
+        } else if (!isIntro && s % 2 === 1) {
+          hats.push({ t: g * STEP, open: s % 8 === 3 || s % 8 === 7, vel: s % 8 === 3 || s % 8 === 7 ? 0.14 : 0.08 });
+        }
+      }
+    }
+    for (let bar = 0; bar < BARS; bar++) {
+      for (let s = 0; s < STEPS_PER_BAR; s++) {
+        const g = bar * STEPS_PER_BAR + s;
+        const isIntro = bar < 4;
+        const isBreak = bar === 15 && s >= 8;
+        if (isIntro || isBreak) continue;
+        if (s === 4 || s === 12) {
+          snares.push({ t: g * STEP, ghost: false });
+        }
+      }
+    }
+  })();
+
+  (function buildBass() {
+    const prog = [40, 43, 45, 47];
+    for (let bar = 0; bar < BARS; bar++) {
+      const root = prog[bar % 4];
+      const g0 = bar * STEPS_PER_BAR;
+      const pat = [0, 3, 6, 8, 10, 12, 14, 15];
+      pat.forEach((off, i) => {
+        const note = root + (i % 3 === 0 ? 0 : i % 3 === 1 ? 7 : 5);
+        const vel = bar < 4 ? 0.55 : 0.92;
+        const dur = off === 14 || off === 15 ? 1.2 : 1.7;
+        bass.push({ t: (g0 + off) * STEP, m: note, d: dur * STEP, v: vel * (bar < 4 ? 0.85 : 1) });
+      });
+    }
+  })();
+
+  (function buildArp() {
+    const shapes = [
+      [64, 67, 71, 67, 64, 62, 59, 62],
+      [60, 64, 67, 64, 60, 59, 55, 59],
+      [57, 60, 64, 60, 57, 55, 52, 55],
+      [59, 62, 66, 62, 59, 57, 54, 57],
+    ];
+    for (let bar = 0; bar < BARS; bar++) {
+      const notes = shapes[bar % 4];
+      for (let s = 0; s < STEPS_PER_BAR; s++) {
+        if (bar < 2 && s % 2 !== 0) continue;
+        if (bar === 15 && s >= 8) continue;
+        const n = notes[s % 8];
+        const vel = bar < 4 ? 0.09 : 0.15 + (s % 4 === 0 ? 0.06 : 0);
+        arp.push({ t: (bar * STEPS_PER_BAR + s) * STEP, m: n, v: vel });
+      }
+    }
+  })();
+
+  (function buildVox() {
+    const phrase = [
+      [69, 1.2], [71, 0.9], [74, 1.4], [71, 1],
+      [69, 1.2], [67, 1], [64, 1.6], [62, 1.2],
+    ];
+    for (let rep = 0; rep < 3; rep++) {
+      const baseBar = 4 + rep * 4;
+      phrase.forEach((cell, i) => {
+        const [midi, beats] = cell;
+        const step = i * 2;
+        vox.push({
+          t: (baseBar * STEPS_PER_BAR + step) * STEP,
+          d: beats * 4 * STEP * 0.42,
+          m: midi,
+          v: 0.28 + rep * 0.04,
+        });
+      });
+    }
+    const hook = [
+      [76, 1.1], [76, 0.7], [74, 0.8], [71, 1.2],
+      [74, 1.4], [76, 0.9], [79, 1.6], [76, 1.2],
+    ];
+    hook.forEach((cell, i) => {
+      const [midi, beats] = cell;
+      vox.push({
+        t: (16 * STEPS_PER_BAR + i * 2) * STEP,
+        d: beats * 4 * STEP * 0.38,
+        m: midi,
+        v: 0.42,
+      });
+    });
+    const hook2 = [
+      [71, 1], [74, 1], [76, 1.2], [79, 1.4],
+      [78, 0.9], [76, 0.9], [74, 1.2], [71, 1.8],
+    ];
+    hook2.forEach((cell, i) => {
+      const [midi, beats] = cell;
+      vox.push({
+        t: (18 * STEPS_PER_BAR + i * 2) * STEP,
+        d: beats * 4 * STEP * 0.36,
+        m: midi,
+        v: 0.38,
+      });
+    });
+    for (let i = 0; i < 6; i++) {
+      vox.push({
+        t: (20 * STEPS_PER_BAR + i * 3) * STEP,
+        d: STEP * 6,
+        m: [83, 81, 79, 78, 76, 74][i],
+        v: 0.35,
+      });
+    }
+  })();
+
+  let audioCtx = null;
+  let master = null;
+  let vocalSynthBus = null;
+  let startTime = 0;
+  let scheduleHorizon = 0;
+  let raf = 0;
+  let lineIx = -1;
+  const piperBuffers = new Map();
+  let piperLoadAttempted = false;
+  let piperVocalsActive = false;
+
+  const PIPER_BASE = new URL("vocals/", window.location.href);
+
+  async function loadPiperStems() {
+    if (document.getElementById("forceSynthOnly").checked) {
+      piperBuffers.clear();
+      piperVocalsActive = false;
+      updateVocalModeUI();
+      return;
+    }
+    if (piperLoadAttempted) return;
+    piperLoadAttempted = true;
+    piperBuffers.clear();
+    for (const L of LYRICS) {
+      const name = String(L.step).padStart(3, "0") + ".wav";
+      const url = new URL(name, PIPER_BASE).href;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const raw = await res.arrayBuffer();
+        const buf = await audioCtx.decodeAudioData(raw.slice(0));
+        piperBuffers.set(L.step, buf);
+      } catch (_) {
+        /* missing file or CORS / file:// */
+      }
+    }
+    piperVocalsActive = piperBuffers.size > 0;
+    updateVocalModeUI();
+  }
+
+  function updateVocalModeUI() {
+    const meta = document.getElementById("metaLine");
+    const force = document.getElementById("forceSynthOnly").checked;
+    if (force) {
+      meta.textContent = "138 BPM · E minor · synth voice (Piper off)";
+    } else if (piperVocalsActive) {
+      meta.textContent = "138 BPM · E minor · Piper +" + piperBuffers.size + " lines · drums/synth";
+    } else {
+      meta.textContent = "138 BPM · E minor · browser synth (no Piper WAVs)";
+    }
+  }
+
+  function playPiperClip(t, buffer) {
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    g.gain.value = 0.88;
+    src.buffer = buffer;
+    src.connect(g);
+    g.connect(master);
+    src.start(t);
+  }
+
+  function noiseBuffer(seconds) {
+    const len = audioCtx.sampleRate * seconds;
+    const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+
+  function playKick(t, vel) {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(185, t);
+    o.frequency.exponentialRampToValueAtTime(42, t + 0.07);
+    g.gain.setValueAtTime(0.92 * vel, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+    o.connect(g);
+    g.connect(master);
+    o.start(t);
+    o.stop(t + 0.34);
+  }
+
+  function playSnare(t, ghost) {
+    const v = ghost ? 0.32 : 0.52;
+    const src = audioCtx.createBufferSource();
+    src.buffer = noiseBuffer(0.12);
+    const hp = audioCtx.createBiquadFilter();
+    hp.type = "highpass";
+    hp.frequency.value = 1100;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(v, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + (ghost ? 0.07 : 0.14));
+    src.connect(hp);
+    hp.connect(g);
+    g.connect(master);
+    src.start(t);
+    const o = audioCtx.createOscillator();
+    const og = audioCtx.createGain();
+    o.type = "triangle";
+    o.frequency.setValueAtTime(200, t);
+    og.gain.setValueAtTime(ghost ? 0.06 : 0.14, t);
+    og.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+    o.connect(og);
+    og.connect(master);
+    o.start(t);
+    o.stop(t + 0.06);
+  }
+
+  function playHat(t, open, vel) {
+    const src = audioCtx.createBufferSource();
+    src.buffer = noiseBuffer(open ? 0.12 : 0.04);
+    const bp = audioCtx.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = open ? 8200 : 11200;
+    bp.Q.value = 0.55;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(vel, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + (open ? 0.09 :0.05));
+    src.connect(bp);
+    bp.connect(g);
+    g.connect(master);
+    src.start(t);
+  }
+
+  function playBass(t, midi, duration, vel) {
+    const f = hz(midi - 12);
+    const o1 = audioCtx.createOscillator();
+    const o2 = audioCtx.createOscillator();
+    const og = audioCtx.createGain();
+    o1.type = "sine";
+    o2.type = "triangle";
+    o1.frequency.setValueAtTime(f, t);
+    o2.frequency.setValueAtTime(f, t);
+    og.gain.setValueAtTime(0.001, t);
+    og.gain.linearRampToValueAtTime(0.55 * vel, t + 0.012);
+    og.gain.setValueAtTime(0.38 * vel, t + duration * 0.55);
+    og.gain.exponentialRampToValueAtTime(0.001, t + duration);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.setValueAtTime(620, t);
+    lp.frequency.exponentialRampToValueAtTime(90, t + duration);
+    o1.connect(og);
+    o2.connect(og);
+    og.connect(lp);
+    lp.connect(master);
+    o1.start(t);
+    o2.start(t);
+    o1.stop(t + duration + 0.02);
+    o2.stop(t + duration + 0.02);
+  }
+
+  function playArp(t, midi, vel) {
+    const f = hz(midi);
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = "square";
+    o.frequency.setValueAtTime(f, t);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.setValueAtTime(4200, t);
+    lp.frequency.exponentialRampToValueAtTime(900, t + 0.08);
+    g.gain.setValueAtTime(0.001, t);
+    g.gain.linearRampToValueAtTime(0.22 * vel, t + 0.003);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+    o.connect(lp);
+    lp.connect(g);
+    g.connect(master);
+    o.start(t);
+    o.stop(t + 0.095);
+    o.detune.value = 8;
+  }
+
+  function playJanetVoice(t, midi, duration, vel) {
+    const f0 = hz(midi);
+    const vib = audioCtx.createOscillator();
+    const vibG = audioCtx.createGain();
+    vib.type = "sine";
+    vib.frequency.value = 5.8;
+    vibG.gain.value = f0 * 0.0055;
+
+    const car = audioCtx.createOscillator();
+    const mod = audioCtx.createOscillator();
+    const modG = audioCtx.createGain();
+    car.type = "sawtooth";
+    mod.type = "sine";
+    mod.frequency.value = f0;
+    modG.gain.setValueAtTime(f0 * 0.55 * vel, t);
+    modG.gain.exponentialRampToValueAtTime(0.5, t + 0.02);
+    modG.gain.exponentialRampToValueAtTime(0.001, t + Math.min(duration * 0.45, 0.16));
+
+    const f1 = audioCtx.createBiquadFilter();
+    const f2 = audioCtx.createBiquadFilter();
+    f1.type = "peaking";
+    f1.frequency.value = 720;
+    f1.Q.value = 2.2;
+    f1.gain.value = 7;
+    f2.type = "peaking";
+    f2.frequency.value = 2200;
+    f2.frequency.setValueAtTime(2100, t);
+    f2.frequency.linearRampToValueAtTime(2600, t + duration * 0.35);
+    f2.Q.value = 2;
+    f2.gain.value = 5;
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.setValueAtTime(5200, t);
+    lp.frequency.exponentialRampToValueAtTime(1400, t + duration);
+    lp.Q.value = 1.1;
+
+    mod.connect(modG);
+    modG.connect(car.frequency);
+    car.frequency.setValueAtTime(f0, t);
+    vib.connect(vibG);
+    vibG.connect(car.frequency);
+
+    const env = audioCtx.createGain();
+    env.gain.setValueAtTime(0.001, t);
+    env.gain.linearRampToValueAtTime(0.2 * vel, t + 0.022);
+    env.gain.setValueAtTime(0.13 * vel, t + duration * 0.4);
+    env.gain.exponentialRampToValueAtTime(0.001, t + duration);
+
+    car.connect(f1);
+    f1.connect(f2);
+    f2.connect(lp);
+    lp.connect(env);
+    env.connect(vocalSynthBus || master);
+
+    vib.start(t);
+    mod.start(t);
+    car.start(t);
+    const end = t + duration + 0.03;
+    car.stop(end);
+    mod.stop(end);
+    vib.stop(end);
+  }
+
+  function schedule() {
+    const now = audioCtx.currentTime;
+    const end = now + 0.2;
+    const a = scheduleHorizon;
+    const b = end;
+    const eps = 1e-6;
+
+    function loopHits(relT, onHit) {
+      let k = Math.ceil((a - startTime - relT) / TOTAL - eps);
+      while (true) {
+        const hit = startTime + k * TOTAL + relT;
+        if (hit > b + eps) break;
+        if (hit > a + eps) onHit(hit);
+        k += 1;
+      }
+    }
+
+    kicks.forEach((o) => loopHits(o.t, (hit) => playKick(hit, o.vel)));
+    snares.forEach((o) => loopHits(o.t, (hit) => playSnare(hit, o.ghost)));
+    hats.forEach((o) => loopHits(o.t, (hit) => playHat(hit, o.open, o.vel)));
+
+    bass.forEach((o) =>
+      loopHits(o.t, (hit) => playBass(hit, o.m, o.d, o.v))
+    );
+    arp.forEach((o) => loopHits(o.t, (hit) => playArp(hit, o.m, o.v)));
+    if (!piperVocalsActive) {
+      vox.forEach((o) =>
+        loopHits(o.t, (hit) => playJanetVoice(hit, o.m, o.d, o.v))
+      );
+    }
+
+    if (piperVocalsActive) {
+      LYRICS.forEach((L) => {
+        const buf = piperBuffers.get(L.step);
+        if (!buf) return;
+        const relT = L.step * STEP;
+        loopHits(relT, (hit) => playPiperClip(hit, buf));
+      });
+    }
+
+    scheduleHorizon = b;
+  }
+
+  const lyricEl = document.getElementById("lyric");
+
+  function tick() {
+    if (!audioCtx) return;
+    schedule();
+    const songT = ((audioCtx.currentTime - startTime) % TOTAL + TOTAL) % TOTAL;
+    const step = songT / STEP;
+    let ix = -1;
+    for (let i = LYRICS.length - 1; i >= 0; i--) {
+      if (step + 0.1 >= LYRICS[i].step) {
+        ix = i;
+        break;
+      }
+    }
+    if (ix !== lineIx) {
+      lineIx = ix;
+      if (ix < 0) {
+        lyricEl.innerHTML = '<span class="ghost">Instrumental — ink rising…</span>';
+      } else {
+        lyricEl.innerHTML = LYRICS[ix].text;
+      }
+    }
+    const pulse = document.getElementById("pulse");
+    const beatDur = (60 / BPM) / 2;
+    pulse.style.animationDuration = beatDur + "s";
+    raf = requestAnimationFrame(tick);
+  }
+
+  document.getElementById("forceSynthOnly").addEventListener("change", () => {
+    piperLoadAttempted = false;
+    piperBuffers.clear();
+    piperVocalsActive = false;
+    updateVocalModeUI();
+  });
+
+  document.getElementById("play").addEventListener("click", async () => {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      master = audioCtx.createGain();
+      master.gain.value = 0.72;
+      master.connect(audioCtx.destination);
+      vocalSynthBus = audioCtx.createGain();
+      vocalSynthBus.connect(master);
+    }
+    if (audioCtx.state === "suspended") await audioCtx.resume();
+    vocalSynthBus.gain.value = 1;
+    await loadPiperStems();
+    if (piperVocalsActive) vocalSynthBus.gain.value = 0;
+    else vocalSynthBus.gain.value = 1;
+    startTime = audioCtx.currentTime + 0.1;
+    scheduleHorizon = startTime - 1e-4;
+    lineIx = -1;
+    cancelAnimationFrame(raf);
+    tick();
+    document.getElementById("play").textContent = "■ PLAYING";
+    lyricEl.innerHTML = '<span class="ghost">Instrumental — ink rising…</span>';
+  });
+
+  document.getElementById("stop").addEventListener("click", () => {
+    cancelAnimationFrame(raf);
+    if (audioCtx) {
+      audioCtx.close().then(() => {
+        audioCtx = null;
+        master = null;
+        vocalSynthBus = null;
+      });
+    }
+    piperLoadAttempted = false;
+    piperBuffers.clear();
+    piperVocalsActive = false;
+    document.getElementById("play").textContent = "▶ PLAY LOOP";
+    lyricEl.textContent = "";
+    lineIx = -1;
+    updateVocalModeUI();
+  });
+
+  lyricEl.innerHTML = '<span class="ghost">Tap play — original loop, not a cover.</span>';
+  updateVocalModeUI();
+})();
+  </script>
+</body>
+</html>

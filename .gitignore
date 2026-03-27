@@ -1,5 +1,6 @@
 # Ignore markdown files in this repo
 *.md
+!Projects/Personas/InkOrchard/README.md
 
 # Dependencies
 node_modules/
