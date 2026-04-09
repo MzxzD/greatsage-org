@@ -184,6 +184,18 @@
         .dark-mode-toggle:hover { border-color: var(--primary); color: var(--primary); }
         .dark-mode-toggle:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .logo-link:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
         .logo {
             font-size: 2rem;
             font-weight: 700;
@@ -195,24 +207,145 @@
         }
         .logo span { color: var(--primary); background: none; }
 
-        .nav-links {
-            display: flex;
-            gap: 2.8rem;
+        .nav-primary {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.35rem 1.15rem;
+            flex: 1;
             font-weight: 500;
         }
 
-        .nav-links a {
+        .nav-primary-link {
             text-decoration: none;
             color: var(--text-light);
-            transition: color 0.2s ease;
-            font-size: 1.1rem;
+            transition: color 0.2s ease, border-color 0.2s ease;
+            font-size: 1rem;
             border-bottom: 2px solid transparent;
             padding-bottom: 4px;
+            white-space: nowrap;
         }
-
-        .nav-links a:hover {
+        .nav-primary-link:hover {
             color: var(--primary);
             border-bottom-color: var(--primary);
+        }
+        .nav-primary-link:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .nav-cta-ecosystem {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.42rem 1rem;
+            border-radius: var(--apex-radius-pill, 999px);
+            border: 2px solid var(--apex-sage-purple, var(--primary));
+            color: var(--apex-sage-purple, var(--primary));
+            background: rgba(124, 58, 237, 0.06);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            white-space: nowrap;
+        }
+        [data-theme="dark"] .nav-cta-ecosystem {
+            background: rgba(10, 132, 255, 0.12);
+            border-color: var(--apex-sage-blue-dark, var(--primary));
+            color: var(--primary-light);
+        }
+        .nav-cta-ecosystem:hover {
+            background: rgba(124, 58, 237, 0.14);
+            box-shadow: 0 4px 14px -4px rgba(124, 58, 237, 0.35);
+        }
+        [data-theme="dark"] .nav-cta-ecosystem:hover {
+            background: rgba(10, 132, 255, 0.2);
+            box-shadow: 0 4px 14px -4px rgba(10, 132, 255, 0.25);
+        }
+        .nav-cta-ecosystem:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+        .nav-dropdown-trigger {
+            font: inherit;
+            font-weight: 500;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            border-bottom: 2px solid transparent;
+            padding: 0 0 4px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-dropdown-trigger::after {
+            content: "";
+            border: solid currentColor;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+            opacity: 0.75;
+        }
+        .nav-dropdown.is-open .nav-dropdown-trigger::after {
+            transform: rotate(-135deg);
+            margin-bottom: -2px;
+        }
+        .nav-dropdown-trigger:hover,
+        .nav-dropdown.is-open .nav-dropdown-trigger {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .nav-dropdown-trigger:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        .nav-dropdown-panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            min-width: 14rem;
+            padding: 0.4rem 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--apex-radius-card, 16px);
+            box-shadow: var(--shadow-sm);
+            z-index: 60;
+        }
+        .nav-dropdown-panel[hidden] {
+            display: none !important;
+        }
+        .nav-dropdown-panel:not([hidden]) {
+            display: block;
+        }
+        .nav-dropdown-link {
+            display: block;
+            padding: 0.65rem 1.15rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.98rem;
+            font-weight: 500;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .nav-dropdown-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        .nav-dropdown-link:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: -2px;
         }
 
         .nav-hamburger {
@@ -252,7 +385,7 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 50vw;
+            width: min(20rem, 88vw);
             min-height: 100vh;
             height: 100vh;
             background: var(--bg-card);
@@ -266,15 +399,47 @@
         .nav-mobile-menu[aria-hidden="false"] .nav-mobile-panel {
             transform: translateX(0);
         }
-        .nav-mobile-panel .nav-links {
+        .nav-mobile-group-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-light);
+            margin: 1.1rem 0 0.4rem;
+            padding-top: 0.65rem;
+            border-top: 1px solid var(--border-card);
+        }
+        .nav-mobile-panel > .nav-mobile-group-label:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .nav-mobile-links {
+            display: flex;
             flex-direction: column;
             gap: 0;
         }
-        .nav-mobile-panel .nav-links a {
+        .nav-mobile-links a {
             display: block;
             padding: 14px 0;
             border-bottom: 1px solid var(--border-card);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-mobile-links a:hover {
+            color: var(--primary);
+        }
+        .nav-cta-ecosystem--mobile {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            text-align: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-card);
+            border-radius: var(--apex-radius-pill, 999px);
+            padding: 12px 1rem !important;
         }
         .nav-mobile-close {
             position: absolute;
@@ -292,9 +457,15 @@
             justify-content: center;
         }
         .nav-mobile-close:hover { background: var(--gray-light); }
+        @media (min-width: 769px) {
+            .nav-primary {
+                display: flex !important;
+            }
+        }
+        /* Mobile: hamburger + drawer always — never tie visibility to scroll (was buggy: links at top, menu only after scroll). */
         @media (max-width: 768px) {
-            .navbar[data-scrolled] .nav-container .nav-links { display: none; }
-            .navbar[data-scrolled] .nav-hamburger { display: flex; }
+            .nav-container > .nav-primary { display: none !important; }
+            .nav-hamburger { display: flex !important; }
             .navbar[data-scrolled] { padding: 8px 0; }
             .navbar[data-scrolled] .nav-container { flex-direction: row; gap: 8px; }
             .navbar[data-scrolled] .logo { font-size: 1.35rem; }
@@ -309,8 +480,13 @@
             .nav-mobile-menu { display: block; }
         }
         @media (max-width: 640px) {
-            .nav-container { flex-direction: column; gap: 12px; }
-            .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+            /* Keep header row usable on small phones: logo + hamburger + utils in one row when possible */
+            .nav-container { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+        }
+
+        /* In-page anchors: sticky nav no longer covers section titles */
+        main section[id] {
+            scroll-margin-top: 6rem;
         }
 
         .hero {
@@ -1158,23 +1334,29 @@
     <a href="#main" class="skip-link">Skip to main content</a>
     <nav class="navbar" role="navigation" aria-label="Main">
         <div class="container nav-container">
-            <span class="logo">The Great <span>Sage</span></span>
+            <a href="#home" class="logo-link" data-i18n-attr="aria-label:nav.home">
+                <span class="logo">The Great <span>Sage</span></span>
+            </a>
             <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
-            <div class="nav-links">
-                <a href="#home" data-i18n="nav.home">Home</a>
-                <a href="#about" data-i18n="nav.about">About</a>
-                <a href="#companions" data-i18n="nav.products">Products</a>
-                <a href="#vision" data-i18n="nav.vision">Vision</a>
-                <a href="#support" data-i18n="nav.support">Support</a>
-                <a href="#faq" data-i18n="nav.qa">Q&amp;A</a>
-                <a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a>
-                <a href="axioms.html" data-i18n="nav.axioms">Axioms</a>
-                <a href="Projects/Personas/InkOrchard/" data-i18n="nav.inkOrchard">Ink Orchard</a>
-                <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
-                <a href="https://heyjanet.org/" rel="noopener noreferrer" data-i18n="nav.ecosystem">Janet ecosystem</a>
-                <a href="#contact" data-i18n="nav.contact">Contact</a>
+            <div class="nav-primary" id="nav-primary-desktop">
+                <a href="#about" class="nav-primary-link" data-i18n="nav.about">About</a>
+                <a href="#companions" class="nav-primary-link" data-i18n="nav.products">Products</a>
+                <a href="#vision" class="nav-primary-link" data-i18n="nav.vision">Vision</a>
+                <a href="#support" class="nav-primary-link" data-i18n="nav.support">Support</a>
+                <a href="glasses.html" class="nav-primary-link" data-i18n="nav.glasses">Glasses</a>
+                <div class="nav-dropdown" id="nav-learn-dropdown">
+                    <button type="button" class="nav-dropdown-trigger" id="nav-learn-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="nav-learn-panel" data-i18n="nav.learn">Learn</button>
+                    <div class="nav-dropdown-panel" id="nav-learn-panel" role="region" aria-labelledby="nav-learn-trigger" hidden>
+                        <a href="#faq" class="nav-dropdown-link" data-i18n="nav.qa">Q&amp;A</a>
+                        <a href="understand.html" class="nav-dropdown-link" data-i18n="nav.understand">I still don&apos;t understand</a>
+                        <a href="axioms.html" class="nav-dropdown-link" data-i18n="nav.axioms">Axioms</a>
+                        <a href="Projects/Personas/InkOrchard/" class="nav-dropdown-link" data-i18n="nav.inkOrchard">Ink Orchard</a>
+                    </div>
+                </div>
+                <a href="https://heyjanet.org/" class="nav-cta-ecosystem" rel="noopener noreferrer" target="_blank" data-i18n="nav.ecosystem">Janet ecosystem</a>
+                <a href="#contact" class="nav-primary-link" data-i18n="nav.contact">Contact</a>
             </div>
             <div class="nav-utils">
                 <div class="lang-dropdown" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-label="Language">
@@ -1201,19 +1383,23 @@
                 <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Close menu">
                     <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
-                <div class="nav-links">
+                <p class="nav-mobile-group-label" data-i18n="nav.mobileGroupMain" aria-hidden="true">This site</p>
+                <div class="nav-mobile-links">
                     <a href="#home" data-i18n="nav.home">Home</a>
                     <a href="#about" data-i18n="nav.about">About</a>
                     <a href="#companions" data-i18n="nav.products">Products</a>
                     <a href="#vision" data-i18n="nav.vision">Vision</a>
                     <a href="#support" data-i18n="nav.support">Support</a>
+                    <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
+                    <a href="https://heyjanet.org/" class="nav-cta-ecosystem nav-cta-ecosystem--mobile" rel="noopener noreferrer" target="_blank" data-i18n="nav.ecosystem">Janet ecosystem</a>
+                    <a href="#contact" data-i18n="nav.contact">Contact</a>
+                </div>
+                <p class="nav-mobile-group-label" data-i18n="nav.mobileGroupLearn" aria-hidden="true">Learn more</p>
+                <div class="nav-mobile-links">
                     <a href="#faq" data-i18n="nav.qa">Q&amp;A</a>
                     <a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a>
                     <a href="axioms.html" data-i18n="nav.axioms">Axioms</a>
                     <a href="Projects/Personas/InkOrchard/" data-i18n="nav.inkOrchard">Ink Orchard</a>
-                    <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
-                    <a href="https://heyjanet.org/" rel="noopener noreferrer" data-i18n="nav.ecosystem">Janet ecosystem</a>
-                    <a href="#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
         </div>
@@ -1756,11 +1942,53 @@
             menu.addEventListener('click', function(e) {
                 if (e.target === menu) closeMenu();
             });
-            menu.querySelectorAll('.nav-links a').forEach(function(a) {
+            menu.querySelectorAll('.nav-mobile-links a').forEach(function(a) {
                 a.addEventListener('click', closeMenu);
             });
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && menu.getAttribute('aria-hidden') === 'false') closeMenu();
+            });
+        })();
+
+        (function() {
+            var dd = document.getElementById('nav-learn-dropdown');
+            var trigger = document.getElementById('nav-learn-trigger');
+            var panel = document.getElementById('nav-learn-panel');
+            if (!dd || !trigger || !panel) return;
+            function closeLearn() {
+                dd.classList.remove('is-open');
+                trigger.setAttribute('aria-expanded', 'false');
+                panel.setAttribute('hidden', '');
+            }
+            function openLearn() {
+                dd.classList.add('is-open');
+                trigger.setAttribute('aria-expanded', 'true');
+                panel.removeAttribute('hidden');
+            }
+            function toggleLearn() {
+                if (panel.hasAttribute('hidden')) openLearn();
+                else closeLearn();
+            }
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleLearn();
+            });
+            document.addEventListener('click', function(e) {
+                if (!dd.classList.contains('is-open')) return;
+                if (dd.contains(e.target)) return;
+                closeLearn();
+            });
+            panel.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', closeLearn);
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key !== 'Escape') return;
+                var mob = document.getElementById('nav-mobile-menu');
+                if (mob && mob.getAttribute('aria-hidden') === 'false') return;
+                if (!panel.hasAttribute('hidden')) closeLearn();
+            });
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) closeLearn();
             });
         })();
 
