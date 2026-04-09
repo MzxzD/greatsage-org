@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Janet Halo loader - wavy multi-layer ring (JACK-style).
+  Six elliptical copies, independent spin; screen-blended overlaps read wavy.
+  Ring band width is 2/3 of original (outer 48, inner ~42.67 vs 40).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" aria-hidden="true" style="isolation:isolate" role="img">
+  <title>Janet Halo loader</title>
+  <style>
+    .janet-halo-palette-dark { display: block; }
+    .janet-halo-palette-light { display: none; }
+    @media (prefers-color-scheme: light) {
+      .janet-halo-palette-dark { display: none; }
+      .janet-halo-palette-light { display: block; }
+    }
+    .janet-wave-layer { mix-blend-mode: screen; }
+  </style>
+  <defs>
+    <filter id="janet-halo-blur-a" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.7" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="janet-halo-blur-b" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="janet-halo-blur-c" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <symbol id="janet-ring-dark" viewBox="0 0 100 100">
+      <path fill="#0A84FF" d="M 50.0000 2.0000 A 48 48 0 0 1 91.5692 26.0000 L 86.9504 28.6667 A 42.6667 42.6667 0 0 0 50.0000 7.3333 Z"/>
+      <path fill="#3da3ff" d="M 91.5692 26.0000 A 48 48 0 0 1 91.5692 74.0000 L 86.9504 71.3333 A 42.6667 42.6667 0 0 0 86.9504 28.6667 Z"/>
+      <path fill="#8D9FFF" d="M 91.5692 74.0000 A 48 48 0 0 1 50.0000 98.0000 L 50.0000 92.6667 A 42.6667 42.6667 0 0 0 86.9504 71.3333 Z"/>
+      <path fill="#5aa8ff" d="M 50.0000 98.0000 A 48 48 0 0 1 8.4308 74.0000 L 13.0496 71.3333 A 42.6667 42.6667 0 0 0 50.0000 92.6667 Z"/>
+      <path fill="#C686FF" d="M 8.4308 74.0000 A 48 48 0 0 1 8.4308 26.0000 L 13.0496 28.6667 A 42.6667 42.6667 0 0 0 13.0496 71.3333 Z"/>
+      <path fill="#BC82F3" d="M 8.4308 26.0000 A 48 48 0 0 1 50.0000 2.0000 L 50.0000 7.3333 A 42.6667 42.6667 0 0 0 13.0496 28.6667 Z"/>
+    </symbol>
+    <symbol id="janet-ring-light" viewBox="0 0 100 100">
+      <path fill="#7C3AED" d="M 50.0000 2.0000 A 48 48 0 0 1 91.5692 26.0000 L 86.9504 28.6667 A 42.6667 42.6667 0 0 0 50.0000 7.3333 Z"/>
+      <path fill="#9b5cff" d="M 91.5692 26.0000 A 48 48 0 0 1 91.5692 74.0000 L 86.9504 71.3333 A 42.6667 42.6667 0 0 0 86.9504 28.6667 Z"/>
+      <path fill="#BC82F3" d="M 91.5692 74.0000 A 48 48 0 0 1 50.0000 98.0000 L 50.0000 92.6667 A 42.6667 42.6667 0 0 0 86.9504 71.3333 Z"/>
+      <path fill="#F5B9EA" d="M 50.0000 98.0000 A 48 48 0 0 1 8.4308 74.0000 L 13.0496 71.3333 A 42.6667 42.6667 0 0 0 50.0000 92.6667 Z"/>
+      <path fill="#8D9FFF" d="M 8.4308 74.0000 A 48 48 0 0 1 8.4308 26.0000 L 13.0496 28.6667 A 42.6667 42.6667 0 0 0 13.0496 71.3333 Z"/>
+      <path fill="#C686FF" d="M 8.4308 26.0000 A 48 48 0 0 1 50.0000 2.0000 L 50.0000 7.3333 A 42.6667 42.6667 0 0 0 13.0496 28.6667 Z"/>
+    </symbol>
+  </defs>
+  <g class="janet-halo-palette-dark">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="7.2s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-a)" opacity="0.44">
+        <g transform="translate(50 50) scale(1.10 0.84) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="10.5s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-b)" opacity="0.36">
+        <g transform="translate(50 50) rotate(32) scale(0.86 1.12) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="5.4s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-c)" opacity="0.3">
+        <g transform="translate(50 50) rotate(-18) scale(1.05 0.91) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="8.6s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-a)" opacity="0.32">
+        <g transform="translate(50 50) scale(1.14 0.82) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="11.2s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-b)" opacity="0.28">
+        <g transform="translate(50 50) rotate(50) scale(0.88 1.09) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="4.7s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-c)" opacity="0.26">
+        <g transform="translate(50 50) rotate(-42) scale(1.07 0.89) translate(-50 -50)">
+          <use href="#janet-ring-dark" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g class="janet-halo-palette-light">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="7.2s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-a)" opacity="0.42">
+        <g transform="translate(50 50) scale(1.10 0.84) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="10.5s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-b)" opacity="0.34">
+        <g transform="translate(50 50) rotate(32) scale(0.86 1.12) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="5.4s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-c)" opacity="0.28">
+        <g transform="translate(50 50) rotate(-18) scale(1.05 0.91) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="8.6s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-a)" opacity="0.3">
+        <g transform="translate(50 50) scale(1.14 0.82) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="11.2s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-b)" opacity="0.26">
+        <g transform="translate(50 50) rotate(50) scale(0.88 1.09) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="4.7s" repeatCount="indefinite"/>
+      <g class="janet-wave-layer" filter="url(#janet-halo-blur-c)" opacity="0.24">
+        <g transform="translate(50 50) rotate(-42) scale(1.07 0.89) translate(-50 -50)">
+          <use href="#janet-ring-light" width="100" height="100"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

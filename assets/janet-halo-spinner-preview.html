@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Janet Halo spinner — SVG preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: system-ui, sans-serif;
+      background: #1a1a24;
+      color: #ccc;
+    }
+    h1 { font-size: 1rem; font-weight: 600; margin: 0; color: #eee; }
+    .hint { font-size: 0.85rem; opacity: 0.75; max-width: 36rem; text-align: center; line-height: 1.5; }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    figure { margin: 0; text-align: center; }
+    figcaption { font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.8; }
+    .panel {
+      padding: 2rem;
+      border-radius: 16px;
+      min-width: 11rem;
+    }
+    .panel.dark { background: #0f1726; border: 1px solid rgba(255,255,255,0.06); }
+    .panel.check {
+      background: repeating-conic-gradient(#404050 0% 25%, #2a2a36 0% 50%) 50% / 16px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .panel.light { background: #faf9ff; color: #333; }
+    .panel.light figcaption { color: #555; }
+    .spin {
+      width: 120px;
+      height: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+    a { color: #8D9FFF; }
+  </style>
+</head>
+<body>
+  <h1>Janet Halo spinner (SVG — ring only, transparent center)</h1>
+  <p class="hint">
+    Uses <code>assets/janet-halo-spinner.svg</code>. Palette follows <code>prefers-color-scheme</code>
+    (dark vs light). Open OS appearance to compare. For a looping raster file, see
+    <a href="../janet-halo-loading.gif"><code>janet-halo-loading.gif</code></a> in the repo root (full circular card capture).
+  </p>
+  <div class="row">
+    <figure class="panel dark">
+      <img class="spin" src="janet-halo-spinner.svg" width="120" height="120" alt="Halo on dark">
+      <figcaption>On dark (#0f1726)</figcaption>
+    </figure>
+    <figure class="panel check">
+      <img class="spin" src="janet-halo-spinner.svg" width="120" height="120" alt="Halo on checkerboard">
+      <figcaption>Checkerboard (shows transparency)</figcaption>
+    </figure>
+    <figure class="panel light">
+      <img class="spin" src="janet-halo-spinner.svg" width="120" height="120" alt="Halo on light">
+      <figcaption>Light panel (palette may switch)</figcaption>
+    </figure>
+  </div>
+  <p><a href="janet-halo-spinner.svg" download>Download SVG</a></p>
+</body>
+</html>

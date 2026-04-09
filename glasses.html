@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="i18n/lang-dropdown.css">
     <link rel="stylesheet" href="cookie-consent.css">
+    <link rel="stylesheet" href="css/tokens.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -210,7 +211,90 @@
             box-shadow: 0 20px 25px -8px var(--primary);
         }
         .hero-visual { display: flex; justify-content: center; align-items: center; }
-        .hero-visual .hero-image-wrap {
+        .hero-visual-stack { flex-direction: column; gap: 1.75rem; align-items: center; }
+        .glasses-janet-stage {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+        /* Same portrait frame as janet-hero-loop.mp4 (1604×2110) — still and video align */
+        .glasses-janet-stage .hero-image-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1604 / 2110;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid rgba(255,255,255,0.8);
+            animation: gentle-float 9s infinite alternate ease-in-out;
+            cursor: pointer;
+            transition: box-shadow 0.2s ease;
+        }
+        .glasses-janet-stage .hero-image-wrap:hover { box-shadow: var(--shadow-hover); }
+        .glasses-janet-stage .hero-image-wrap:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
+        }
+        .glasses-janet-stage .hero-image-wrap img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
+            display: block;
+        }
+        .glasses-janet-video {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.35s ease;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: var(--shadow-sm);
+        }
+        .glasses-janet-stage.is-playing .glasses-janet-video {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .glasses-janet-stage.is-playing .hero-image-wrap {
+            opacity: 0;
+            pointer-events: none;
+            animation: none;
+        }
+        .glasses-janet-hint {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        .hero-you-play-trigger {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 4px;
+        }
+        .hero-you-play-trigger:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .glasses-janet-stage .hero-image-wrap { animation: none; }
+            .glasses-janet-hint { display: none; }
+        }
+        .hero-visual .carousel-wrap {
             width: 100%;
             max-width: 380px;
             border-radius: var(--border-radius);
@@ -219,8 +303,8 @@
             border: 2px solid rgba(255,255,255,0.8);
             animation: gentle-float 9s infinite alternate ease-in-out;
         }
-        .hero-visual .hero-image-wrap img { width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover; }
-        @media (prefers-reduced-motion: reduce) { .hero-visual .hero-image-wrap { animation: none; } }
+        .hero-visual .carousel-wrap img { width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover; }
+        @media (prefers-reduced-motion: reduce) { .hero-visual .carousel-wrap { animation: none; } }
         @keyframes gentle-float { 0% { transform: translateY(0); } 100% { transform: translateY(-18px); } }
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
@@ -496,6 +580,7 @@
                 <a href="index.html#faq">Q&amp;A</a>
                 <a href="understand.html">I still don&apos;t understand</a>
                 <a href="glasses.html" class="active">Glasses</a>
+                <a href="https://heyjanet.org/" rel="noopener noreferrer">Janet ecosystem</a>
                 <a href="index.html#contact">Contact</a>
             </div>
             <button type="button" class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -508,11 +593,20 @@
         <section class="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <h1>Fund Janet Glasses: <span class="highlight">Privacy-first AI for your eyes</span></h1>
+                    <h1>Fund Janet Glasses: <span class="highlight">Privacy-first AI for <span class="hero-you-play-trigger" role="button" tabindex="0" aria-label="Play a looping Janet video clip">your</span> eyes</span></h1>
                     <p>Live captions and translation—right in front of your eyes. Offline. No cloud. No subscription.</p>
                     <a href="https://www.gofundme.com/f/janet-glasses-privacyfirst-ai-glasses-for-accessibility" class="btn">Back Janet Glasses on GoFundMe →</a>
                 </div>
-                <div class="hero-visual">
+                <div class="hero-visual hero-visual-stack">
+                    <div class="glasses-janet-stage" data-hero-janet-stage>
+                        <div class="hero-image-wrap hero-janet-image-wrap" tabindex="0" role="button" aria-label="Play looping Janet video clip">
+                            <img src="assets/hero-mascot.png?v=20260409" alt="Janet mascot" width="1024" height="571" />
+                        </div>
+                        <video class="glasses-janet-video" muted loop playsinline preload="metadata" poster="assets/hero-mascot.png?v=20260409" aria-label="Stop video and return to still image">
+                            <source src="assets/janet-hero-loop.mp4" type="video/mp4">
+                        </video>
+                        <p class="glasses-janet-hint" aria-live="polite">Tap Janet or <strong>your</strong> to play · tap the video to stop</p>
+                    </div>
                     <div class="hero-image-wrap carousel-wrap" role="region" aria-roledescription="carousel" aria-label="Janet Glasses campaign visuals">
                         <div class="carousel-track" id="carousel-track">
                             <div class="carousel-slide"><img src="assets/carousel-1.png" alt="JANET GLASSES — Privacy-first AI glasses for accessibility. Offline, no cloud, no subscription."></div>
@@ -574,9 +668,9 @@
                     <h2 id="wcjd-heading">What can Janet do?</h2>
                     <p>Explore the self-updating portfolio of the Janet ecosystem—apps, integrations, and how everything fits together. The site rebuilds from public GitHub data on a schedule, so the list stays current.</p>
                     <div class="wcjd-links">
-                        <a href="https://heyjanet.org">Browse the live portfolio</a>
+                        <a href="https://heyjanet.org/" rel="noopener noreferrer">Browse the live portfolio (heyjanet.org)</a>
                         <span aria-hidden="true" style="color: var(--gray-mid);">·</span>
-                        <a href="https://what-can-janet-do.pages.dev">Cloudflare mirror</a>
+                        <a href="https://what-can-janet-do.pages.dev" rel="noopener noreferrer">Cloudflare Pages mirror</a>
                     </div>
                     <span class="wcjd-repo-hint">The highlighted icon opens the <strong>what-can-janet-do</strong> repository.</span>
                 </div>
@@ -672,6 +766,64 @@
         <a href="#main" class="goto-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
     </nav>
 
+    <script>
+        (function() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var stage = document.querySelector('[data-hero-janet-stage]');
+            var video = stage && stage.querySelector('.glasses-janet-video');
+            var imageWrap = stage && stage.querySelector('.hero-janet-image-wrap');
+            var youTrigger = document.querySelector('.hero-you-play-trigger');
+            if (!stage || !video || !imageWrap) return;
+
+            function showImage() {
+                stage.classList.remove('is-playing');
+                try {
+                    video.pause();
+                    video.currentTime = 0;
+                } catch (e) {}
+            }
+
+            function showVideo() {
+                stage.classList.add('is-playing');
+                var p = video.play();
+                if (p && typeof p.catch === 'function') p.catch(function() {});
+            }
+
+            imageWrap.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (stage.classList.contains('is-playing')) return;
+                showVideo();
+            });
+            imageWrap.addEventListener('keydown', function(e) {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                if (!stage.classList.contains('is-playing')) showVideo();
+            });
+
+            video.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                showImage();
+            });
+
+            if (youTrigger) {
+                youTrigger.addEventListener('click', function() {
+                    if (stage.classList.contains('is-playing')) showImage();
+                    else showVideo();
+                });
+                youTrigger.addEventListener('keydown', function(e) {
+                    if (e.key !== 'Enter' && e.key !== ' ') return;
+                    e.preventDefault();
+                    if (stage.classList.contains('is-playing')) showImage();
+                    else showVideo();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && stage.classList.contains('is-playing')) showImage();
+            });
+        })();
+    </script>
     <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
     <script defer src="scripts/gfm-embed-a11y.js"></script>
     <script defer src="cookie-consent.js"></script>

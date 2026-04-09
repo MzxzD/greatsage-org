@@ -8,22 +8,33 @@
     <link rel="canonical" href="https://greatsage.org/">
     <meta name="robots" content="index, follow">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="css/tokens.css">
     <meta property="og:title" content="The Great Sage · Offline-first AI for everyone">
     <meta property="og:description" content="Janet: your AI companion, offline and yours. Privacy-first. Voice-first. Open source.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://greatsage.org/">
-    <meta property="og:image" content="https://greatsage.org/assets/hero-mascot.png">
+    <meta property="og:image" content="https://greatsage.org/assets/og-greatsage-hero-1200x630.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="The Great Sage — Janet, offline-first AI; N.E.A.T. Just A Neat Evolving Thinker">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Great Sage · Offline-first AI for everyone">
     <meta name="twitter:description" content="Janet: your AI companion, offline and yours. Privacy-first. Voice-first. Open source.">
+    <meta name="twitter:image" content="https://greatsage.org/assets/og-greatsage-hero-1200x630.png">
     <meta name="theme-color" content="#7C3AED" id="meta-theme">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32-dark.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16-dark.png" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" media="(prefers-color-scheme: light)">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon-dark.png" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="i18n/lang-dropdown.css">
     <link rel="stylesheet" href="cookie-consent.css">
     <link rel="stylesheet" href="css/janet-chat.css">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://greatsage.org/#organization","name":"The Great Sage","url":"https://greatsage.org","logo":"https://greatsage.org/assets/hero-mascot.png","description":"The Great Sage builds Janet — privacy-first, voice-first AI. Offline-first. Constitutional AI. Open source.","sameAs":["https://github.com/MzxzD","https://www.instagram.com/ohayo.janet/","https://www.linkedin.com/in/mateodoslic/"]},{"@type":"WebSite","@id":"https://greatsage.org/#website","name":"The Great Sage","url":"https://greatsage.org","publisher":{"@id":"https://greatsage.org/#organization"}}]}
+    {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://greatsage.org/#organization","name":"The Great Sage","url":"https://greatsage.org","logo":"https://greatsage.org/assets/janet-icon.png","description":"The Great Sage builds Janet — privacy-first, voice-first AI. Offline-first. Constitutional AI. Open source.","sameAs":["https://github.com/MzxzD","https://www.instagram.com/ohayo.janet/","https://www.linkedin.com/in/mateodoslic/"]},{"@type":"WebSite","@id":"https://greatsage.org/#website","name":"The Great Sage","url":"https://greatsage.org","publisher":{"@id":"https://greatsage.org/#organization"}}]}
     </script>
     <style>
         * {
@@ -357,30 +368,138 @@
             box-shadow: 0 20px 25px -8px var(--primary);
         }
 
+        .hero-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+        }
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            border: 2px solid var(--primary);
+            box-shadow: none;
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
         .hero-visual {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .hero-visual .hero-image-wrap {
+        .hero-janet-stage {
+            position: relative;
             width: 100%;
             max-width: 380px;
+            margin: 0 auto;
+        }
+
+        /* Frame matches janet-hero-loop.mp4 (1604×2110) so still + video share the same crop/scale */
+        .hero-janet-stage .hero-image-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1604 / 2110;
             border-radius: 50%;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             border: 2px solid rgba(255,255,255,0.8);
             animation: gentle-float 9s infinite alternate ease-in-out;
+            cursor: pointer;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
-        .hero-visual .hero-image-wrap img {
+        .hero-janet-stage .hero-image-wrap:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-janet-stage .hero-image-wrap:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
+        }
+
+        .hero-janet-stage .hero-image-wrap img {
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
             display: block;
         }
 
+        .hero-janet-video {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.35s ease;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .hero-janet-stage.is-playing .hero-janet-video {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-janet-stage.is-playing .hero-image-wrap {
+            opacity: 0;
+            pointer-events: none;
+            animation: none;
+        }
+
+        .hero-janet-hint {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-top: 12px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        .hero-you-play-trigger {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 4px;
+        }
+
+        .hero-you-play-trigger:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            .hero-visual .hero-image-wrap { animation: none; }
+            .hero-janet-stage .hero-image-wrap { animation: none; }
+            .hero-janet-video { transition: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-janet-hint { display: none; }
         }
 
         @keyframes gentle-float {
@@ -1054,6 +1173,7 @@
                 <a href="axioms.html" data-i18n="nav.axioms">Axioms</a>
                 <a href="Projects/Personas/InkOrchard/" data-i18n="nav.inkOrchard">Ink Orchard</a>
                 <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
+                <a href="https://heyjanet.org/" rel="noopener noreferrer" data-i18n="nav.ecosystem">Janet ecosystem</a>
                 <a href="#contact" data-i18n="nav.contact">Contact</a>
             </div>
             <div class="nav-utils">
@@ -1092,6 +1212,7 @@
                     <a href="axioms.html" data-i18n="nav.axioms">Axioms</a>
                     <a href="Projects/Personas/InkOrchard/" data-i18n="nav.inkOrchard">Ink Orchard</a>
                     <a href="glasses.html" data-i18n="nav.glasses">Glasses</a>
+                    <a href="https://heyjanet.org/" rel="noopener noreferrer" data-i18n="nav.ecosystem">Janet ecosystem</a>
                     <a href="#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
@@ -1102,13 +1223,22 @@
         <section id="home" class="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <h1><span data-i18n="hero.title"></span><span class="highlight" data-i18n="hero.titleHighlight"></span></h1>
+                    <h1><span data-i18n="hero.title"></span><span class="highlight hero-you-play-trigger" tabindex="0" role="button" data-i18n="hero.titleHighlight" data-i18n-attr="aria-label:hero.janetYouAria"></span></h1>
                     <p data-i18n="hero.subtitle">The Great Sage builds Janet — privacy-first, voice-first AI on your devices. No cloud. No subscription.</p>
-                    <a href="#companions" class="btn" data-i18n="hero.cta">Meet Janet everywhere →</a>
+                    <div class="hero-cta-row">
+                        <a href="#companions" class="btn" data-i18n="hero.cta">Meet Janet everywhere →</a>
+                        <a href="https://heyjanet.org/" class="btn-secondary" rel="noopener noreferrer" data-i18n="hero.ctaEcosystem">Janet ecosystem (repos) →</a>
+                    </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="hero-image-wrap">
-                        <img src="assets/hero-mascot.png" alt="" width="400" height="400" data-i18n-attr="alt:hero.imgAlt" />
+                    <div class="hero-janet-stage" data-hero-janet-stage>
+                        <div class="hero-image-wrap hero-janet-image-wrap" tabindex="0" role="button" data-i18n-attr="aria-label:hero.janetMascotTapAria">
+                            <img src="assets/hero-mascot.png?v=20260409" alt="" width="1024" height="571" data-i18n-attr="alt:hero.imgAlt" />
+                        </div>
+                        <video class="hero-janet-video" muted loop playsinline preload="metadata" poster="assets/hero-mascot.png?v=20260409" data-i18n-attr="aria-label:hero.janetVideoStopAria">
+                            <source src="assets/janet-hero-loop.mp4" type="video/mp4">
+                        </video>
+                        <p class="hero-janet-hint" data-i18n="hero.janetTapHint" aria-live="polite"></p>
                     </div>
                 </div>
             </div>
@@ -1171,6 +1301,11 @@
                         <div class="card-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
                         <h3 data-i18n="companions.awakening">Janet Awakening</h3>
                         <p data-i18n="companions.awakeningDesc">Janet in Cursor IDE. Code with your companion, 100% offline via Continue.dev and janet-seed.</p>
+                    </div>
+                    <div class="companion-card">
+                        <div class="card-icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+                        <h3 data-i18n="companions.janetide">Janet IDE</h3>
+                        <p data-i18n-html="companions.janetideDesc">Local agent dev stack — janet-seed, Cursor/Continue, MCP. <a href="https://github.com/MzxzD/Janet-IDE" target="_blank" rel="noopener noreferrer">GitHub</a></p>
                     </div>
                     <div class="companion-card">
                         <div class="card-icon"><i class="fas fa-desktop" aria-hidden="true"></i></div>
@@ -1251,7 +1386,7 @@
                     <details class="faq-item">
                         <summary data-i18n="faq.devices">What devices can I use Janet on?</summary>
                         <div class="faq-answer">
-                            <p data-i18n-html="faq.devicesA">Janet runs on your computer (janet-seed), then you connect from your phone (CallJanet for iOS), code editor (Janet Awakening in Cursor), smart home (Home Assistant), or future glasses. There are or will be native apps for iOS, watchOS, macOS, Windows, and Android. The vision includes Meta Quest. Right now you can see what's available at <a href="https://what-can-janet-do.pages.dev">what-can-janet-do.pages.dev</a>. Production-ready deployment is targeted for Q3 2026 if funding is successful.</p>
+                            <p data-i18n-html="faq.devicesA">Janet runs on your computer (janet-seed), then you connect from your phone (CallJanet for iOS), code editor (Janet Awakening in Cursor), smart home (Home Assistant), or future glasses. There are or will be native apps for iOS, watchOS, macOS, Windows, and Android. The vision includes Meta Quest. Browse the live portfolio at <a href="https://heyjanet.org/">heyjanet.org</a>; a <a href="https://what-can-janet-do.pages.dev">Cloudflare Pages mirror</a> is also available. Production-ready deployment is targeted for Q3 2026 if funding is successful.</p>
                         </div>
                     </details>
                     <details class="faq-item">
@@ -1476,15 +1611,15 @@
                         <li><a href="understand.html" data-i18n="nav.understand">I still don&apos;t understand</a></li>
                         <li><a href="axioms.html" data-i18n="nav.axioms">Axioms</a></li>
                         <li><a href="glasses.html" data-i18n="nav.glasses">Glasses</a></li>
-                        <li><a href="#" data-i18n="footer.careers">Careers</a></li>
+                        <li><a href="mailto:hello@greatsage.org?subject=Careers%20inquiry%20%E2%80%94%20The%20Great%20Sage" data-i18n="footer.careers">Careers</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 data-i18n="footer.ethics">Ethics</h4>
                     <ul class="footer-links">
-                        <li><a href="#" data-i18n="footer.aiPrinciples">AI principles</a></li>
-                        <li><a href="#" data-i18n="footer.privacyPolicy">Privacy policy</a></li>
-                        <li><a href="#" data-i18n="footer.safetyStandards">Safety standards</a></li>
+                        <li><a href="axioms.html" data-i18n="footer.aiPrinciples">AI principles</a></li>
+                        <li><a href="privacy.html" data-i18n="footer.privacyPolicy">Privacy policy</a></li>
+                        <li><a href="#faq" data-i18n="footer.safetyStandards">Safety standards</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1645,6 +1780,67 @@
                 }).catch(function() { alert('Download failed. Try again.'); });
             }
             if (downloadPngBtn) downloadPngBtn.addEventListener('click', downloadPng);
+        })();
+
+        (function() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var stage = document.querySelector('[data-hero-janet-stage]');
+            var video = stage && stage.querySelector('.hero-janet-video');
+            var imageWrap = stage && stage.querySelector('.hero-janet-image-wrap');
+            var youTrigger = document.querySelector('.hero-you-play-trigger');
+            if (!stage || !video || !imageWrap) return;
+
+            function showImage() {
+                stage.classList.remove('is-playing');
+                try {
+                    video.pause();
+                    video.currentTime = 0;
+                } catch (e) {}
+            }
+
+            function showVideo() {
+                stage.classList.add('is-playing');
+                var p = video.play();
+                if (p && typeof p.catch === 'function') p.catch(function() {});
+            }
+
+            function onVideoClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                showImage();
+            }
+
+            imageWrap.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (stage.classList.contains('is-playing')) return;
+                showVideo();
+            });
+            imageWrap.addEventListener('keydown', function(e) {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                if (!stage.classList.contains('is-playing')) showVideo();
+            });
+
+            video.addEventListener('click', onVideoClick);
+
+            if (youTrigger) {
+                youTrigger.addEventListener('click', function() {
+                    if (stage.classList.contains('is-playing')) showImage();
+                    else showVideo();
+                });
+                youTrigger.addEventListener('keydown', function(e) {
+                    if (e.key !== 'Enter' && e.key !== ' ') return;
+                    e.preventDefault();
+                    if (stage.classList.contains('is-playing')) showImage();
+                    else showVideo();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && stage.classList.contains('is-playing')) {
+                    showImage();
+                }
+            });
         })();
     </script>
 </body>

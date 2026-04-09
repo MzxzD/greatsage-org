@@ -1,0 +1,27 @@
+/**
+ * Dual-apex bridge tokens — Great Sage (greatsage.org) + Janet portfolio (heyjanet.org)
+ * Keep in sync with: Janet-Projects/what-can-janet-do/css/tokens.css
+ */
+:root {
+  /* Great Sage — professional pole */
+  --apex-sage-purple: #7c3aed;
+  --apex-sage-purple-dark: #5b21b6;
+  --apex-sage-purple-light: #9b5cff;
+  --apex-sage-blue-dark: #0a84ff;
+
+  /* Janet — playful pole */
+  --apex-janet-cyan: #5eead4;
+  --apex-janet-blue: #38bdf8;
+  --apex-janet-purple: #a78bfa;
+  --apex-sage-gold: #d4a857;
+
+  /* Shared rhythm */
+  --apex-space-xs: 0.5rem;
+  --apex-space-sm: 0.75rem;
+  --apex-space-md: 1rem;
+  --apex-space-lg: 1.5rem;
+  --apex-space-xl: 2rem;
+  --apex-radius-chrome: 28px;
+  --apex-radius-card: 16px;
+  --apex-radius-pill: 999px;
+}

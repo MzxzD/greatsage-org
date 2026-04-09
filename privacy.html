@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="privacy.pageTitle">Privacy policy · The Great Sage</title>
+    <meta name="description" content="How greatsage.org handles information — cookies, third-party embeds, and contact." data-i18n-attr="content:privacy.metaDesc">
+    <link rel="canonical" href="https://greatsage.org/privacy.html">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="i18n/lang-dropdown.css">
+    <link rel="stylesheet" href="cookie-consent.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.05ms !important;
+            }
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+        :root {
+            --primary: #7C3AED;
+            --primary-light: #9b5cff;
+            --text: #1e1b2e;
+            --text-light: #4c4a6e;
+            --bg: #faf9ff;
+            --bg-card: #ffffff;
+            --border-card: #f0eaff;
+            --accent: #ede9fe;
+            --shadow-sm: 0 10px 25px -5px rgba(124,58,237,0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
+            --border-radius: 28px;
+        }
+        [data-theme="dark"] {
+            --primary: #0A84FF;
+            --primary-light: #3da3ff;
+            --text: #f1f5f9;
+            --text-light: #cbd5e1;
+            --bg: #0f1726;
+            --bg-card: #1a2744;
+            --border-card: #2a3a5c;
+            --accent: #1e2d4a;
+        }
+        [data-theme="dark"] h1 { color: #f1f5f9; }
+        [data-theme="dark"] .subhead { color: #e2e8f0; }
+        [data-theme="dark"] .privacy-card { border-color: var(--border-card); background: var(--bg-card); }
+        [data-theme="dark"] .privacy-card h2 { color: #60a5fa; }
+        [data-theme="dark"] .privacy-card p { color: #cbd5e1; }
+        [data-theme="dark"] .footer-legal { color: #94a3b8; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary: #0A84FF;
+                --primary-light: #3da3ff;
+                --text: #f1f5f9; --text-light: #cbd5e1; --bg: #0f1726; --bg-card: #1a2744;
+                --border-card: #2a3a5c; --accent: #1e2d4a;
+            }
+        }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+        .top-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-card);
+            padding: 16px 0;
+        }
+        .top-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .back-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .dark-toggle {
+            border: 1px solid var(--border-card);
+            background: var(--bg-card);
+            color: var(--text);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        main { padding: 40px 0 48px; }
+        h1 { font-size: 2rem; margin-bottom: 8px; color: var(--text); }
+        .subhead { color: var(--text-light); font-size: 0.95rem; margin-bottom: 28px; }
+        .privacy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--border-radius);
+            padding: 22px 24px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        .privacy-card h2 { font-size: 1.15rem; margin-bottom: 12px; color: var(--primary); }
+        .privacy-card p { color: var(--text-light); font-size: 0.98rem; }
+        .privacy-card a { color: var(--primary); font-weight: 500; }
+        .privacy-card a:hover { text-decoration: underline; }
+        .privacy-footer {
+            text-align: center;
+            padding: 24px 24px 32px;
+            border-top: 1px solid var(--border-card);
+        }
+        .footer-legal { font-size: 0.75rem; color: var(--text-light); }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="container">
+            <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="privacy.backLink">Back to greatsage.org</span></a>
+            <div class="lang-dropdown" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-label="Language">
+                <button type="button" class="lang-dropdown-trigger" aria-label="Select language">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <span class="lang-dropdown-label">English</span>
+                    <i class="fas fa-chevron-down lang-dropdown-chevron" aria-hidden="true"></i>
+                </button>
+                <ul class="lang-dropdown-menu" role="listbox">
+                    <li><button type="button" role="option" data-lang="en" aria-selected="true">English</button></li>
+                    <li><button type="button" role="option" data-lang="de" aria-selected="false">Deutsch</button></li>
+                    <li><button type="button" role="option" data-lang="es" aria-selected="false">Español</button></li>
+                    <li><button type="button" role="option" data-lang="hr" aria-selected="false">Hrvatski</button></li>
+                    <li><button type="button" role="option" data-lang="ja" aria-selected="false">日本語</button></li>
+                </ul>
+            </div>
+            <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+        </div>
+    </header>
+    <main id="main">
+        <div class="container">
+            <h1 data-i18n="privacy.h1">Privacy policy</h1>
+            <p class="subhead" data-i18n="privacy.updated">Last updated: 9 April 2026.</p>
+            <p class="subhead" style="margin-top:-12px;margin-bottom:24px;" data-i18n="privacy.intro">The Great Sage operates greatsage.org. This page describes this public website. Janet apps, devices, and self-hosted software may use additional notices (for example App Store privacy labels or your own deployment).</p>
+
+            <div class="privacy-card">
+                <h2 data-i18n="privacy.sectionSiteTitle">This site and your preferences</h2>
+                <p data-i18n-html="privacy.sectionSiteBody">We use browser storage and, where you accept the banner, cookies to remember <strong>language</strong> and <strong>theme</strong> (light/dark). We do not run first-party analytics on greatsage.org.</p>
+            </div>
+            <div class="privacy-card">
+                <h2 data-i18n="privacy.sectionThirdTitle">Third-party content</h2>
+                <p data-i18n-html="privacy.sectionThirdBody">Some pages load fonts or scripts from <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare</a> (cdnjs) and <a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net" target="_blank" rel="noopener noreferrer">jsDelivr</a>. The contact card may request a QR image from <a href="https://goqr.me/api/" target="_blank" rel="noopener noreferrer">goqr.me</a> (api.qrserver.com). <a href="https://www.gofundme.com/privacy" target="_blank" rel="noopener noreferrer">GoFundMe</a> widgets load GoFundMe scripts when embedded. Those services have their own policies.</p>
+            </div>
+            <div class="privacy-card">
+                <h2 data-i18n="privacy.sectionChatTitle">Janet in the browser</h2>
+                <p data-i18n="privacy.sectionChatBody">Where the site offers optional in-browser chat, inference runs on your device as described in the feature; we do not receive your conversation from that local session.</p>
+            </div>
+            <div class="privacy-card">
+                <h2 data-i18n="privacy.sectionContactTitle">Questions</h2>
+                <p data-i18n-html="privacy.sectionContactBody">Email <a href="mailto:hello@greatsage.org">hello@greatsage.org</a> or <a href="mailto:ilovejanet@greatsage.org">ilovejanet@greatsage.org</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="privacy-footer">
+        <p id="cookies" class="footer-legal" data-i18n="footer.cookies">Cookies: We use cookies to remember your language and theme (dark/light) preferences.</p>
+    </footer>
+
+    <aside id="cookie-consent" class="cookie-consent" role="status" aria-live="polite">
+        <p class="cookie-consent-text" data-i18n-html="cookieConsent.text">We use cookies to remember your language and theme preferences. <a href="#cookies">Cookies</a></p>
+        <button type="button" class="cookie-consent-btn" aria-label="Accept">OK</button>
+    </aside>
+    <script>
+    (function(){
+      var el=document.getElementById('cookie-consent');
+      if(!el)return;
+      try{if(localStorage.getItem('greatsage-cookie-ack')==='1'){el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);return}}
+      catch(e){}
+      var dismiss=function(e){if(e)e.preventDefault();if(!el.parentNode)return;try{localStorage.setItem('greatsage-cookie-ack','1')}catch(x){}el.style.display='none';if(el.parentNode)el.parentNode.removeChild(el);};
+      var btn=el.querySelector('.cookie-consent-btn');
+      if(btn){btn.addEventListener('click',dismiss);btn.addEventListener('touchend',dismiss);}
+    })();
+    </script>
+
+    <script defer src="i18n/i18n.js"></script>
+    <script defer src="cookie-consent.js"></script>
+    <script>
+        (function() {
+            document.getElementById('dark-toggle').addEventListener('click', function() {
+                var root = document.documentElement;
+                var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                this.querySelector('i').className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                this.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            });
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !document.documentElement.getAttribute('data-theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                var icon = document.querySelector('#dark-toggle i');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        })();
+    </script>
+</body>
+</html>

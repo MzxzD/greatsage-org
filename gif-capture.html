@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Janet Halo — GIF Capture</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #0f1726; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .janet-jack-overlay {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      background: rgba(15, 23, 38, 0.95);
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .janet-jack-glow-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transform-origin: center center;
+      border-radius: 50%;
+    }
+    .janet-jack-glow-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .janet-jack-glow-gradient {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #7C3AED 0%, #9b5cff 20%, #BC82F3 40%, #F5B9EA 60%, #8D9FFF 80%, #C686FF 100%);
+    }
+    .janet-jack-glow-inner {
+      position: absolute;
+      border-radius: 50%;
+      background: rgb(15, 23, 38);
+      inset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="janet-jack-overlay" id="overlay">
+    <div class="janet-jack-glow-container" id="glowContainer" data-shape="circle"></div>
+  </div>
+  <script>
+    (function () {
+      var overlay = document.getElementById('overlay');
+      var glowContainer = document.getElementById('glowContainer');
+      var w = 280, h = 280;
+      var palette = ['#0A84FF', '#3da3ff', '#8D9FFF', '#5aa8ff', '#C686FF', '#BC82F3'];
+      var glowGradData = [];
+      var glowAngle = 0;
+      var glowInterval = [];
+
+      function generateGradientStops(pal) {
+        return pal.map(function (hex) {
+          return { color: hex, location: Math.random() };
+        }).sort(function (a, b) { return a.location - b.location; });
+      }
+      var layers = [
+        { width: 4, blur: 0, interval: 400 },
+        { width: 6, blur: 2, interval: 400 },
+        { width: 8, blur: 4, interval: 500 }
+      ];
+      for (var li = 0; li < layers.length; li++) {
+        var cfg = layers[li];
+        var layer = document.createElement('div');
+        layer.className = 'janet-jack-glow-layer';
+        if (cfg.blur) layer.style.filter = 'blur(' + cfg.blur + 'px)';
+        var grad = document.createElement('div');
+        grad.className = 'janet-jack-glow-gradient';
+        var stopsRef = { current: generateGradientStops(palette) };
+        glowGradData.push({ grad: grad, stopsRef: stopsRef });
+        var inner = document.createElement('div');
+        inner.className = 'janet-jack-glow-inner';
+        inner.style.inset = cfg.width + 'px';
+        inner.style.borderRadius = '50%';
+        inner.style.background = 'rgb(15, 23, 38)';
+        layer.appendChild(grad);
+        layer.appendChild(inner);
+        glowContainer.appendChild(layer);
+        glowInterval.push(setInterval(function () {
+          stopsRef.current = generateGradientStops(palette);
+        }, cfg.interval));
+      }
+      function updateGlowWave() {
+        glowAngle = (glowAngle + 0.8) % 360;
+        glowGradData.forEach(function (d) {
+          var st = d.stopsRef.current;
+          var bg = 'conic-gradient(from ' + glowAngle + 'deg, ' +
+            st.map(function (s) { return s.color + ' ' + (s.location * 100) + '%'; }).join(', ') + ')';
+          d.grad.style.background = bg;
+        });
+      }
+      function loop() {
+        updateGlowWave();
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+      document.body.setAttribute('data-ready', 'true');
+    })();
+  </script>
+</body>
+</html>
