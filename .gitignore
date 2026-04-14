@@ -4,3 +4,6 @@
 
 # Dependencies
 node_modules/
+
+# Local asset backups (do not commit)
+assets/_bak_*/

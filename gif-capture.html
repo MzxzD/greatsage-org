@@ -6,7 +6,34 @@
   <title>Janet Halo — GIF Capture</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #0f1726; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    html, body { margin: 0; padding: 0; background: #0f1726; min-height: 100vh; }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 44px;
+    }
+    .gif-capture-apex {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.45rem 12px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(15, 23, 38, 0.95);
+      border-bottom: 1px solid #2a3a5c;
+    }
+    .gif-capture-apex a { color: #5eead4; text-decoration: none; }
+    .gif-capture-apex a:hover { text-decoration: underline; }
+    .gif-capture-apex .apex-muted { color: #8b9bb3; margin-right: 0.35rem; }
     .janet-jack-overlay {
       position: relative;
       width: 280px;
@@ -44,6 +71,12 @@
   </style>
 </head>
 <body>
+  <nav class="gif-capture-apex" aria-label="Janet ecosystem">
+    <span class="apex-muted">Janet</span>
+    <a href="index.html">The Great Sage</a>
+    <a href="https://heyjanet.org/" rel="noopener noreferrer" target="_blank">Portfolio</a>
+    <a href="https://heyjanet.org/janet/" rel="noopener noreferrer" target="_blank">Meet Janet</a>
+  </nav>
   <div class="janet-jack-overlay" id="overlay">
     <div class="janet-jack-glow-container" id="glowContainer" data-shape="circle"></div>
   </div>

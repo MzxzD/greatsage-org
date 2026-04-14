@@ -1,0 +1,100 @@
+/**
+ * Great Sage — shared reset, theme surface, container.
+ * Load after css/tokens.css (dual-apex bridge).
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.05ms !important;
+    }
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@supports (font-variation-settings: normal) {
+    body { font-family: 'Inter var', system-ui, sans-serif; }
+}
+
+:root {
+    --primary: var(--apex-sage-purple, #7c3aed);
+    --primary-light: var(--apex-sage-purple-light, #9b5cff);
+    --primary-dark: var(--apex-sage-purple-dark, #5b21b6);
+    --secondary: #2d2b4e;
+    --accent: #ede9fe;
+    --gray-light: #f5f3ff;
+    --gray-mid: #cbd5e1;
+    --text: #1e1b2e;
+    --text-light: #4c4a6e;
+    --bg: #faf9ff;
+    --bg-card: #ffffff;
+    --border-card: #f0eaff;
+    --shadow-sm: 0 10px 25px -5px rgba(124,58,237,0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
+    --shadow-hover: 0 25px 30px -12px rgba(124,58,237,0.25);
+    --border-radius: 28px;
+    --gradient-bg: linear-gradient(145deg, #fdfaff, #f0eaff);
+    --nav-bg: rgba(255,255,255,0.75);
+    --nav-border: rgba(203,213,225,0.3);
+    --hero-border: #e4dcff;
+}
+
+[data-theme="dark"] {
+    --primary: var(--apex-sage-blue-dark, #0a84ff);
+    --primary-light: #3da3ff;
+    --primary-dark: #0066cc;
+    --text: #f1f5f9;
+    --text-light: #cbd5e1;
+    --bg: #0f1726;
+    --bg-card: #1a2744;
+    --border-card: #2a3a5c;
+    --accent: #1e2d4a;
+    --gray-light: #152033;
+    --gradient-bg: linear-gradient(145deg, #152033, #0f1726);
+    --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.3);
+    --shadow-hover: 0 25px 30px -12px rgba(10,132,255,0.35);
+    --nav-bg: rgba(15,23,38,0.9);
+    --nav-border: rgba(42,58,92,0.5);
+    --hero-border: #2a3a5c;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --primary: var(--apex-sage-blue-dark, #0a84ff);
+        --primary-light: #3da3ff;
+        --primary-dark: #0066cc;
+        --text: #f1f5f9;
+        --text-light: #cbd5e1;
+        --bg: #0f1726;
+        --bg-card: #1a2744;
+        --border-card: #2a3a5c;
+        --accent: #1e2d4a;
+        --gray-light: #152033;
+        --gradient-bg: linear-gradient(145deg, #152033, #0f1726);
+        --nav-bg: rgba(15,23,38,0.9);
+        --nav-border: rgba(42,58,92,0.5);
+        --hero-border: #2a3a5c;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}

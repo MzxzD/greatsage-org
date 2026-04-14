@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="i18n/lang-dropdown.css">
     <link rel="stylesheet" href="cookie-consent.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/apex-nav.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -178,10 +180,26 @@
         .explanation-box p { margin-bottom: 12px; color: var(--text); }
         .explanation-box p:last-child { margin-bottom: 0; }
         .explanation-box a { color: var(--primary); font-weight: 500; }
+        .gs-apex-nav {
+            --nav-bg: var(--bg-card);
+            --nav-border: var(--border-card);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <nav class="gs-apex-nav gs-apex-nav--slim" aria-label="Janet ecosystem">
+        <div class="gs-apex-nav-inner">
+            <span class="gs-apex-brand" data-i18n="apex.brand">Janet</span>
+            <a href="https://greatsage.org/" class="gs-apex-here" aria-current="page" data-i18n="apex.greatSage">The Great Sage</a>
+            <a href="https://heyjanet.org/" rel="noopener noreferrer" target="_blank" data-i18n="apex.portfolio">Portfolio</a>
+            <a href="https://heyjanet.org/janet/" rel="noopener noreferrer" target="_blank" data-i18n="apex.meetJanet">Meet Janet</a>
+            <a href="https://greatsage.org/glasses" data-i18n="apex.glasses">Glasses</a>
+        </div>
+    </nav>
+    <p class="gs-apex-w-strip" data-i18n="apex.wStrip">Accessibility + Privacy = W — No cap, on JANET.</p>
     <header class="top-bar">
         <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
             <a href="https://greatsage.org/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="understand.backLink">Back to greatsage.org</span></a>
@@ -202,7 +220,7 @@
             <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
         </div>
     </header>
-    <main id="main">
+    <main id="main" tabindex="-1">
         <div class="container">
             <h1 data-i18n="understand.title">I still don't understand</h1>
             <p class="subhead" data-i18n="understand.subhead">We'll explain Janet in a way that fits you. Choose your age and how you like to learn.</p>

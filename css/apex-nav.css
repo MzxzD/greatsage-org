@@ -1,0 +1,107 @@
+/**
+ * Ecosystem apex strip — greatsage.org (+ tier-2/3 variants)
+ * Meet Janet URL: keep in sync with Janet-Projects/what-can-janet-do/config.json → meetJanetUrl
+ * (placeholder: https://heyjanet.org/janet/ until subdomain/path is final).
+ */
+.gs-apex-nav {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--nav-border);
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gs-apex-nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+  padding: 0.45rem 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gs-apex-brand {
+  color: var(--apex-sage-gold, #d4a857);
+  margin-right: 0.25rem;
+}
+
+.gs-apex-nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.gs-apex-nav a:hover {
+  color: var(--primary);
+  border-bottom-color: color-mix(in srgb, var(--apex-sage-purple, #7c3aed) 55%, var(--apex-janet-cyan, #5eead4) 45%);
+}
+
+[data-theme="dark"] .gs-apex-nav a:hover {
+  border-bottom-color: color-mix(in srgb, var(--apex-sage-blue-dark, #0a84ff) 60%, var(--apex-janet-cyan, #5eead4) 40%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gs-apex-nav a:hover {
+    border-bottom-color: color-mix(in srgb, var(--apex-sage-blue-dark, #0a84ff) 60%, var(--apex-janet-cyan, #5eead4) 40%);
+  }
+}
+
+.gs-apex-nav a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.gs-apex-nav a.gs-apex-here {
+  color: var(--primary);
+  border-bottom-color: color-mix(in srgb, var(--apex-sage-purple, #7c3aed) 50%, var(--apex-janet-cyan, #5eead4) 50%);
+}
+
+[data-theme="dark"] .gs-apex-nav a.gs-apex-here {
+  border-bottom-color: color-mix(in srgb, var(--apex-sage-blue-dark, #0a84ff) 55%, var(--apex-janet-cyan, #5eead4) 45%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gs-apex-nav a.gs-apex-here {
+    border-bottom-color: color-mix(in srgb, var(--apex-sage-blue-dark, #0a84ff) 55%, var(--apex-janet-cyan, #5eead4) 45%);
+  }
+}
+
+.gs-apex-nav--slim .gs-apex-nav-inner {
+  padding: 0.35rem 24px;
+  font-size: 0.78rem;
+}
+
+.gs-apex-nav--minimal .gs-apex-nav-inner {
+  justify-content: center;
+  padding: 0.4rem 16px;
+  font-size: 0.75rem;
+}
+
+.gs-apex-w-strip {
+  text-align: center;
+  padding: 0.4rem 16px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  border-bottom: 1px solid var(--border-card);
+  background: var(--bg-card);
+}
+
+.gs-apex-w-strip strong {
+  color: var(--primary);
+}
+
+.header-stack {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+}
+
+.header-stack .navbar {
+  position: relative;
+  top: auto;
+}

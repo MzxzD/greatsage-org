@@ -1,6 +1,9 @@
 /**
  * Dual-apex bridge tokens — Great Sage (greatsage.org) + Janet portfolio (heyjanet.org)
  * Keep in sync with: Janet-Projects/what-can-janet-do/css/tokens.css
+ *
+ * Meet Janet (mascot / story landing) canonical URL — mirror in config.json meetJanetUrl:
+ *   https://heyjanet.org/janet/  (placeholder; update when DNS/path is final)
  */
 :root {
   /* Great Sage — professional pole */
@@ -24,4 +27,51 @@
   --apex-radius-chrome: 28px;
   --apex-radius-card: 16px;
   --apex-radius-pill: 999px;
+
+  /* Brand promise — Accessibility + Privacy = W */
+  --apex-tagline-w-bg: linear-gradient(135deg, #5eead4, #38bdf8);
+  --apex-tagline-w-fg: #0f1726;
+  --apex-mascot-glow: 0 0 48px rgba(94, 234, 212, 0.2);
+
+  /* Prism accents — restrained (professional Great Sage + Janet spectrum) */
+  --prism-gradient-subtle: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.14),
+    rgba(94, 234, 212, 0.1),
+    rgba(167, 139, 250, 0.12)
+  );
+  --prism-gradient-text-light: linear-gradient(
+    145deg,
+    #1e1b2e 0%,
+    #5b21b6 42%,
+    #0f766e 100%
+  );
+  --prism-gradient-text-dark: linear-gradient(
+    145deg,
+    #f8fafc 0%,
+    #93c5fd 45%,
+    #2dd4bf 100%
+  );
+  --prism-gradient-cta: linear-gradient(
+    135deg,
+    var(--apex-sage-purple) 0%,
+    #6366f1 48%,
+    #0d9488 100%
+  );
+  --prism-gradient-cta-dark: linear-gradient(
+    135deg,
+    #2563eb 0%,
+    var(--apex-sage-blue-dark) 45%,
+    #14b8a6 100%
+  );
+  --prism-glow-soft: 0 0 42px rgba(94, 234, 212, 0.14);
+  --prism-divider: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 58, 237, 0.25),
+    rgba(45, 212, 191, 0.35),
+    rgba(167, 139, 250, 0.25),
+    transparent
+  );
+  --text-gold: var(--apex-sage-gold);
 }
